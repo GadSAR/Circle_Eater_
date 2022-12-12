@@ -18,7 +18,7 @@ public class GameStateManager {
     private Resource resource;
     private int mouseX, mouseY;
 
-    private boolean changedPanel = true, changedMode = true;
+    private boolean changedPanel = true;
     private GamePanel gP;
     private GameMenu gM;
     private GameHowToPlay gH;
@@ -135,13 +135,13 @@ public class GameStateManager {
 
     private void setMenuPanel() {
         if (previousGameState != null) {
-            if(previousGameState == GameState.GAME)
+            if (previousGameState == GameState.GAME)
                 f.remove(gP);
-            else if(previousGameState == GameState.GAMEOVER)
+            else if (previousGameState == GameState.GAMEOVER)
                 f.remove(gO);
-            else if(previousGameState == GameState.SETTINGS)
+            else if (previousGameState == GameState.SETTINGS)
                 f.remove(gS);
-            else if(previousGameState == GameState.HOWTOPLAY)
+            else if (previousGameState == GameState.HOWTOPLAY)
                 f.remove(gH);
         }
         gM = new GameMenu(this);
@@ -150,9 +150,9 @@ public class GameStateManager {
 
     private void setGamePanel() {
         if (previousGameState != null) {
-            if(previousGameState == GameState.MENU)
+            if (previousGameState == GameState.MENU)
                 f.remove(gM);
-            else if(previousGameState == GameState.GAMEOVER)
+            else if (previousGameState == GameState.GAMEOVER)
                 f.remove(gO);
         }
         gP = new GamePanel(this);
@@ -318,16 +318,4 @@ public class GameStateManager {
         this.gS = gS;
     }
 
-    public boolean isChangedMode() {
-        return changedMode;
-    }
-
-    public void setChangedMode(boolean changedMode) {
-        this.changedMode = changedMode;
-    }
 }
-
-
-/*
-
- */
