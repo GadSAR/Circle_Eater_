@@ -1,5 +1,8 @@
 package Manage;
+import Manage.*;
+import Multiplayer.*;
 import Music.*;
+import Objects.*;
 import Panels.*;
 import Resources.*;
 
@@ -42,7 +45,7 @@ public class GameStateManager {
     }
 
     private void setStartGameStates() {
-        currentGameState = GameState.GAME;
+        currentGameState = GameState.MENU;
         previousGameState = null;
     }
 

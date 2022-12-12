@@ -1,4 +1,5 @@
 package Objects;
+import Multiplayer.*;
 import Manage.*;
 import Music.*;
 import Panels.*;
