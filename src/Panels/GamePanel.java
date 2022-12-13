@@ -1,10 +1,7 @@
 package Panels;
 import Manage.*;
-import Multiplayer.*;
 import Music.*;
-import Panels.*;
 import Objects.*;
-import Resources.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -38,7 +35,7 @@ public class GamePanel extends JPanel
 		setMusic();
 	}
 
-	private void setMusic() { gameStateManager.getMusicControler().getBackground().setFlag(true); }
+	private void setMusic() { gameStateManager.getMusicControler().getGame().setFlag(true); }
 
 	public void setScreenImgs()
 	{

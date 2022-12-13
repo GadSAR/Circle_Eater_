@@ -1,10 +1,5 @@
 package Panels;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,35 +8,50 @@ public class GameMenu extends JPanel {
 
     private GameStateManager gameStateManager;
 
-    private Image bgMenu, Play, onPlay, HowToPlay, onHowToPlay, Exit, onExit;
+    private Image bgMenu, Play, onPlay, Settings, onSettings, HowToPlay, onHowToPlay, Exit, onExit;
     private int xMiddleScreen, yMiddleScreen,
             wPlay, hPlay, xPlay, yPlay,
+            wSettings, hSettings, xSettings, ySettings,
             wHowToPlay, hHowToPlay, xHowToPlay, yHowToPlay,
             wExit, hExit, xExit, yExit;
 
 
     public GameMenu(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
-        bgMenu = (new ImageIcon(gameStateManager.getResource().getMenuBackgroundImg())).getImage();
-        Play = (new ImageIcon(gameStateManager.getResource().getPlayImg())).getImage();
 
-        xMiddleScreen = gameStateManager.getF().getWidth() / 2;
-        yMiddleScreen = gameStateManager.getF().getHeight() / 2;
+        bgMenu = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
+        Play = (new ImageIcon(gameStateManager.getResource().getPlayImg())).getImage();
+        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayImg())).getImage();
+        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsImg())).getImage();
+        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsImg())).getImage();
+        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayImg())).getImage();
+        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayImg())).getImage();
+        Exit = (new ImageIcon(gameStateManager.getResource().getExitImg())).getImage();
+        onExit = (new ImageIcon(gameStateManager.getResource().getOnExitImg())).getImage();
+
+        Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
+        xMiddleScreen = tk.getScreenSize().width / 2;
+        yMiddleScreen = tk.getScreenSize().height / 2;
 
         wPlay = 80;
         hPlay = 30;
         xPlay = xMiddleScreen - wPlay / 2;
-        yPlay = yMiddleScreen - hPlay / 2;
+        yPlay = yMiddleScreen - hPlay / 2 - 100;
+
+        wSettings = 80;
+        hSettings = 30;
+        xSettings = xMiddleScreen - wSettings / 2;
+        ySettings = yPlay + hPlay + 20;
 
         wHowToPlay = 80;
         hHowToPlay = 30;
         xHowToPlay = xMiddleScreen - wHowToPlay / 2;
-        yHowToPlay = yMiddleScreen - hHowToPlay / 2;
+        yHowToPlay = ySettings + hSettings + 20;
 
         wExit = 80;
         hExit = 30;
         xExit = xMiddleScreen - wExit / 2;
-        yExit = yMiddleScreen - hExit / 2;
+        yExit = yHowToPlay + hHowToPlay + 20;
     }
 
     public void paintComponent(Graphics g) {
@@ -51,6 +61,9 @@ public class GameMenu extends JPanel {
         if(gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay)
             g.drawImage(onPlay, xPlay, yPlay, wPlay, hPlay, null);
         else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
+        if(gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings)
+            g.drawImage(onSettings, xSettings, ySettings, wSettings, hSettings, null);
+        else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
         if(gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay)
             g.drawImage(onHowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
         else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
@@ -90,6 +103,22 @@ public class GameMenu extends JPanel {
 
     public void setOnPlay(Image onPlay) {
         this.onPlay = onPlay;
+    }
+
+    public Image getSettings() {
+        return Settings;
+    }
+
+    public void setSettings(Image settings) {
+        Settings = settings;
+    }
+
+    public Image getOnSettings() {
+        return onSettings;
+    }
+
+    public void setOnSettings(Image onSettings) {
+        this.onSettings = onSettings;
     }
 
     public Image getHowToPlay() {
@@ -170,6 +199,38 @@ public class GameMenu extends JPanel {
 
     public void setyPlay(int yPlay) {
         this.yPlay = yPlay;
+    }
+
+    public int getwSettings() {
+        return wSettings;
+    }
+
+    public void setwSettings(int wSettings) {
+        this.wSettings = wSettings;
+    }
+
+    public int gethSettings() {
+        return hSettings;
+    }
+
+    public void sethSettings(int hSettings) {
+        this.hSettings = hSettings;
+    }
+
+    public int getxSettings() {
+        return xSettings;
+    }
+
+    public void setxSettings(int xSettings) {
+        this.xSettings = xSettings;
+    }
+
+    public int getySettings() {
+        return ySettings;
+    }
+
+    public void setySettings(int ySettings) {
+        this.ySettings = ySettings;
     }
 
     public int getwHowToPlay() {

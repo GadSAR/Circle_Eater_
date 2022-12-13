@@ -1,13 +1,5 @@
 package Resources;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class Resource {
 
@@ -16,9 +8,9 @@ public class Resource {
             CHILLgoodBallImg, CHILLbadBallImg, CHILLplayer1BallImg, CHILLplayer2BallImg,
             GLITCHgoodBallImg, GLITCHbadBallImg, GLITCHplayer1BallImg, GLITCHplayer2BallImg,
             UNKNOWNgoodBallImg, UNKNOWNbadBallImg, UNKNOWNplayer1BallImg, UNKNOWNplayer2BallImg,
-            menuBackgroundImg, gameOverBackgroundImg, gameSettingsBackgroundImg, howToPlayBackgroundImg, pauseImg,
+            gameMenuBackgroundImg, gameOverBackgroundImg, gameSettingsBackgroundImg, gameHowToPlayBackgroundImg, pauseImg,
             playImg, onPlayImg, howToPlayImg, onHowToPlayImg, exitImg, onExitImg, settingsImg, onSettingsImg;
-    ;
+
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
             UNKNOWNgoodBallPathSound, UNKNOWNbadBallPathSound, UNKNOWNgameBackgroundPathSound,
@@ -41,18 +33,18 @@ public class Resource {
         UNKNOWNbadBallImg = null;
         UNKNOWNplayer1BallImg = null;
         UNKNOWNplayer2BallImg = null;
-        menuBackgroundImg = "src/Resources/pictures/bgMenu.gif";
+        gameMenuBackgroundImg = "src/Resources/pictures/bgMenu.gif";
         gameOverBackgroundImg = "src/Resources/pictures/space.png";
         gameSettingsBackgroundImg = "src/Resources/pictures/space.png";
-        howToPlayImg = "src/Resources/pictures/space.png";
+        gameHowToPlayBackgroundImg = "src/Resources/pictures/space.png";
         pauseImg = "src/Resources/pictures/pauseScreen.png";
         playImg = "src/Resources/pictures/empty.png";
         onPlayImg = null;
-        howToPlayImg = null;
+        howToPlayImg = "src/Resources/pictures/empty.png";
         onHowToPlayImg = null;
-        exitImg = null;
+        exitImg = "src/Resources/pictures/empty.png";
         onExitImg = null;
-        settingsImg = null;
+        settingsImg = "src/Resources/pictures/empty.png";
         onSettingsImg = null;
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
@@ -269,12 +261,12 @@ public class Resource {
         this.UNKNOWNplayer2BallImg = UNKNOWNplayer2BallImg;
     }
 
-    public String getMenuBackgroundImg() {
-        return menuBackgroundImg;
+    public String getGameMenuBackgroundImg() {
+        return gameMenuBackgroundImg;
     }
 
-    public void setMenuBackgroundImg(String menuBackgroundImg) {
-        this.menuBackgroundImg = menuBackgroundImg;
+    public void setGameMenuBackgroundImg(String gameMenuBackgroundImg) {
+        this.gameMenuBackgroundImg = gameMenuBackgroundImg;
     }
 
     public String getGameOverBackgroundImg() {
@@ -293,12 +285,12 @@ public class Resource {
         this.gameSettingsBackgroundImg = gameSettingsBackgroundImg;
     }
 
-    public String getHowToPlayBackgroundImg() {
-        return howToPlayBackgroundImg;
+    public String getGameHowToPlayBackgroundImg() {
+        return gameHowToPlayBackgroundImg;
     }
 
-    public void setHowToPlayBackgroundImg(String howToPlayBackgroundImg) {
-        this.howToPlayBackgroundImg = howToPlayBackgroundImg;
+    public void setGameHowToPlayBackgroundImg(String gameHowToPlayBackgroundImg) {
+        this.gameHowToPlayBackgroundImg = gameHowToPlayBackgroundImg;
     }
 
     public String getPauseImg() {

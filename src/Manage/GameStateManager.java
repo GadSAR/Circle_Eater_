@@ -56,10 +56,14 @@ public class GameStateManager {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     if (currentGameState == GameState.GAME)
                         setCurrentGameState(GameState.MENU);
-                    else if (currentGameState == GameState.MENU)
-                        System.exit(1);
                     else if (currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.MENU);
+                    else if (currentGameState == GameState.SETTINGS)
+                        setCurrentGameState(GameState.MENU);
+                    else if (currentGameState == GameState.HOWTOPLAY)
+                        setCurrentGameState(GameState.MENU);
+                    else if (currentGameState == GameState.MENU)
+                        System.exit(1);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (currentGameState == GameState.GAME)
@@ -77,9 +81,16 @@ public class GameStateManager {
             public void mouseClicked(MouseEvent e) {
                 mouseX = e.getX();
                 mouseY = e.getY();
-                if (GameState.MENU == currentGameState)
+                if (GameState.MENU == currentGameState) {
                     if (mouseX > gM.getxPlay() && mouseX < gM.getxPlay() + gM.getwPlay() && mouseY > gM.getyPlay() && mouseY < gM.getyPlay() + gM.gethPlay())
                         setCurrentGameState(GameState.GAME);
+                    if (mouseX > gM.getxHowToPlay() && mouseX < gM.getxHowToPlay() + gM.getwHowToPlay() && mouseY > gM.getyHowToPlay() && mouseY < gM.getyHowToPlay() + gM.gethHowToPlay())
+                        setCurrentGameState(GameState.HOWTOPLAY);
+                    if (mouseX > gM.getxSettings() && mouseX < gM.getxSettings() + gM.getwSettings() && mouseY > gM.getySettings() && mouseY < gM.getySettings() + gM.gethSettings())
+                        setCurrentGameState(GameState.SETTINGS);
+                    if (mouseX > gM.getxExit() && mouseX < gM.getxExit() + gM.getwExit() && mouseY > gM.getyExit() && mouseY < gM.getyExit() + gM.gethExit())
+                        System.exit(1);
+                }
             }
         });
 

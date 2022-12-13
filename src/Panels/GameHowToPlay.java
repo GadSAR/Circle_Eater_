@@ -16,7 +16,7 @@ public class GameHowToPlay extends JPanel {
 
     public GameHowToPlay(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
-        this.img = (new ImageIcon(gameStateManager.getResource().getHowToPlayImg())).getImage();
+        this.img = (new ImageIcon(gameStateManager.getResource().getGameHowToPlayBackgroundImg())).getImage();
     }
 
     public void paintComponent(Graphics g)
