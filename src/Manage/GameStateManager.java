@@ -21,7 +21,7 @@ public class GameStateManager {
     private Resource resource;
     private int mouseX, mouseY;
 
-    private boolean changedPanel = true;
+    private boolean changedPanel = true, changedMode = true;
     private GamePanel gP;
     private GameMenu gM;
     private GameHowToPlay gH;
@@ -93,7 +93,7 @@ public class GameStateManager {
     }
 
     private void setMusicControler() {
-        musicControler = new MusicControler(resource.getCHILLgoodBallPathSound(), resource.getCHILLbadBallPathSound(), resource.getCHILLgameBackgroundPathSound(), this);
+        musicControler = new MusicControler(resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), this);
     }
 
     private void setFrame() {
@@ -133,7 +133,6 @@ public class GameStateManager {
                 break;
             }
         }
-
     }
 
     private void setMenuPanel() {
@@ -255,6 +254,14 @@ public class GameStateManager {
 
     public void setChangedPanel(boolean changedPanel) {
         this.changedPanel = changedPanel;
+    }
+
+    public boolean isChangedMode() {
+        return changedMode;
+    }
+
+    public void setChangedMode(boolean changedMode) {
+        this.changedMode = changedMode;
     }
 
     public GameState getPreviousGameState() {

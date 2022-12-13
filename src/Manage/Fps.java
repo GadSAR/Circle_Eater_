@@ -24,6 +24,10 @@ public class Fps extends Thread {
                 gSM.changePanel();
                 gSM.setChangedPanel(false);
             }
+            if(gSM.isChangedMode()){
+                gSM.setMusicControler(gSM.getMusicControler());
+                gSM.setChangedMode(false);
+            }
             if(gSM.getCurrentGameState() == GameState.GAME ) gSM.getgP().repaint();
             if(gSM.getCurrentGameState() == GameState.MENU ) gSM.getgM().repaint();
             if(gSM.getCurrentGameState() == GameState.SETTINGS ) gSM.getgS().repaint();
