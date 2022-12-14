@@ -45,6 +45,7 @@ public class GamePanel extends JPanel
 
 	public void setPlayers()
 	{
+		///if(playerNum == 1)
 		player = new BallPlayer(this);
 		player2 = new BallPlayer(this, 100,100);
 	}
