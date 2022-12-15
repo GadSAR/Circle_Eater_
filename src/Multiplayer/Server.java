@@ -37,10 +37,7 @@ public class Server implements Runnable {
         t = new Thread(this);
         this.gSM = gSM;
         serverConnection();
-        game = new GamePanel(gSM, 1);
-        gSM.removeGamePreviousPanels();
-        gSM.setGamePanel(game);
-        gSM.setNewPanel(game);
+        gSM.setCurrentGameState(GameState.GAME);
         data = new Data(game);
 
         t.start();

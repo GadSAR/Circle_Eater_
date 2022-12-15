@@ -22,9 +22,10 @@ public class Fps extends Thread {
                 gSM.setMusicControler(gSM.getMusicControler());
                 gSM.setChangedMode(false);
             }
-            if(gSM.getCurrentGameState() == GameState.PLAY) gSM.getGamePanel().repaint();
+            if(gSM.getCurrentGameState() == GameState.GAME) gSM.getGamePanel().repaint();
             if(gSM.getCurrentGameState() == GameState.MENU ) gSM.getGameMenu().repaint();
             if(gSM.getCurrentGameState() == GameState.SETTINGS ) gSM.getGameSettings().repaint();
+            if(gSM.getCurrentGameState() == GameState.MULTIPLAYER ) gSM.getGameMultiplayer().repaint();
             if(gSM.getCurrentGameState() == GameState.GAMEOVER ) gSM.getGameOver().repaint();
             if(gSM.getCurrentGameState() == GameState.HOWTOPLAY ) gSM.getGameHowToPlay().repaint();
             startTime = System.currentTimeMillis();

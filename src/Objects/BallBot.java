@@ -57,7 +57,7 @@ public class BallBot extends Thread implements Serializable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            if (panel.getGameStateManager().getCurrentGameState() != GameState.PLAY)
+            if (panel.getGameStateManager().getCurrentGameState() != GameState.GAME)
                 break;
         }
     }

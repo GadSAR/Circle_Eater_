@@ -33,10 +33,7 @@ public class Client implements Runnable {
         t = new Thread(this);
         this.gSM = gSM;
         connectToServer(Server.port);
-        game = new GamePanel(gSM, 2);
-        gSM.removeGamePreviousPanels();
-        gSM.setGamePanel(game);
-        gSM.setNewPanel(game);
+        gSM.setCurrentGameState(GameState.GAME);
         data = new Data(game);
 
         Object obj = objectInputStream.readObject();

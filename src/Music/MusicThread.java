@@ -25,7 +25,7 @@ public class MusicThread extends Thread {
                     flag = false;
             }
 
-            if (gSM.getCurrentGameState() != GameState.PLAY) {
+            if (gSM.getCurrentGameState() != GameState.GAME) {
                 wav.stop();
             }
 

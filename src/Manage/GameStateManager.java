@@ -1,4 +1,7 @@
 package Manage;
+
+import Multiplayer.Client;
+import Multiplayer.Server;
 import Music.*;
 import Panels.*;
 import Resources.*;
@@ -7,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class GameStateManager {
 
@@ -19,7 +23,11 @@ public class GameStateManager {
     private int mouseX, mouseY;
 
     private boolean changedPanel = true, changedMode = true;
+    private char gameType = 0;
+
     private GameMultiplayer gameMultiplayer;
+    private Client client;
+    private Server server;
     private GamePanel gamePanel;
     private GameMenu gameMenu;
     private GameHowToPlay gameHowToPlay;
@@ -52,7 +60,7 @@ public class GameStateManager {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    if (currentGameState == GameState.PLAY)
+                    if (currentGameState == GameState.GAME)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.MENU);
@@ -64,12 +72,12 @@ public class GameStateManager {
                         System.exit(1);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    if (currentGameState == GameState.PLAY)
+                    if (currentGameState == GameState.GAME)
                         gamePanel.pause();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
-                        setCurrentGameState(GameState.PLAY);
+                        setCurrentGameState(GameState.GAME);
                 }
             }
         });
@@ -79,15 +87,41 @@ public class GameStateManager {
             public void mouseClicked(MouseEvent e) {
                 mouseX = e.getX();
                 mouseY = e.getY();
+
                 if (GameState.MENU == currentGameState) {
-                    if (mouseX > gameMenu.getxPlay() && mouseX < gameMenu.getxPlay() + gameMenu.getwPlay() && mouseY > gameMenu.getyPlay() && mouseY < gameMenu.getyPlay() + gameMenu.gethPlay())
-                        setCurrentGameState(GameState.PLAY);
+                    if (mouseX > gameMenu.getxPlay() && mouseX < gameMenu.getxPlay() + gameMenu.getwPlay() && mouseY > gameMenu.getyPlay() && mouseY < gameMenu.getyPlay() + gameMenu.gethPlay()) {
+                        gameType = 0;
+                        setCurrentGameState(GameState.GAME);
+                    }
                     if (mouseX > gameMenu.getxHowToPlay() && mouseX < gameMenu.getxHowToPlay() + gameMenu.getwHowToPlay() && mouseY > gameMenu.getyHowToPlay() && mouseY < gameMenu.getyHowToPlay() + gameMenu.gethHowToPlay())
-                        setCurrentGameState(GameState.HOWTOPLAY);
+                        setCurrentGameState(GameState.MULTIPLAYER);
                     if (mouseX > gameMenu.getxSettings() && mouseX < gameMenu.getxSettings() + gameMenu.getwSettings() && mouseY > gameMenu.getySettings() && mouseY < gameMenu.getySettings() + gameMenu.gethSettings())
                         setCurrentGameState(GameState.SETTINGS);
                     if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
                         System.exit(1);
+                } else if (GameState.MULTIPLAYER == currentGameState) {
+
+                    if (mouseX > gameMultiplayer.getxPlay() && mouseX < gameMultiplayer.getxPlay() + gameMultiplayer.getwPlay() && mouseY > gameMultiplayer.getyPlay() && mouseY < gameMultiplayer.getyPlay() + gameMultiplayer.gethPlay()) {
+                        gameType = 1;
+                        try {
+                            newServer();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                    if (mouseX > gameMultiplayer.getxSettings() && mouseX < gameMultiplayer.getxSettings() + gameMultiplayer.getwSettings() && mouseY > gameMultiplayer.getySettings() && mouseY < gameMultiplayer.getySettings() + gameMultiplayer.gethSettings()) {
+                        gameType = 2;
+                        try {
+                            newClient();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (ClassNotFoundException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                    if (mouseX > gameMultiplayer.getxHowToPlay() && mouseX < gameMultiplayer.getxHowToPlay() + gameMultiplayer.getwHowToPlay() && mouseY > gameMultiplayer.getyHowToPlay() && mouseY < gameMultiplayer.getyHowToPlay() + gameMultiplayer.gethHowToPlay()) {
+                        setCurrentGameState(GameState.MENU);
+                    }
                 }
             }
         });
@@ -99,6 +133,14 @@ public class GameStateManager {
                 mouseY = e.getY();
             }
         });
+    }
+
+    private void newServer() throws IOException {
+        server = new Server(this);
+    }
+
+    private void newClient() throws IOException, ClassNotFoundException {
+        client = new Client(this);
     }
 
     private void setMusicControler() {
@@ -125,8 +167,12 @@ public class GameStateManager {
                 setMenuPanel();
                 break;
             }
-            case PLAY: {
+            case GAME: {
                 setGamePanel();
+                break;
+            }
+            case MULTIPLAYER: {
+                setMultiplayerPanel();
                 break;
             }
             case HOWTOPLAY: {
@@ -141,13 +187,22 @@ public class GameStateManager {
                 setSettingsPanel();
                 break;
             }
+
         }
+    }
+
+    private void setMultiplayerPanel() {
+        f.remove(gameMenu);
+        gameMultiplayer = new GameMultiplayer(this);
+        setNewPanel(gameMultiplayer);
     }
 
     private void setMenuPanel() {
         if (previousGameState != null) {
-            if (previousGameState == GameState.PLAY)
+            if (previousGameState == GameState.GAME)
                 f.remove(gamePanel);
+            else if (previousGameState == GameState.MULTIPLAYER)
+                f.remove(gameMultiplayer);
             else if (previousGameState == GameState.GAMEOVER)
                 f.remove(gameOver);
             else if (previousGameState == GameState.SETTINGS)
@@ -161,7 +216,7 @@ public class GameStateManager {
 
     private void setGamePanel() {
         removeGamePreviousPanels();
-        gamePanel = new GamePanel(this);
+        gamePanel = new GamePanel(this, gameType);
         setNewPanel(gamePanel);
     }
 
@@ -171,6 +226,8 @@ public class GameStateManager {
                 f.remove(gameMenu);
             else if (previousGameState == GameState.GAMEOVER)
                 f.remove(gameOver);
+            else if (previousGameState == GameState.MULTIPLAYER)
+                f.remove(gameMultiplayer);
         }
     }
 
@@ -317,6 +374,30 @@ public class GameStateManager {
         this.gameMenu = gameMenu;
     }
 
+    public GameMultiplayer getGameMultiplayer() {
+        return gameMultiplayer;
+    }
+
+    public void setGameMultiplayer(GameMultiplayer gameMultiplayer) {
+        this.gameMultiplayer = gameMultiplayer;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
     public GameHowToPlay getGameHowToPlay() {
         return gameHowToPlay;
     }
@@ -340,5 +421,14 @@ public class GameStateManager {
     public void setGameSettings(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
     }
+
+    public char getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(char gameType) {
+        this.gameType = gameType;
+    }
+
 
 }

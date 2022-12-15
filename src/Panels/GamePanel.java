@@ -25,7 +25,6 @@ public class GamePanel extends JPanel {
     private Image backgroundImg, pauseImg;
     private Image[][] imgsCursor = new Image[3][3];
 
-    public GamePanel(GameStateManager gameStateManager) { this(gameStateManager, 0);}
     public GamePanel(GameStateManager gameStateManager, int index) {
         setGameStateManager(gameStateManager);
         setScreenImgs();

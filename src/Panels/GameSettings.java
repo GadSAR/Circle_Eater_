@@ -23,7 +23,7 @@ public class GameSettings extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //System.exit(1);
-                    gameStateManager.setCurrentGameState(GameState.PLAY);
+                    gameStateManager.setCurrentGameState(GameState.GAME);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(1);
