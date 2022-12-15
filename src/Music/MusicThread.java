@@ -1,10 +1,5 @@
 package Music;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 public class MusicThread extends Thread {
     private MusicWavPlayer wav;
@@ -30,7 +25,7 @@ public class MusicThread extends Thread {
                     flag = false;
             }
 
-            if (gSM.getCurrentGameState() != GameState.GAME) {
+            if (gSM.getCurrentGameState() != GameState.PLAY) {
                 wav.stop();
             }
 

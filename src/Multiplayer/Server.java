@@ -27,8 +27,9 @@ public class Server implements Runnable {
     ObjectOutputStream objectOutputStream;
     ObjectInputStream objectInputStream;
 
-    GamePanel game;
     GameStateManager gSM;
+    GamePanel game;
+    Data data;
 
     Thread t;
 
@@ -36,7 +37,11 @@ public class Server implements Runnable {
         t = new Thread(this);
         this.gSM = gSM;
         serverConnection();
-        game = new GamePanel(gSM);
+        game = new GamePanel(gSM, 1);
+        gSM.removeGamePreviousPanels();
+        gSM.setGamePanel(game);
+        gSM.setNewPanel(game);
+        data = new Data(game);
 
         t.start();
     }
@@ -59,6 +64,7 @@ public class Server implements Runnable {
 
         while (true) {
 
+            data.update();
             try {
                 Thread.sleep(5);
             } catch (InterruptedException e) {
@@ -66,16 +72,12 @@ public class Server implements Runnable {
             }
 
             try {
+                objectOutputStream.writeObject(data.cordinatesAndStatus);
 
-                Point pp = new Point(p1);
-                d1 = new Data(pp, width1, color1);
-                objectOutputStream.writeObject(d1);
-
-                d2 = (Data) objectInputStream.readObject();
-                p2.x = d2.p.x;
-                p2.y = d2.p.y;
-                width2 = d2.width;
-                color2 = d2.color;
+                Object obj = objectInputStream.readObject();
+                if (obj instanceof char[][]) {
+                    game.setCordinatesAndStatus((char[][]) obj);
+                }
 
             } catch (IOException e) {
                 try {
@@ -99,4 +101,3 @@ public class Server implements Runnable {
         }
     }
 }
-

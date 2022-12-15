@@ -1,8 +1,5 @@
 package Manage;
-import Manage.*;
-import Multiplayer.*;
 import Music.*;
-import Objects.*;
 import Panels.*;
 import Resources.*;
 
@@ -22,11 +19,12 @@ public class GameStateManager {
     private int mouseX, mouseY;
 
     private boolean changedPanel = true, changedMode = true;
-    private GamePanel gP;
-    private GameMenu gM;
-    private GameHowToPlay gH;
-    private GameOver gO;
-    private GameSettings gS;
+    private GameMultiplayer gameMultiplayer;
+    private GamePanel gamePanel;
+    private GameMenu gameMenu;
+    private GameHowToPlay gameHowToPlay;
+    private GameOver gameOver;
+    private GameSettings gameSettings;
 
 
     public GameStateManager() {
@@ -54,7 +52,7 @@ public class GameStateManager {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    if (currentGameState == GameState.GAME)
+                    if (currentGameState == GameState.PLAY)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.MENU);
@@ -66,12 +64,12 @@ public class GameStateManager {
                         System.exit(1);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    if (currentGameState == GameState.GAME)
-                        gP.pause();
+                    if (currentGameState == GameState.PLAY)
+                        gamePanel.pause();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
-                        setCurrentGameState(GameState.GAME);
+                        setCurrentGameState(GameState.PLAY);
                 }
             }
         });
@@ -82,13 +80,13 @@ public class GameStateManager {
                 mouseX = e.getX();
                 mouseY = e.getY();
                 if (GameState.MENU == currentGameState) {
-                    if (mouseX > gM.getxPlay() && mouseX < gM.getxPlay() + gM.getwPlay() && mouseY > gM.getyPlay() && mouseY < gM.getyPlay() + gM.gethPlay())
-                        setCurrentGameState(GameState.GAME);
-                    if (mouseX > gM.getxHowToPlay() && mouseX < gM.getxHowToPlay() + gM.getwHowToPlay() && mouseY > gM.getyHowToPlay() && mouseY < gM.getyHowToPlay() + gM.gethHowToPlay())
+                    if (mouseX > gameMenu.getxPlay() && mouseX < gameMenu.getxPlay() + gameMenu.getwPlay() && mouseY > gameMenu.getyPlay() && mouseY < gameMenu.getyPlay() + gameMenu.gethPlay())
+                        setCurrentGameState(GameState.PLAY);
+                    if (mouseX > gameMenu.getxHowToPlay() && mouseX < gameMenu.getxHowToPlay() + gameMenu.getwHowToPlay() && mouseY > gameMenu.getyHowToPlay() && mouseY < gameMenu.getyHowToPlay() + gameMenu.gethHowToPlay())
                         setCurrentGameState(GameState.HOWTOPLAY);
-                    if (mouseX > gM.getxSettings() && mouseX < gM.getxSettings() + gM.getwSettings() && mouseY > gM.getySettings() && mouseY < gM.getySettings() + gM.gethSettings())
+                    if (mouseX > gameMenu.getxSettings() && mouseX < gameMenu.getxSettings() + gameMenu.getwSettings() && mouseY > gameMenu.getySettings() && mouseY < gameMenu.getySettings() + gameMenu.gethSettings())
                         setCurrentGameState(GameState.SETTINGS);
-                    if (mouseX > gM.getxExit() && mouseX < gM.getxExit() + gM.getwExit() && mouseY > gM.getyExit() && mouseY < gM.getyExit() + gM.gethExit())
+                    if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
                         System.exit(1);
                 }
             }
@@ -127,7 +125,7 @@ public class GameStateManager {
                 setMenuPanel();
                 break;
             }
-            case GAME: {
+            case PLAY: {
                 setGamePanel();
                 break;
             }
@@ -148,46 +146,50 @@ public class GameStateManager {
 
     private void setMenuPanel() {
         if (previousGameState != null) {
-            if (previousGameState == GameState.GAME)
-                f.remove(gP);
+            if (previousGameState == GameState.PLAY)
+                f.remove(gamePanel);
             else if (previousGameState == GameState.GAMEOVER)
-                f.remove(gO);
+                f.remove(gameOver);
             else if (previousGameState == GameState.SETTINGS)
-                f.remove(gS);
+                f.remove(gameSettings);
             else if (previousGameState == GameState.HOWTOPLAY)
-                f.remove(gH);
+                f.remove(gameHowToPlay);
         }
-        gM = new GameMenu(this);
-        setNewPanel(gM);
+        gameMenu = new GameMenu(this);
+        setNewPanel(gameMenu);
     }
 
     private void setGamePanel() {
+        removeGamePreviousPanels();
+        gamePanel = new GamePanel(this);
+        setNewPanel(gamePanel);
+    }
+
+    public void removeGamePreviousPanels() {
         if (previousGameState != null) {
             if (previousGameState == GameState.MENU)
-                f.remove(gM);
+                f.remove(gameMenu);
             else if (previousGameState == GameState.GAMEOVER)
-                f.remove(gO);
+                f.remove(gameOver);
         }
-        gP = new GamePanel(this);
-        setNewPanel(gP);
     }
 
     private void setHowToPlayPanel() {
-        f.remove(gM);
-        gH = new GameHowToPlay(this);
-        setNewPanel(gH);
+        f.remove(gameMenu);
+        gameHowToPlay = new GameHowToPlay(this);
+        setNewPanel(gameHowToPlay);
     }
 
     private void setGameOverPanel() {
-        f.remove(gP);
-        gO = new GameOver(this);
-        setNewPanel(gO);
+        f.remove(gamePanel);
+        gameOver = new GameOver(this);
+        setNewPanel(gameOver);
     }
 
     private void setSettingsPanel() {
-        f.remove(gM);
-        gS = new GameSettings(this);
-        setNewPanel(gS);
+        f.remove(gameMenu);
+        gameSettings = new GameSettings(this);
+        setNewPanel(gameSettings);
     }
 
     public void setNewPanel(JPanel p) {
@@ -299,44 +301,44 @@ public class GameStateManager {
         this.fps = fps;
     }
 
-    public GamePanel getgP() {
-        return gP;
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 
-    public void setgP(GamePanel gP) {
-        this.gP = gP;
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
-    public GameMenu getgM() {
-        return gM;
+    public GameMenu getGameMenu() {
+        return gameMenu;
     }
 
-    public void setgM(GameMenu gM) {
-        this.gM = gM;
+    public void setGameMenu(GameMenu gameMenu) {
+        this.gameMenu = gameMenu;
     }
 
-    public GameHowToPlay getgH() {
-        return gH;
+    public GameHowToPlay getGameHowToPlay() {
+        return gameHowToPlay;
     }
 
-    public void setgH(GameHowToPlay gH) {
-        this.gH = gH;
+    public void setGameHowToPlay(GameHowToPlay gameHowToPlay) {
+        this.gameHowToPlay = gameHowToPlay;
     }
 
-    public GameOver getgO() {
-        return gO;
+    public GameOver getGameOver() {
+        return gameOver;
     }
 
-    public void setgO(GameOver gO) {
-        this.gO = gO;
+    public void setGameOver(GameOver gameOver) {
+        this.gameOver = gameOver;
     }
 
-    public GameSettings getgS() {
-        return gS;
+    public GameSettings getGameSettings() {
+        return gameSettings;
     }
 
-    public void setgS(GameSettings gS) {
-        this.gS = gS;
+    public void setGameSettings(GameSettings gameSettings) {
+        this.gameSettings = gameSettings;
     }
 
 }

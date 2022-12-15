@@ -1,4 +1,5 @@
 package Multiplayer;
+
 import Manage.*;
 import Multiplayer.*;
 import Music.*;
@@ -21,10 +22,9 @@ public class Client implements Runnable {
     ObjectOutputStream objectOutputStream;
     ObjectInputStream objectInputStream;
 
-    GamePanel game;
-    BallPlayer player;
-    BallBot vec;
     GameStateManager gSM;
+    GamePanel game;
+    Data data;
 
     Thread t;
 
@@ -33,12 +33,16 @@ public class Client implements Runnable {
         t = new Thread(this);
         this.gSM = gSM;
         connectToServer(Server.port);
-        game = new GamePanel(gSM);
+        game = new GamePanel(gSM, 2);
+        gSM.removeGamePreviousPanels();
+        gSM.setGamePanel(game);
+        gSM.setNewPanel(game);
+        data = new Data(game);
 
         Object obj = objectInputStream.readObject();
-        if (obj instanceof GameState) {
-            GameState command = (GameState) obj;
-            if (command == GameState.GAME) {
+        if (obj instanceof String) {
+            String command = (String) obj;
+            if (command.equals("start")) {
                 t.start();
             }
         }
@@ -57,7 +61,7 @@ public class Client implements Runnable {
     public void run() {
 
         while (true) {
-
+            data.update();
             try {
                 Thread.sleep(5);
             } catch (InterruptedException e) {
@@ -65,13 +69,12 @@ public class Client implements Runnable {
             }
 
             try {
+                objectOutputStream.writeObject(data.cordinatesAndStatus);
 
-                objectOutputStream.writeObject(game.getVec());
-                Class vecType = game.getVec().getClass();
                 Object obj = objectInputStream.readObject();
-                if(vecType.isInstance(obj))
-                    obj = (vecType) obj;
-                    game.setVec(obj);
+                if (obj instanceof char[][]) {
+                    game.setCordinatesAndStatus((char[][]) obj);
+                }
 
             } catch (IOException e) {
                 try {

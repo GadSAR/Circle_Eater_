@@ -1,10 +1,5 @@
 package Music;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -39,7 +34,7 @@ public class MusicWavPlayer {
             auline.start();
             int nBytesRead = 0;
             byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
-            while (nBytesRead != -1 && gSM.getCurrentGameState() == GameState.GAME) {
+            while (nBytesRead != -1 && gSM.getCurrentGameState() == GameState.PLAY) {
                 nBytesRead = audioInputStream.read(abData, 0, abData.length);
                 if (nBytesRead >= 0)
                     auline.write(abData, 0, nBytesRead);

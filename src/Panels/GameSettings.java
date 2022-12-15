@@ -1,10 +1,5 @@
 package Panels;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +23,7 @@ public class GameSettings extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //System.exit(1);
-                    gameStateManager.setCurrentGameState(GameState.GAME);
+                    gameStateManager.setCurrentGameState(GameState.PLAY);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(1);

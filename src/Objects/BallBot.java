@@ -1,10 +1,6 @@
 package Objects;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
 import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import java.awt.*;
 import java.io.Serial;
@@ -23,7 +19,7 @@ public class BallBot extends Thread implements Serializable {
     private int x, y, width;
     long startTime;
     double delay = 1000 / 120;
-    private boolean isAlive;
+    private boolean alive;
     private int dirX, dirY;
     private Random random = new Random();
     private double degrees;
@@ -61,7 +57,7 @@ public class BallBot extends Thread implements Serializable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            if (panel.getGameStateManager().getCurrentGameState() != GameState.GAME)
+            if (panel.getGameStateManager().getCurrentGameState() != GameState.PLAY)
                 break;
         }
     }
@@ -101,7 +97,7 @@ public class BallBot extends Thread implements Serializable {
                 soundEffect(false);
                 return true;
             }
-            isAlive = false;
+            alive = false;
         }
         return false;
     }
@@ -200,6 +196,24 @@ public class BallBot extends Thread implements Serializable {
     public void setWidth(int width) {
         this.width = width;
     }
+
+    public int getAlive() {
+        return alive ? 1:0;
+    }
+
+    public void setAlive(char alive) {
+        this.alive = alive == 1? true : false;
+    }
+
+    public boolean isBotAlive() {
+        return alive;
+    }
+
+    public void setBotAlive(Boolean alive) {
+        this.alive = alive;
+    }
+
+
 
     public int getDirX() {
         return dirX;

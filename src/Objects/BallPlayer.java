@@ -1,10 +1,6 @@
 package Objects;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
 import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import java.awt.*;
 import java.io.Serial;
@@ -19,8 +15,9 @@ public class BallPlayer extends Thread implements Serializable
 	
 	private GamePanel panel;
 	private int x, y, width;
-	long startTime;
-	double delay = 1000/60;
+	private Boolean alive;
+	private long startTime;
+	private double delay = 1000/60;
 	private double dx, dy, angle;
 	private double degrees = 0;
 	private Image ballImage;
@@ -34,6 +31,7 @@ public class BallPlayer extends Thread implements Serializable
 		this.x = x;
 		this.y = y;
 		this.width = 30;
+		alive = true;
 		ballImage = new ImageIcon(panel.getGameStateManager().getResource().getplayer1BallImg()).getImage();
 		startTime = System.currentTimeMillis();
 		start();
@@ -51,7 +49,7 @@ public class BallPlayer extends Thread implements Serializable
 		   	   }catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}
-			if(panel.getGameStateManager().getCurrentGameState() != GameState.GAME)
+			if(panel.getGameStateManager().getCurrentGameState() != GameState.PLAY)
 				break;
 		}
 	}
@@ -132,6 +130,22 @@ public class BallPlayer extends Thread implements Serializable
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	public int getAlive() {
+		return alive? 1:0;
+	}
+
+	public void setAlive(char alive) {
+		this.alive = alive == 1? true : false;
+	}
+
+	public boolean isPlayerAlive() {
+		return alive;
+	}
+
+	public void setPlayerAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	public double getDx() {
