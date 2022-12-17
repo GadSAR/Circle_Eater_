@@ -22,7 +22,6 @@ public class BallBot extends Thread implements Serializable {
     private boolean alive;
     private int dirX, dirY;
     private Random random = new Random();
-    private double degrees;
     private Image ballImage;
     private ImageIcon goodBall, badBall;
 
@@ -36,7 +35,6 @@ public class BallBot extends Thread implements Serializable {
         startTime = System.currentTimeMillis();
         dirX = random.nextBoolean() ? 1 : -1;
         dirY = random.nextBoolean() ? 1 : -1;
-        degrees = 0;
         preventionDistance = 0;
         this.ballImage = ballsImage;
         this.panel = p;
@@ -110,7 +108,6 @@ public class BallBot extends Thread implements Serializable {
             y += dirY;
             startTime = System.currentTimeMillis();
         }
-        degrees = degrees == 360 ? 4 : degrees + 4;    //for rotation animation
     }
 
     private void hitWall() {
@@ -237,14 +234,6 @@ public class BallBot extends Thread implements Serializable {
 
     public void setRandom(Random random) {
         this.random = random;
-    }
-
-    public double getDegrees() {
-        return degrees;
-    }
-
-    public void setDegrees(double degrees) {
-        this.degrees = degrees;
     }
 
     public Image getBallImage() {

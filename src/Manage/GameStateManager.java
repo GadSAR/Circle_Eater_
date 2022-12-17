@@ -21,6 +21,7 @@ public class GameStateManager {
     private GameMode currentGameMode;
     private Resource resource;
     private int mouseX, mouseY;
+    private Image cursor;
 
     private boolean changedPanel = true, changedMode = true;
     private char gameType = 0;
@@ -48,6 +49,7 @@ public class GameStateManager {
     private void setGameResources() {
         currentGameMode = GameMode.CHILL;
         resource = new Resource(this);
+        cursor = (new ImageIcon(resource.getCursorImg())).getImage();
     }
 
     private void setStartGameStates() {
@@ -67,6 +69,8 @@ public class GameStateManager {
                     else if (currentGameState == GameState.SETTINGS)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.HOWTOPLAY)
+                        setCurrentGameState(GameState.MENU);
+                    else if (currentGameState == GameState.MULTIPLAYER)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.MENU)
                         System.exit(1);
@@ -135,6 +139,10 @@ public class GameStateManager {
         });
     }
 
+    public void drawCursor(Graphics g){
+        g.drawImage(cursor, mouseX, mouseY, 30, 30, null);
+    }
+
     private void newServer() throws IOException {
         server = new Server(this);
     }
@@ -187,8 +195,8 @@ public class GameStateManager {
                 setSettingsPanel();
                 break;
             }
-
         }
+        changedPanel = false;
     }
 
     private void setMultiplayerPanel() {
@@ -275,6 +283,7 @@ public class GameStateManager {
         previousGameState = this.currentGameState;
         this.currentGameState = currentGameState;
         this.changedPanel = true;
+        changePanel();
     }
 
 

@@ -14,6 +14,7 @@ public class Resource {
             GLITCHgoodBallImg, GLITCHbadBallImg, GLITCHplayer1BallImg, GLITCHplayer2BallImg,
             UNKNOWNgoodBallImg, UNKNOWNbadBallImg, UNKNOWNplayer1BallImg, UNKNOWNplayer2BallImg,
             gameMenuBackgroundImg, gameOverBackgroundImg, gameSettingsBackgroundImg, gameHowToPlayBackgroundImg, pauseImg,
+            cursorImg, cursorLuImg, cursorUImg, cursorRuImg, cursorLImg, cursorCImg, cursorRImg, cursorLdImg, cursorDImg, cursorRdImg,
             playImg, onPlayImg, howToPlayImg, onHowToPlayImg, exitImg, onExitImg, settingsImg, onSettingsImg;
 
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
@@ -40,9 +41,22 @@ public class Resource {
         UNKNOWNplayer2BallImg = null;
         gameMenuBackgroundImg = "src/Resources/pictures/bgMenu.gif";
         gameOverBackgroundImg = "src/Resources/pictures/space.png";
-        gameSettingsBackgroundImg = "src/Resources/pictures/space.png";
-        gameHowToPlayBackgroundImg = "src/Resources/pictures/space.png";
-        pauseImg = "src/Resources/pictures/pauseScreen.png";
+        gameSettingsBackgroundImg = "src/Resources/pictures/original.gif";
+        gameHowToPlayBackgroundImg = "src/Resources/pictures/original.gif";
+        pauseImg = "src/Resources/pictures/pauseScreen2.png";
+
+        cursorImg = "src/Resources/pictures/cursor.gif";
+
+        cursorLuImg = "src/Resources/pictures/lu.png";
+        cursorUImg = "src/Resources/pictures/u.png";
+        cursorRuImg = "src/Resources/pictures/ru.png";
+        cursorLImg = "src/Resources/pictures/l.png";
+        cursorCImg = "src/Resources/pictures/c.png";
+        cursorRImg = "src/Resources/pictures/r.png";
+        cursorLdImg = "src/Resources/pictures/ld.png";
+        cursorDImg = "src/Resources/pictures/d.png";
+        cursorRdImg = "src/Resources/pictures/rd.png";
+
         playImg = "src/Resources/pictures/empty.png";
         onPlayImg = null;
         howToPlayImg = "src/Resources/pictures/empty.png";
@@ -306,6 +320,78 @@ public class Resource {
         this.pauseImg = pauseImg;
     }
 
+    public String getCursorLuImg() {
+        return cursorLuImg;
+    }
+
+    public void setCursorLuImg(String cursorLuImg) {
+        this.cursorLuImg = cursorLuImg;
+    }
+
+    public String getCursorUImg() {
+        return cursorUImg;
+    }
+
+    public void setCursorUImg(String cursorUImg) {
+        this.cursorUImg = cursorUImg;
+    }
+
+    public String getCursorRuImg() {
+        return cursorRuImg;
+    }
+
+    public void setCursorRuImg(String cursorRuImg) {
+        this.cursorRuImg = cursorRuImg;
+    }
+
+    public String getCursorLImg() {
+        return cursorLImg;
+    }
+
+    public void setCursorLImg(String cursorLImg) {
+        this.cursorLImg = cursorLImg;
+    }
+
+    public String getCursorCImg() {
+        return cursorCImg;
+    }
+
+    public void setCursorCImg(String cursorCImg) {
+        this.cursorCImg = cursorCImg;
+    }
+
+    public String getCursorRImg() {
+        return cursorRImg;
+    }
+
+    public void setCursorRImg(String cursorRImg) {
+        this.cursorRImg = cursorRImg;
+    }
+
+    public String getCursorLdImg() {
+        return cursorLdImg;
+    }
+
+    public void setCursorLdImg(String cursorLdImg) {
+        this.cursorLdImg = cursorLdImg;
+    }
+
+    public String getCursorDImg() {
+        return cursorDImg;
+    }
+
+    public void setCursorDImg(String cursorDImg) {
+        this.cursorDImg = cursorDImg;
+    }
+
+    public String getCursorRdImg() {
+        return cursorRdImg;
+    }
+
+    public void setCursorRdImg(String cursorRdImg) {
+        this.cursorRdImg = cursorRdImg;
+    }
+
     public String getPlayImg() {
         return playImg;
     }
@@ -474,4 +560,8 @@ public class Resource {
         this.gameStateManager = gameStateManager;
     }
 
+
+    public String getCursorImg() {
+        return cursorImg;
+    }
 }

@@ -29,7 +29,7 @@ public class Server implements Runnable {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data;
+    Data data, recivedData;
 
     Thread t;
 
@@ -37,8 +37,9 @@ public class Server implements Runnable {
         t = new Thread(this);
         this.gSM = gSM;
         serverConnection();
-        gSM.setCurrentGameState(GameState.GAME);
-        data = new Data(game);
+        this.gSM.setCurrentGameState(GameState.GAME);
+        this.game = this.gSM.getGamePanel();
+        this.data = new Data(game);
 
         t.start();
     }
@@ -63,17 +64,18 @@ public class Server implements Runnable {
 
             data.update();
             try {
-                Thread.sleep(5);
+                Thread.sleep(0,10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             try {
-                objectOutputStream.writeObject(data.cordinatesAndStatus);
+                objectOutputStream.writeObject(data);
 
                 Object obj = objectInputStream.readObject();
-                if (obj instanceof char[][]) {
-                    game.setCordinatesAndStatus((char[][]) obj);
+                if (obj instanceof Data) {
+                    recivedData = (Data)obj;
+                    game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);
                 }
 
             } catch (IOException e) {

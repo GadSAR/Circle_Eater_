@@ -19,8 +19,7 @@ public class BallPlayer extends Thread implements Serializable
 	private long startTime;
 	private double delay = 1000/60;
 	private double dx, dy, angle;
-	private double degrees = 0;
-	private Image ballImage;
+	private Image playerImage, player2Image;
 
 
 	public BallPlayer(GamePanel panel) { this(panel,0,0); }
@@ -32,7 +31,8 @@ public class BallPlayer extends Thread implements Serializable
 		this.y = y;
 		this.width = 30;
 		alive = true;
-		ballImage = new ImageIcon(panel.getGameStateManager().getResource().getplayer1BallImg()).getImage();
+		playerImage = new ImageIcon(panel.getGameStateManager().getResource().getplayer1BallImg()).getImage();
+		player2Image = new ImageIcon(panel.getGameStateManager().getResource().getplayer2BallImg()).getImage();
 		startTime = System.currentTimeMillis();
 		start();
 	}
@@ -80,7 +80,6 @@ public class BallPlayer extends Thread implements Serializable
 				panel.getPlayer().x += (int) (5 * Math.cos(angle));
 				panel.getPlayer().y += (int) (5 * Math.sin(angle));
 			}
-			degrees = degrees == 360 ? 4 : degrees + 4;    //for rotation animation
 			startTime = System.currentTimeMillis();
 		}
 
@@ -88,17 +87,22 @@ public class BallPlayer extends Thread implements Serializable
 
 	public void drawPlayer(Graphics g)
 	{
-		g.drawImage(ballImage, x,y, width, width,null);
+		g.drawImage(playerImage, x,y, width, width,null);
+	}
+
+	public void drawPlayer2(Graphics g)
+	{
+		g.drawImage(playerImage, x,y, width, width,null);
 	}
 	
-	public void drawAnimatedPlayer(Graphics g)
+	/*public void drawAnimatedPlayer(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D)g;
 		
 		Point p = new Point(x+ width /2,y+ width /2);
 		g2.rotate(Math.toRadians(degrees),p.x,p.y);
-		g2.drawImage(ballImage,x,y, width, width, null);
-	}
+		g2.drawImage(playerImage,x,y, width, width, null);
+	}*/
 	
 	public GamePanel getPanel() {
 		return panel;
@@ -172,20 +176,12 @@ public class BallPlayer extends Thread implements Serializable
 		this.angle = angle;
 	}
 
-	public double getDegrees() {
-		return degrees;
+	public Image getPlayerImage() {
+		return playerImage;
 	}
 
-	public void setDegrees(double degrees) {
-		this.degrees = degrees;
-	}
-
-	public Image getBallImage() {
-		return ballImage;
-	}
-
-	public void setBallImage(Image ballImage) {
-		this.ballImage = ballImage;
+	public void setPlayerImage(Image playerImage) {
+		this.playerImage = playerImage;
 	}
 
 	public static long getSerialversionuid() {

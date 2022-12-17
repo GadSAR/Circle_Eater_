@@ -33,23 +33,23 @@ public class GameMenu extends JPanel {
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
-        wPlay = 80;
-        hPlay = 30;
+        wPlay = 150;
+        hPlay = 60;
         xPlay = xMiddleScreen - wPlay / 2;
         yPlay = yMiddleScreen - hPlay / 2 - 100;
 
-        wSettings = 80;
-        hSettings = 30;
+        wSettings = 120;
+        hSettings = 60;
         xSettings = xMiddleScreen - wSettings / 2;
         ySettings = yPlay + hPlay + 20;
 
-        wHowToPlay = 80;
-        hHowToPlay = 30;
+        wHowToPlay = 120;
+        hHowToPlay = 60;
         xHowToPlay = xMiddleScreen - wHowToPlay / 2;
         yHowToPlay = ySettings + hSettings + 20;
 
-        wExit = 80;
-        hExit = 30;
+        wExit = 120;
+        hExit = 60;
         xExit = xMiddleScreen - wExit / 2;
         yExit = yHowToPlay + hHowToPlay + 20;
     }
@@ -70,6 +70,8 @@ public class GameMenu extends JPanel {
         if(gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit)
             g.drawImage(onExit, xExit, yExit, wExit, hExit, null);
         else g.drawImage(Exit, xExit, yExit, wExit, hExit, null);
+
+        gameStateManager.drawCursor(g);
 
     }
 

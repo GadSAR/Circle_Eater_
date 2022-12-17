@@ -75,15 +75,15 @@ public class GamePanel extends JPanel {
     }
 
     public void setCursors() {
-        imgsCursor[0][0] = (new ImageIcon("src/Resources/pictures/lu.png")).getImage();
-        imgsCursor[0][1] = (new ImageIcon("src/Resources/pictures/u.png")).getImage();
-        imgsCursor[0][2] = (new ImageIcon("src/Resources/pictures/ru.png")).getImage();
-        imgsCursor[1][0] = (new ImageIcon("src/Resources/pictures/l.png")).getImage();
-        imgsCursor[1][1] = (new ImageIcon("src/Resources/pictures/c.png")).getImage();
-        imgsCursor[1][2] = (new ImageIcon("src/Resources/pictures/r.png")).getImage();
-        imgsCursor[2][0] = (new ImageIcon("src/Resources/pictures/ld.png")).getImage();
-        imgsCursor[2][1] = (new ImageIcon("src/Resources/pictures/d.png")).getImage();
-        imgsCursor[2][2] = (new ImageIcon("src/Resources/pictures/rd.png")).getImage();
+        imgsCursor[0][0] = (new ImageIcon(gameStateManager.getResource().getCursorLuImg())).getImage();
+        imgsCursor[0][1] = (new ImageIcon(gameStateManager.getResource().getCursorUImg())).getImage();
+        imgsCursor[0][2] = (new ImageIcon(gameStateManager.getResource().getCursorRuImg())).getImage();
+        imgsCursor[1][0] = (new ImageIcon(gameStateManager.getResource().getCursorLImg())).getImage();
+        imgsCursor[1][1] = (new ImageIcon(gameStateManager.getResource().getCursorCImg())).getImage();
+        imgsCursor[1][2] = (new ImageIcon(gameStateManager.getResource().getCursorRImg())).getImage();
+        imgsCursor[2][0] = (new ImageIcon(gameStateManager.getResource().getCursorLdImg())).getImage();
+        imgsCursor[2][1] = (new ImageIcon(gameStateManager.getResource().getCursorDImg())).getImage();
+        imgsCursor[2][2] = (new ImageIcon(gameStateManager.getResource().getCursorRdImg())).getImage();
     }
 
     public void pause() {
@@ -109,15 +109,13 @@ public class GamePanel extends JPanel {
             if (vec[i].isAlive())
                 vec[i].drawBall(g);
 
-
-        drawCursor(g);
-
         if (!moveFlag) {
             g.drawImage(pauseImg, 0, 0, getWidth(), getHeight(), null);
         }
 
+        drawCursor(g);
         player.drawPlayer(g);
-        if(player2 != null) player2.drawPlayer(g);
+        if(player2 != null) player2.drawPlayer2(g);
     }
 
     public void drawCursor(Graphics g) {
@@ -204,13 +202,14 @@ public class GamePanel extends JPanel {
     public void setCordinatesAndStatus(char[][] cordinatesAndStatus) {
         player.setX(cordinatesAndStatus[0][0]);
         player.setY(cordinatesAndStatus[0][1]);
-        player.setAlive(cordinatesAndStatus[0][2]);
+        player.setWidth(cordinatesAndStatus[0][2]);
+        player.setAlive(cordinatesAndStatus[0][3]);
 
         for(int i = 1; i < cordinatesAndStatus.length; i++){
             vec[i-1].setX(cordinatesAndStatus[i][0]);
             vec[i-1].setY(cordinatesAndStatus[i][1]);
-            vec[i-1].setAlive(cordinatesAndStatus[i][2]);
+            vec[i-1].setWidth(cordinatesAndStatus[i][2]);
+            vec[i-1].setAlive(cordinatesAndStatus[i][3]);
         }
-
     }
 }

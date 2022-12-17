@@ -20,7 +20,8 @@ public class Data {
     public Data(GamePanel game) {
         this.game = game;
         vecSize = game.getVecSize();
-        cordinatesAndStatus = new char[vecSize + 1][3];
+        cordinatesAndStatus = new char[vecSize + 1][4];
+        update();
     }
 
     public void update() {
@@ -28,12 +29,14 @@ public class Data {
         tempVec = game.getVec();
         cordinatesAndStatus[0][0] = (char) tempPlayer.getX();
         cordinatesAndStatus[0][1] = (char) tempPlayer.getY();
-        cordinatesAndStatus[0][2] = (char) tempPlayer.getAlive();
+        cordinatesAndStatus[0][2] = (char) tempPlayer.getWidth();
+        cordinatesAndStatus[0][3] = (char) tempPlayer.getAlive();
 
         for (int i = 1; i < cordinatesAndStatus.length; i++) {
             cordinatesAndStatus[i][0] = (char) tempVec[i - 1].getX();
             cordinatesAndStatus[i][1] = (char) tempVec[i - 1].getY();
-            cordinatesAndStatus[i][2] = (char) tempVec[i - 1].getAlive();
+            cordinatesAndStatus[i][2] = (char) tempVec[i - 1].getWidth();
+            cordinatesAndStatus[i][3] = (char) tempVec[i - 1].getAlive();
         }
     }
 

@@ -24,7 +24,7 @@ public class Client implements Runnable {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data;
+    Data data, recivedData;
 
     Thread t;
 
@@ -34,6 +34,7 @@ public class Client implements Runnable {
         this.gSM = gSM;
         connectToServer(Server.port);
         gSM.setCurrentGameState(GameState.GAME);
+        game = gSM.getGamePanel();
         data = new Data(game);
 
         Object obj = objectInputStream.readObject();
@@ -46,7 +47,7 @@ public class Client implements Runnable {
     }
 
     public void connectToServer(int port) throws IOException {
-        socket = new Socket("localhost", port);
+        socket = new Socket("192.168.1.12", port);
 
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();
@@ -60,17 +61,18 @@ public class Client implements Runnable {
         while (true) {
             data.update();
             try {
-                Thread.sleep(5);
+                Thread.sleep(0,10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             try {
-                objectOutputStream.writeObject(data.cordinatesAndStatus);
+                objectOutputStream.writeObject(data);
 
                 Object obj = objectInputStream.readObject();
-                if (obj instanceof char[][]) {
-                    game.setCordinatesAndStatus((char[][]) obj);
+                if (obj instanceof Data) {
+                    recivedData = (Data)obj;
+                    game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);
                 }
 
             } catch (IOException e) {
