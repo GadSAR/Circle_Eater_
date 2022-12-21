@@ -20,36 +20,36 @@ public class GameMenu extends JPanel {
         this.gameStateManager = gameStateManager;
 
         bgMenu = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
-        Play = (new ImageIcon(gameStateManager.getResource().getPlayImg())).getImage();
-        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayImg())).getImage();
-        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsImg())).getImage();
-        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsImg())).getImage();
-        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayImg())).getImage();
-        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayImg())).getImage();
-        Exit = (new ImageIcon(gameStateManager.getResource().getExitImg())).getImage();
-        onExit = (new ImageIcon(gameStateManager.getResource().getOnExitImg())).getImage();
+        Play = (new ImageIcon(gameStateManager.getResource().getPlayButton())).getImage();
+        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayButton())).getImage();
+        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsButton())).getImage();
+        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsButton())).getImage();
+        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayButton())).getImage();
+        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayButton())).getImage();
+        Exit = (new ImageIcon(gameStateManager.getResource().getExitButton())).getImage();
+        onExit = (new ImageIcon(gameStateManager.getResource().getOnExitButton())).getImage();
 
         Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
-        wPlay = 150;
-        hPlay = 60;
+        wPlay = 240;
+        hPlay = 120;
         xPlay = xMiddleScreen - wPlay / 2;
         yPlay = yMiddleScreen - hPlay / 2 - 100;
 
-        wSettings = 120;
-        hSettings = 60;
+        wSettings = 180;
+        hSettings = 90;
         xSettings = xMiddleScreen - wSettings / 2;
         ySettings = yPlay + hPlay + 20;
 
-        wHowToPlay = 120;
-        hHowToPlay = 60;
+        wHowToPlay = 180;
+        hHowToPlay = 90;
         xHowToPlay = xMiddleScreen - wHowToPlay / 2;
         yHowToPlay = ySettings + hSettings + 20;
 
-        wExit = 120;
-        hExit = 60;
+        wExit = 180;
+        hExit = 90;
         xExit = xMiddleScreen - wExit / 2;
         yExit = yHowToPlay + hHowToPlay + 20;
     }

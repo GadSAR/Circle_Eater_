@@ -1,10 +1,6 @@
 package Resources;
+
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 public class Resource {
 
@@ -15,7 +11,8 @@ public class Resource {
             UNKNOWNgoodBallImg, UNKNOWNbadBallImg, UNKNOWNplayer1BallImg, UNKNOWNplayer2BallImg,
             gameMenuBackgroundImg, gameOverBackgroundImg, gameSettingsBackgroundImg, gameHowToPlayBackgroundImg, pauseImg,
             cursorImg, cursorLuImg, cursorUImg, cursorRuImg, cursorLImg, cursorCImg, cursorRImg, cursorLdImg, cursorDImg, cursorRdImg,
-            playImg, onPlayImg, howToPlayImg, onHowToPlayImg, exitImg, onExitImg, settingsImg, onSettingsImg;
+            playButton, onPlayButton, howToPlayButton, onHowToPlayButton, exitButton, onExitButton, settingsButton, onSettingsButton,
+            lobbyButton, onLobbyButton, creatButton, onCreatButton, joinButton, onJoinButton, backButton, onBackButton;
 
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
@@ -30,7 +27,7 @@ public class Resource {
         CHILLgoodBallImg = "src/Resources/pictures/blue.gif";
         CHILLbadBallImg = "src/Resources/pictures/red.gif";
         CHILLplayer1BallImg = "src/Resources/pictures/pause.gif";
-        CHILLplayer2BallImg = null;
+        CHILLplayer2BallImg = "src/Resources/pictures/pause.gif";
         GLITCHgoodBallImg = null;
         GLITCHbadBallImg = null;
         GLITCHplayer1BallImg = null;
@@ -57,14 +54,23 @@ public class Resource {
         cursorDImg = "src/Resources/pictures/d.png";
         cursorRdImg = "src/Resources/pictures/rd.png";
 
-        playImg = "src/Resources/pictures/empty.png";
-        onPlayImg = null;
-        howToPlayImg = "src/Resources/pictures/empty.png";
-        onHowToPlayImg = null;
-        exitImg = "src/Resources/pictures/empty.png";
-        onExitImg = null;
-        settingsImg = "src/Resources/pictures/empty.png";
-        onSettingsImg = null;
+        playButton = "src/Resources/pictures/playButton.png";
+        onPlayButton = "src/Resources/pictures/onplayButton.png";
+        howToPlayButton = "src/Resources/pictures/howtoplayButton.png";
+        onHowToPlayButton = "src/Resources/pictures/onhowtoplayButton.png";
+        exitButton = "src/Resources/pictures/exitButton.png";
+        onExitButton = "src/Resources/pictures/onexitButton.png";
+        settingsButton = "src/Resources/pictures/settingsButton.png";
+        onSettingsButton = "src/Resources/pictures/onsettingsButton.png";
+        lobbyButton = "src/Resources/pictures/lobbyButton.png";
+        onLobbyButton = "src/Resources/pictures/onlobbyButton.png";
+        creatButton = "src/Resources/pictures/creatButton.png";
+        onCreatButton = "src/Resources/pictures/oncreatButton.png";
+        joinButton = "src/Resources/pictures/joinButton.png";
+        onJoinButton = "src/Resources/pictures/onjoinButton.png";
+        backButton = "src/Resources/pictures/backButton.png";
+        onBackButton = "src/Resources/pictures/onbackButtonButton.png";
+
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
         CHILLgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
@@ -392,68 +398,68 @@ public class Resource {
         this.cursorRdImg = cursorRdImg;
     }
 
-    public String getPlayImg() {
-        return playImg;
+    public String getPlayButton() {
+        return playButton;
     }
 
-    public void setPlayImg(String playImg) {
-        this.playImg = playImg;
+    public void setPlayButton(String playButton) {
+        this.playButton = playButton;
     }
 
-    public String getOnPlayImg() {
-        return onPlayImg;
+    public String getOnPlayButton() {
+        return onPlayButton;
     }
 
-    public void setOnPlayImg(String onPlayImg) {
-        this.onPlayImg = onPlayImg;
+    public void setOnPlayButton(String onPlayButton) {
+        this.onPlayButton = onPlayButton;
     }
 
-    public String getHowToPlayImg() {
-        return howToPlayImg;
+    public String getHowToPlayButton() {
+        return howToPlayButton;
     }
 
-    public void setHowToPlayImg(String howToPlayImg) {
-        this.howToPlayImg = howToPlayImg;
+    public void setHowToPlayButton(String howToPlayButton) {
+        this.howToPlayButton = howToPlayButton;
     }
 
-    public String getOnHowToPlayImg() {
-        return onHowToPlayImg;
+    public String getOnHowToPlayButton() {
+        return onHowToPlayButton;
     }
 
-    public void setOnHowToPlayImg(String onHowToPlayImg) {
-        this.onHowToPlayImg = onHowToPlayImg;
+    public void setOnHowToPlayButton(String onHowToPlayButton) {
+        this.onHowToPlayButton = onHowToPlayButton;
     }
 
-    public String getExitImg() {
-        return exitImg;
+    public String getExitButton() {
+        return exitButton;
     }
 
-    public void setExitImg(String exitImg) {
-        this.exitImg = exitImg;
+    public void setExitButton(String exitButton) {
+        this.exitButton = exitButton;
     }
 
-    public String getOnExitImg() {
-        return onExitImg;
+    public String getOnExitButton() {
+        return onExitButton;
     }
 
-    public void setOnExitImg(String onExitImg) {
-        this.onExitImg = onExitImg;
+    public void setOnExitButton(String onExitButton) {
+        this.onExitButton = onExitButton;
     }
 
-    public String getSettingsImg() {
-        return settingsImg;
+    public String getSettingsButton() {
+        return settingsButton;
     }
 
-    public void setSettingsImg(String settingsImg) {
-        this.settingsImg = settingsImg;
+    public void setSettingsButton(String settingsButton) {
+        this.settingsButton = settingsButton;
     }
 
-    public String getOnSettingsImg() {
-        return onSettingsImg;
+    public String getOnSettingsButton() {
+        return onSettingsButton;
     }
 
-    public void setOnSettingsImg(String onSettingsImg) {
-        this.onSettingsImg = onSettingsImg;
+    public void setOnSettingsButton(String onSettingsButton) {
+        this.onSettingsButton = onSettingsButton;
     }
 
     public String getCHILLgoodBallPathSound() {

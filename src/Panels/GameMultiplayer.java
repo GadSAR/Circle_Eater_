@@ -19,12 +19,12 @@ public class GameMultiplayer extends JPanel {
         this.gameStateManager = gameStateManager;
 
         bgMenu = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
-        Play = (new ImageIcon(gameStateManager.getResource().getPlayImg())).getImage();
-        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayImg())).getImage();
-        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsImg())).getImage();
-        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsImg())).getImage();
-        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayImg())).getImage();
-        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayImg())).getImage();
+        Play = (new ImageIcon(gameStateManager.getResource().getPlayButton())).getImage();
+        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayButton())).getImage();
+        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsButton())).getImage();
+        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsButton())).getImage();
+        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayButton())).getImage();
+        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayButton())).getImage();
 
         Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
