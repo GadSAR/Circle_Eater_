@@ -1,4 +1,5 @@
 package Panels;
+
 import Manage.*;
 
 import javax.swing.*;
@@ -8,9 +9,10 @@ public class GameMenu extends JPanel {
 
     private GameStateManager gameStateManager;
 
-    private Image bgMenu, Play, onPlay, Settings, onSettings, HowToPlay, onHowToPlay, Exit, onExit;
+    private Image bgMenu, Play, onPlay, Lobby, onLobby, Settings, onSettings, HowToPlay, onHowToPlay, Exit, onExit;
     private int xMiddleScreen, yMiddleScreen,
             wPlay, hPlay, xPlay, yPlay,
+            wLobby, hLobby, xLobby, yLobby,
             wSettings, hSettings, xSettings, ySettings,
             wHowToPlay, hHowToPlay, xHowToPlay, yHowToPlay,
             wExit, hExit, xExit, yExit;
@@ -22,6 +24,8 @@ public class GameMenu extends JPanel {
         bgMenu = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
         Play = (new ImageIcon(gameStateManager.getResource().getPlayButton())).getImage();
         onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayButton())).getImage();
+        Lobby = (new ImageIcon(gameStateManager.getResource().getLobbyButton())).getImage();
+        onLobby = (new ImageIcon(gameStateManager.getResource().getOnLobbyButton())).getImage();
         Settings = (new ImageIcon(gameStateManager.getResource().getSettingsButton())).getImage();
         onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsButton())).getImage();
         HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayButton())).getImage();
@@ -35,21 +39,26 @@ public class GameMenu extends JPanel {
 
         wPlay = 240;
         hPlay = 120;
-        xPlay = xMiddleScreen - wPlay / 2;
+        xPlay = xMiddleScreen - wPlay - 50;
         yPlay = yMiddleScreen - hPlay / 2 - 100;
+
+        wLobby = 240;
+        hLobby = 120;
+        xLobby = xMiddleScreen + 50;
+        yLobby = yPlay;
 
         wSettings = 180;
         hSettings = 90;
-        xSettings = xMiddleScreen - wSettings / 2;
-        ySettings = yPlay + hPlay + 20;
+        xSettings = xMiddleScreen - wSettings - 20;
+        ySettings = yLobby + hLobby + 20;
 
         wHowToPlay = 180;
         hHowToPlay = 90;
-        xHowToPlay = xMiddleScreen - wHowToPlay / 2;
-        yHowToPlay = ySettings + hSettings + 20;
+        xHowToPlay = xMiddleScreen + 20;
+        yHowToPlay = ySettings;
 
-        wExit = 180;
-        hExit = 90;
+        wExit = 160;
+        hExit = 80;
         xExit = xMiddleScreen - wExit / 2;
         yExit = yHowToPlay + hHowToPlay + 20;
     }
@@ -58,16 +67,19 @@ public class GameMenu extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(bgMenu, 0, 0, getWidth(), getHeight(), null);
-        if(gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay)
+        if (gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay)
             g.drawImage(onPlay, xPlay, yPlay, wPlay, hPlay, null);
         else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
-        if(gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings)
+        if (gameStateManager.getMouseX() > xLobby && gameStateManager.getMouseX() < xLobby + wLobby && gameStateManager.getMouseY() > yLobby && gameStateManager.getMouseY() < yLobby + hLobby)
+            g.drawImage(onLobby, xLobby, yLobby, wLobby, hLobby, null);
+        else g.drawImage(Lobby, xLobby, yLobby, wLobby, hLobby, null);
+        if (gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings)
             g.drawImage(onSettings, xSettings, ySettings, wSettings, hSettings, null);
         else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
-        if(gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay)
+        if (gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay)
             g.drawImage(onHowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
         else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
-        if(gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit)
+        if (gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit)
             g.drawImage(onExit, xExit, yExit, wExit, hExit, null);
         else g.drawImage(Exit, xExit, yExit, wExit, hExit, null);
 
@@ -297,5 +309,53 @@ public class GameMenu extends JPanel {
 
     public void setyExit(int yExit) {
         this.yExit = yExit;
+    }
+
+    public Image getLobby() {
+        return Lobby;
+    }
+
+    public void setLobby(Image lobby) {
+        Lobby = lobby;
+    }
+
+    public Image getOnLobby() {
+        return onLobby;
+    }
+
+    public void setOnLobby(Image onLobby) {
+        this.onLobby = onLobby;
+    }
+
+    public int getwLobby() {
+        return wLobby;
+    }
+
+    public void setwLobby(int wLobby) {
+        this.wLobby = wLobby;
+    }
+
+    public int gethLobby() {
+        return hLobby;
+    }
+
+    public void sethLobby(int hLobby) {
+        this.hLobby = hLobby;
+    }
+
+    public int getxLobby() {
+        return xLobby;
+    }
+
+    public void setxLobby(int xLobby) {
+        this.xLobby = xLobby;
+    }
+
+    public int getyLobby() {
+        return yLobby;
+    }
+
+    public void setyLobby(int yLobby) {
+        this.yLobby = yLobby;
     }
 }

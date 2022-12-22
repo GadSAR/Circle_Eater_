@@ -14,7 +14,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements Runnable {
+public class Server extends Thread {
 
     static int port = 8888;
 
@@ -31,17 +31,14 @@ public class Server implements Runnable {
     GamePanel game;
     Data data, recivedData;
 
-    Thread t;
-
     public Server(GameStateManager gSM) throws IOException {
-        t = new Thread(this);
         this.gSM = gSM;
         serverConnection();
         this.gSM.setCurrentGameState(GameState.GAME);
         this.game = this.gSM.getGamePanel();
         this.data = new Data(game);
 
-        t.start();
+        start();
     }
 
     public void serverConnection() throws IOException {
@@ -64,7 +61,7 @@ public class Server implements Runnable {
 
             data.update();
             try {
-                Thread.sleep(0,10);
+                sleep(0,10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -86,7 +83,7 @@ public class Server implements Runnable {
                     e1.printStackTrace();
                 }
                 try {
-                    Thread.sleep(5000);
+                    sleep(5000);
                 } catch (InterruptedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();

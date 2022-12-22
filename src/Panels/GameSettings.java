@@ -37,6 +37,9 @@ public class GameSettings extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(settingsBackgroundImg,0,0,getWidth(),getHeight(),null);
+
+        gameStateManager.drawCursor(g);
+
     }
 
 }

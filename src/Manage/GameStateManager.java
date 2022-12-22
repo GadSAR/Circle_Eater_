@@ -24,7 +24,7 @@ public class GameStateManager {
     private Image cursor;
 
     private boolean changedPanel = true, changedMode = true;
-    private char gameType = 0;
+    private char playerType = 0;
 
     private GameMultiplayer gameMultiplayer;
     private Client client;
@@ -93,28 +93,31 @@ public class GameStateManager {
                 mouseY = e.getY();
 
                 if (GameState.MENU == currentGameState) {
+
                     if (mouseX > gameMenu.getxPlay() && mouseX < gameMenu.getxPlay() + gameMenu.getwPlay() && mouseY > gameMenu.getyPlay() && mouseY < gameMenu.getyPlay() + gameMenu.gethPlay()) {
-                        gameType = 0;
+                        playerType = 0;
                         setCurrentGameState(GameState.GAME);
                     }
-                    if (mouseX > gameMenu.getxHowToPlay() && mouseX < gameMenu.getxHowToPlay() + gameMenu.getwHowToPlay() && mouseY > gameMenu.getyHowToPlay() && mouseY < gameMenu.getyHowToPlay() + gameMenu.gethHowToPlay())
+                    if (mouseX > gameMenu.getxLobby() && mouseX < gameMenu.getxLobby() + gameMenu.getwLobby() && mouseY > gameMenu.getyLobby() && mouseY < gameMenu.getyLobby() + gameMenu.gethLobby())
                         setCurrentGameState(GameState.MULTIPLAYER);
                     if (mouseX > gameMenu.getxSettings() && mouseX < gameMenu.getxSettings() + gameMenu.getwSettings() && mouseY > gameMenu.getySettings() && mouseY < gameMenu.getySettings() + gameMenu.gethSettings())
                         setCurrentGameState(GameState.SETTINGS);
                     if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
                         System.exit(1);
-                } else if (GameState.MULTIPLAYER == currentGameState) {
+                }
 
-                    if (mouseX > gameMultiplayer.getxPlay() && mouseX < gameMultiplayer.getxPlay() + gameMultiplayer.getwPlay() && mouseY > gameMultiplayer.getyPlay() && mouseY < gameMultiplayer.getyPlay() + gameMultiplayer.gethPlay()) {
-                        gameType = 1;
+                else if (GameState.MULTIPLAYER == currentGameState) {
+
+                    if (mouseX > gameMultiplayer.getxCreate() && mouseX < gameMultiplayer.getxCreate() + gameMultiplayer.getwCreate() && mouseY > gameMultiplayer.getyCreate() && mouseY < gameMultiplayer.getyCreate() + gameMultiplayer.gethCreate()) {
+                        playerType = 1;
                         try {
                             newServer();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
-                    if (mouseX > gameMultiplayer.getxSettings() && mouseX < gameMultiplayer.getxSettings() + gameMultiplayer.getwSettings() && mouseY > gameMultiplayer.getySettings() && mouseY < gameMultiplayer.getySettings() + gameMultiplayer.gethSettings()) {
-                        gameType = 2;
+                    if (mouseX > gameMultiplayer.getxJoin() && mouseX < gameMultiplayer.getxJoin() + gameMultiplayer.getwJoin() && mouseY > gameMultiplayer.getyJoin() && mouseY < gameMultiplayer.getyJoin() + gameMultiplayer.gethJoin()) {
+                        playerType = 2;
                         try {
                             newClient();
                         } catch (IOException ex) {
@@ -123,9 +126,18 @@ public class GameStateManager {
                             throw new RuntimeException(ex);
                         }
                     }
-                    if (mouseX > gameMultiplayer.getxHowToPlay() && mouseX < gameMultiplayer.getxHowToPlay() + gameMultiplayer.getwHowToPlay() && mouseY > gameMultiplayer.getyHowToPlay() && mouseY < gameMultiplayer.getyHowToPlay() + gameMultiplayer.gethHowToPlay()) {
+                    if (mouseX > gameMultiplayer.getxBack() && mouseX < gameMultiplayer.getxBack() + gameMultiplayer.getWBack() && mouseY > gameMultiplayer.getyBack() && mouseY < gameMultiplayer.getyBack() + gameMultiplayer.gethBack()) {
                         setCurrentGameState(GameState.MENU);
                     }
+                }
+
+                else if (GameState.GAMEOVER == currentGameState) {
+
+                    if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
+                        setCurrentGameState(GameState.GAME);
+                    }
+                    if (mouseX > gameOver.getxMenu() && mouseX < gameOver.getxMenu() + gameOver.getwMenu() && mouseY > gameOver.getyMenu() && mouseY < gameOver.getyMenu() + gameOver.gethMenu())
+                        setCurrentGameState(GameState.MENU);
                 }
             }
         });
@@ -224,7 +236,7 @@ public class GameStateManager {
 
     private void setGamePanel() {
         removeGamePreviousPanels();
-        gamePanel = new GamePanel(this, gameType);
+        gamePanel = new GamePanel(this, playerType);
         setNewPanel(gamePanel);
     }
 
@@ -431,12 +443,12 @@ public class GameStateManager {
         this.gameSettings = gameSettings;
     }
 
-    public char getGameType() {
-        return gameType;
+    public char getPlayerType() {
+        return playerType;
     }
 
-    public void setGameType(char gameType) {
-        this.gameType = gameType;
+    public void setPlayerType(char playerType) {
+        this.playerType = playerType;
     }
 
 

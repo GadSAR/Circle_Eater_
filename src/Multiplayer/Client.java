@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class Client implements Runnable {
+public class Client extends Thread {
 
     Socket socket;
     InputStream inputStream;
@@ -26,11 +26,8 @@ public class Client implements Runnable {
     GamePanel game;
     Data data, recivedData;
 
-    Thread t;
-
 
     public Client(GameStateManager gSM) throws IOException, ClassNotFoundException {
-        t = new Thread(this);
         this.gSM = gSM;
         connectToServer(Server.port);
         gSM.setCurrentGameState(GameState.GAME);
@@ -41,7 +38,7 @@ public class Client implements Runnable {
         if (obj instanceof String) {
             String command = (String) obj;
             if (command.equals("start")) {
-                t.start();
+                start();
             }
         }
     }
@@ -61,7 +58,7 @@ public class Client implements Runnable {
         while (true) {
             data.update();
             try {
-                Thread.sleep(0,10);
+                sleep(0,10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -83,7 +80,7 @@ public class Client implements Runnable {
                     e1.printStackTrace();
                 }
                 try {
-                    Thread.sleep(5000);
+                    sleep(5000);
                 } catch (InterruptedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();

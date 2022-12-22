@@ -24,6 +24,9 @@ public class GameHowToPlay extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(img,0,0,getWidth(),getHeight(),null);
+
+        gameStateManager.drawCursor(g);
+
     }
 
 }

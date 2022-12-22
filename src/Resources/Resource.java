@@ -12,7 +12,8 @@ public class Resource {
             gameMenuBackgroundImg, gameOverBackgroundImg, gameSettingsBackgroundImg, gameHowToPlayBackgroundImg, pauseImg,
             cursorImg, cursorLuImg, cursorUImg, cursorRuImg, cursorLImg, cursorCImg, cursorRImg, cursorLdImg, cursorDImg, cursorRdImg,
             playButton, onPlayButton, howToPlayButton, onHowToPlayButton, exitButton, onExitButton, settingsButton, onSettingsButton,
-            lobbyButton, onLobbyButton, creatButton, onCreatButton, joinButton, onJoinButton, backButton, onBackButton;
+            lobbyButton, onLobbyButton, creatButton, onCreatButton, joinButton, onJoinButton, backButton, onBackButton,
+            replayButton, onReplayButton, menuButton, onMenuButton;
 
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
@@ -69,7 +70,11 @@ public class Resource {
         joinButton = "src/Resources/pictures/joinButton.png";
         onJoinButton = "src/Resources/pictures/onjoinButton.png";
         backButton = "src/Resources/pictures/backButton.png";
-        onBackButton = "src/Resources/pictures/onbackButtonButton.png";
+        onBackButton = "src/Resources/pictures/onbackButton.png";
+        replayButton = "src/Resources/pictures/replayButton.png";
+        onReplayButton = "src/Resources/pictures/onreplayButton.png";
+        menuButton = "src/Resources/pictures/menuButton.png";
+        onMenuButton = "src/Resources/pictures/onmenuButton.png";
 
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
@@ -462,6 +467,38 @@ public class Resource {
         this.onSettingsButton = onSettingsButton;
     }
 
+    public String getReplayButton() {
+        return replayButton;
+    }
+
+    public void setReplayButton(String replayButton) {
+        this.replayButton = replayButton;
+    }
+
+    public String getOnReplayButton() {
+        return onReplayButton;
+    }
+
+    public void setOnReplayButton(String onReplayButton) {
+        this.onReplayButton = onReplayButton;
+    }
+
+    public String getMenuButton() {
+        return menuButton;
+    }
+
+    public void setMenuButton(String menuButton) {
+        this.menuButton = menuButton;
+    }
+
+    public String getOnMenuButton() {
+        return onMenuButton;
+    }
+
+    public void setOnMenuButton(String onMenuButton) {
+        this.onMenuButton = onMenuButton;
+    }
+
     public String getCHILLgoodBallPathSound() {
         return CHILLgoodBallPathSound;
     }
@@ -566,8 +603,75 @@ public class Resource {
         this.gameStateManager = gameStateManager;
     }
 
-
     public String getCursorImg() {
         return cursorImg;
+    }
+
+    public void setCursorImg(String cursorImg) {
+        this.cursorImg = cursorImg;
+    }
+
+    public String getLobbyButton() {
+        return lobbyButton;
+    }
+
+    public void setLobbyButton(String lobbyButton) {
+        this.lobbyButton = lobbyButton;
+    }
+
+    public String getOnLobbyButton() {
+        return onLobbyButton;
+    }
+
+    public void setOnLobbyButton(String onLobbyButton) {
+        this.onLobbyButton = onLobbyButton;
+    }
+
+    public String getCreatButton() {
+        return creatButton;
+    }
+
+    public void setCreatButton(String creatButton) {
+        this.creatButton = creatButton;
+    }
+
+    public String getOnCreatButton() {
+        return onCreatButton;
+    }
+
+    public void setOnCreatButton(String onCreatButton) {
+        this.onCreatButton = onCreatButton;
+    }
+
+    public String getJoinButton() {
+        return joinButton;
+    }
+
+    public void setJoinButton(String joinButton) {
+        this.joinButton = joinButton;
+    }
+
+    public String getOnJoinButton() {
+        return onJoinButton;
+    }
+
+    public void setOnJoinButton(String onJoinButton) {
+        this.onJoinButton = onJoinButton;
+    }
+
+    public String getBackButton() {
+        return backButton;
+    }
+
+    public void setBackButton(String backButton) {
+        this.backButton = backButton;
+    }
+
+    public String getOnBackButton() {
+        return onBackButton;
+    }
+
+    public void setOnBackButton(String onBackButton) {
+        this.onBackButton = onBackButton;
     }
 }

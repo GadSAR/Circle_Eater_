@@ -8,58 +8,60 @@ public class GameMultiplayer extends JPanel {
 
     private GameStateManager gameStateManager;
 
-    private Image bgMenu, Play, onPlay, Settings, onSettings, HowToPlay, onHowToPlay;
+    private Image bgMultiplayer, Create, onCreate, Join, onJoin, Back, onBack;
     private int xMiddleScreen, yMiddleScreen,
-            wPlay, hPlay, xPlay, yPlay,
-            wSettings, hSettings, xSettings, ySettings,
-            wHowToPlay, hHowToPlay, xHowToPlay, yHowToPlay;
+            wCreate, hCreate, xCreate  , yCreate,
+            wJoin, hJoin, xJoin, yJoin,
+            WBack, hBack, xBack, yBack;
 
 
     public GameMultiplayer(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
-        bgMenu = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
-        Play = (new ImageIcon(gameStateManager.getResource().getPlayButton())).getImage();
-        onPlay = (new ImageIcon(gameStateManager.getResource().getOnPlayButton())).getImage();
-        Settings = (new ImageIcon(gameStateManager.getResource().getSettingsButton())).getImage();
-        onSettings = (new ImageIcon(gameStateManager.getResource().getOnSettingsButton())).getImage();
-        HowToPlay = (new ImageIcon(gameStateManager.getResource().getHowToPlayButton())).getImage();
-        onHowToPlay = (new ImageIcon(gameStateManager.getResource().getOnHowToPlayButton())).getImage();
+        bgMultiplayer = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
+        Create = (new ImageIcon(gameStateManager.getResource().getCreatButton())).getImage();
+        onCreate = (new ImageIcon(gameStateManager.getResource().getOnCreatButton())).getImage();
+        Join = (new ImageIcon(gameStateManager.getResource().getJoinButton())).getImage();
+        onJoin = (new ImageIcon(gameStateManager.getResource().getOnJoinButton())).getImage();
+        Back = (new ImageIcon(gameStateManager.getResource().getBackButton())).getImage();
+        onBack = (new ImageIcon(gameStateManager.getResource().getOnBackButton())).getImage();
 
         Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
-        wPlay = 80;
-        hPlay = 30;
-        xPlay = xMiddleScreen - wPlay / 2;
-        yPlay = yMiddleScreen - hPlay / 2 - 100;
+        wCreate = 180;
+        hCreate = 90;
+        xCreate = xMiddleScreen - wCreate - 20;
+        yCreate = yMiddleScreen - hCreate / 2 - 50;
 
-        wSettings = 80;
-        hSettings = 30;
-        xSettings = xMiddleScreen - wSettings / 2;
-        ySettings = yPlay + hPlay + 20;
+        wJoin = 180;
+        hJoin = 90;
+        xJoin = xMiddleScreen + 20;
+        yJoin = yCreate;
 
-        wHowToPlay = 80;
-        hHowToPlay = 30;
-        xHowToPlay = xMiddleScreen - wHowToPlay / 2;
-        yHowToPlay = ySettings + hSettings + 20;
+        WBack = 160;
+        hBack = 80;
+        xBack = xMiddleScreen - WBack / 2;
+        yBack = yJoin + hJoin + 20;
 
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(bgMenu, 0, 0, getWidth(), getHeight(), null);
-        if (gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay)
-            g.drawImage(onPlay, xPlay, yPlay, wPlay, hPlay, null);
-        else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
-        if (gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings)
-            g.drawImage(onSettings, xSettings, ySettings, wSettings, hSettings, null);
-        else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
-        if (gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay)
-            g.drawImage(onHowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
-        else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
+        g.drawImage(bgMultiplayer, 0, 0, getWidth(), getHeight(), null);
+        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate)
+            g.drawImage(onCreate, xCreate, yCreate, wCreate, hCreate, null);
+        else g.drawImage(Create, xCreate, yCreate, wCreate, hCreate, null);
+        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin)
+            g.drawImage(onJoin, xJoin, yJoin, wJoin, hJoin, null);
+        else g.drawImage(Join, xJoin, yJoin, wJoin, hJoin, null);
+        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack)
+            g.drawImage(onBack, xBack, yBack, WBack, hBack, null);
+        else g.drawImage(Back, xBack, yBack, WBack, hBack, null);
+
+        gameStateManager.drawCursor(g);
 
     }
 
@@ -71,60 +73,60 @@ public class GameMultiplayer extends JPanel {
         this.gameStateManager = gameStateManager;
     }
 
-    public Image getBgMenu() {
-        return bgMenu;
+    public Image getBgMultiplayer() {
+        return bgMultiplayer;
     }
 
-    public void setBgMenu(Image bgMenu) {
-        this.bgMenu = bgMenu;
+    public void setBgMultiplayer(Image bgMultiplayer) {
+        this.bgMultiplayer = bgMultiplayer;
     }
 
-    public Image getPlay() {
-        return Play;
+    public Image getCreate() {
+        return Create;
     }
 
-    public void setPlay(Image play) {
-        Play = play;
+    public void setCreate(Image create) {
+        Create = create;
     }
 
-    public Image getOnPlay() {
-        return onPlay;
+    public Image getOnCreate() {
+        return onCreate;
     }
 
-    public void setOnPlay(Image onPlay) {
-        this.onPlay = onPlay;
+    public void setOnCreate(Image onCreate) {
+        this.onCreate = onCreate;
     }
 
-    public Image getSettings() {
-        return Settings;
+    public Image getJoin() {
+        return Join;
     }
 
-    public void setSettings(Image settings) {
-        Settings = settings;
+    public void setJoin(Image join) {
+        Join = join;
     }
 
-    public Image getOnSettings() {
-        return onSettings;
+    public Image getOnJoin() {
+        return onJoin;
     }
 
-    public void setOnSettings(Image onSettings) {
-        this.onSettings = onSettings;
+    public void setOnJoin(Image onJoin) {
+        this.onJoin = onJoin;
     }
 
-    public Image getHowToPlay() {
-        return HowToPlay;
+    public Image getBack() {
+        return Back;
     }
 
-    public void setHowToPlay(Image howToPlay) {
-        HowToPlay = howToPlay;
+    public void setBack(Image back) {
+        Back = back;
     }
 
-    public Image getOnHowToPlay() {
-        return onHowToPlay;
+    public Image getOnBack() {
+        return onBack;
     }
 
-    public void setOnHowToPlay(Image onHowToPlay) {
-        this.onHowToPlay = onHowToPlay;
+    public void setOnBack(Image onBack) {
+        this.onBack = onBack;
     }
 
     public int getxMiddleScreen() {
@@ -143,100 +145,100 @@ public class GameMultiplayer extends JPanel {
         this.yMiddleScreen = yMiddleScreen;
     }
 
-    public int getwPlay() {
-        return wPlay;
+    public int getwCreate() {
+        return wCreate;
     }
 
-    public void setwPlay(int wPlay) {
-        this.wPlay = wPlay;
+    public void setwCreate(int wCreate) {
+        this.wCreate = wCreate;
     }
 
-    public int gethPlay() {
-        return hPlay;
+    public int gethCreate() {
+        return hCreate;
     }
 
-    public void sethPlay(int hPlay) {
-        this.hPlay = hPlay;
+    public void sethCreate(int hCreate) {
+        this.hCreate = hCreate;
     }
 
-    public int getxPlay() {
-        return xPlay;
+    public int getxCreate() {
+        return xCreate;
     }
 
-    public void setxPlay(int xPlay) {
-        this.xPlay = xPlay;
+    public void setxCreate(int xCreate) {
+        this.xCreate = xCreate;
     }
 
-    public int getyPlay() {
-        return yPlay;
+    public int getyCreate() {
+        return yCreate;
     }
 
-    public void setyPlay(int yPlay) {
-        this.yPlay = yPlay;
+    public void setyCreate(int yCreate) {
+        this.yCreate = yCreate;
     }
 
-    public int getwSettings() {
-        return wSettings;
+    public int getwJoin() {
+        return wJoin;
     }
 
-    public void setwSettings(int wSettings) {
-        this.wSettings = wSettings;
+    public void setwJoin(int wJoin) {
+        this.wJoin = wJoin;
     }
 
-    public int gethSettings() {
-        return hSettings;
+    public int gethJoin() {
+        return hJoin;
     }
 
-    public void sethSettings(int hSettings) {
-        this.hSettings = hSettings;
+    public void sethJoin(int hJoin) {
+        this.hJoin = hJoin;
     }
 
-    public int getxSettings() {
-        return xSettings;
+    public int getxJoin() {
+        return xJoin;
     }
 
-    public void setxSettings(int xSettings) {
-        this.xSettings = xSettings;
+    public void setxJoin(int xJoin) {
+        this.xJoin = xJoin;
     }
 
-    public int getySettings() {
-        return ySettings;
+    public int getyJoin() {
+        return yJoin;
     }
 
-    public void setySettings(int ySettings) {
-        this.ySettings = ySettings;
+    public void setyJoin(int yJoin) {
+        this.yJoin = yJoin;
     }
 
-    public int getwHowToPlay() {
-        return wHowToPlay;
+    public int getWBack() {
+        return WBack;
     }
 
-    public void setwHowToPlay(int wHowToPlay) {
-        this.wHowToPlay = wHowToPlay;
+    public void setWBack(int WBack) {
+        this.WBack = WBack;
     }
 
-    public int gethHowToPlay() {
-        return hHowToPlay;
+    public int gethBack() {
+        return hBack;
     }
 
-    public void sethHowToPlay(int hHowToPlay) {
-        this.hHowToPlay = hHowToPlay;
+    public void sethBack(int hBack) {
+        this.hBack = hBack;
     }
 
-    public int getxHowToPlay() {
-        return xHowToPlay;
+    public int getxBack() {
+        return xBack;
     }
 
-    public void setxHowToPlay(int xHowToPlay) {
-        this.xHowToPlay = xHowToPlay;
+    public void setxBack(int xBack) {
+        this.xBack = xBack;
     }
 
-    public int getyHowToPlay() {
-        return yHowToPlay;
+    public int getyBack() {
+        return yBack;
     }
 
-    public void setyHowToPlay(int yHowToPlay) {
-        this.yHowToPlay = yHowToPlay;
+    public void setyBack(int yBack) {
+        this.yBack = yBack;
     }
 
 }

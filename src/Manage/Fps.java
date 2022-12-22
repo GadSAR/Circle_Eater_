@@ -41,7 +41,7 @@ public class Fps extends Thread {
                 Thread.sleep(2);
             }
             catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                 throw new RuntimeException(e);
             }
         }
     }
