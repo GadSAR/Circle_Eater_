@@ -61,15 +61,18 @@ public class Server extends Thread {
 
             data.update();
             try {
-                sleep(0,10);
+                sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             try {
                 objectOutputStream.writeObject(data);
+                System.out.println("server write");
 
                 Object obj = objectInputStream.readObject();
+                System.out.println("server read");
+
                 if (obj instanceof Data) {
                     recivedData = (Data)obj;
                     game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);

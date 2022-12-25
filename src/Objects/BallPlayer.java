@@ -17,7 +17,7 @@ public class BallPlayer extends Thread implements Serializable
 	private int x, y, width;
 	private Boolean alive;
 	private long startTime;
-	private double delay = 1000/60;
+	private double delay = 1000/30;
 	private double dx, dy, angle;
 	private Image playerImage, player2Image;
 
@@ -77,8 +77,8 @@ public class BallPlayer extends Thread implements Serializable
 
 			if (dx * dx + dy * dy > panel.getPlayer().width / 2) {    //minimum to move
 				angle = Math.atan2(dy, dx);
-				panel.getPlayer().x += (int) (5 * Math.cos(angle));
-				panel.getPlayer().y += (int) (5 * Math.sin(angle));
+				panel.getPlayer().x += (int) (10 * Math.cos(angle));
+				panel.getPlayer().y += (int) (10 * Math.sin(angle));
 			}
 			startTime = System.currentTimeMillis();
 		}

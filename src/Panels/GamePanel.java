@@ -16,7 +16,7 @@ public class GamePanel extends JPanel {
     private BallPlayer player;
     private BallPlayer player2;
     private BallBot[] vec;
-    private char vecSize;
+    private char vecSize = 60;
 
     private boolean moveFlag = false;
 
@@ -57,20 +57,42 @@ public class GamePanel extends JPanel {
     }
 
     public void setBallsGame() {
-        vecSize = 60;
         vec = new BallBot[vecSize];
 
+        Random rnd = new Random();
+        int space = 30;
+
         for (int i = 0; i < vec.length; i++) {
-            int w = (int) (Math.random() * 50) + 12;
+
+            int w = rnd.nextInt(50) + 12;
 
             ImageIcon img1 = new ImageIcon(gameStateManager.getResource().getgoodBallImg());
             ImageIcon img2 = new ImageIcon(gameStateManager.getResource().getbadBallImg());
 
             Image ballsImage = w < player.getWidth() ? img1.getImage() : img2.getImage();
 
-            Random rnd = new Random();
+            int x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
+            int y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
 
-            vec[i] = new BallBot(rnd.nextInt(1400), rnd.nextInt(800), w, ballsImage, this);
+            if(player2 != null)
+            {
+                while((((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) || (((x < player2.getX() + player.getWidth() + space) || (x < player2.getY() - space)) && ((y < player2.getY() + player.getWidth() + space) || (y < player2.getY() - space)))){
+                    x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
+                    y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
+                }
+            }
+            else
+            {
+                while(((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space)))
+                {
+                    x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
+                    y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
+                }
+
+            }
+
+
+            vec[i] = new BallBot(x, rnd.nextInt(gameStateManager.getF().getHeight() - w), w, ballsImage, this);
         }
     }
 

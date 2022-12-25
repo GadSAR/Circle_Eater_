@@ -44,7 +44,7 @@ public class Client extends Thread {
     }
 
     public void connectToServer(int port) throws IOException {
-        socket = new Socket("192.168.1.12", port);
+        socket = new Socket("192.168.1.12", port+1);
 
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();
@@ -56,17 +56,20 @@ public class Client extends Thread {
     public void run() {
 
         while (true) {
+
             data.update();
             try {
-                sleep(0,10);
+                sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             try {
                 objectOutputStream.writeObject(data);
+                System.out.println("client write");
 
                 Object obj = objectInputStream.readObject();
+                System.out.println("client read");
                 if (obj instanceof Data) {
                     recivedData = (Data)obj;
                     game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);

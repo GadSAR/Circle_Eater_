@@ -295,9 +295,7 @@ public class GameStateManager {
         previousGameState = this.currentGameState;
         this.currentGameState = currentGameState;
         this.changedPanel = true;
-        changePanel();
     }
-
 
     public GameMode getCurrentGameMode() {
         return currentGameMode;

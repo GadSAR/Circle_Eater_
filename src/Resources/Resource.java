@@ -41,7 +41,7 @@ public class Resource {
         gameOverBackgroundImg = "src/Resources/pictures/space.png";
         gameSettingsBackgroundImg = "src/Resources/pictures/original.gif";
         gameHowToPlayBackgroundImg = "src/Resources/pictures/original.gif";
-        pauseImg = "src/Resources/pictures/pauseScreen2.png";
+        pauseImg = "src/Resources/pictures/pauseScreen.png";
 
         cursorImg = "src/Resources/pictures/cursor.gif";
 
@@ -85,6 +85,7 @@ public class Resource {
         UNKNOWNgoodBallPathSound = null;
         UNKNOWNbadBallPathSound = null;
         UNKNOWNgameBackgroundPathSound = null;
+
         clickButtonPathSound = null;
         onButtonPathSound = null;
         backgroundPathSound = null;
