@@ -1,10 +1,5 @@
 package Panels;
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
-import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import javax.swing.*;
 import java.awt.*;

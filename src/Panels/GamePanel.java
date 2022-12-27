@@ -23,11 +23,11 @@ public class GamePanel extends JPanel {
 
     private MusicThread mt;
     private Image backgroundImg, pauseImg;
-    private Image[][] imgsCursor = new Image[3][3];
+    private Image[][] imagesCursor = new Image[3][3];
 
     public GamePanel(GameStateManager gameStateManager, int index) {
         setGameStateManager(gameStateManager);
-        setScreenImgs();
+        setScreenImages();
         setPlayers(index);
         setBallsGame();
         setCursors();
@@ -35,10 +35,10 @@ public class GamePanel extends JPanel {
     }
 
     private void setMusic() {
-        gameStateManager.getMusicControler().getGame().setFlag(true);
+        gameStateManager.getMusicController().getGame().setFlag(true);
     }
 
-    public void setScreenImgs() {
+    public void setScreenImages() {
         backgroundImg = (new ImageIcon(gameStateManager.getResource().getgameBackgroundImg())).getImage();
         pauseImg = (new ImageIcon(gameStateManager.getResource().getPauseImg())).getImage();
     }
@@ -97,15 +97,15 @@ public class GamePanel extends JPanel {
     }
 
     public void setCursors() {
-        imgsCursor[0][0] = (new ImageIcon(gameStateManager.getResource().getCursorLuImg())).getImage();
-        imgsCursor[0][1] = (new ImageIcon(gameStateManager.getResource().getCursorUImg())).getImage();
-        imgsCursor[0][2] = (new ImageIcon(gameStateManager.getResource().getCursorRuImg())).getImage();
-        imgsCursor[1][0] = (new ImageIcon(gameStateManager.getResource().getCursorLImg())).getImage();
-        imgsCursor[1][1] = (new ImageIcon(gameStateManager.getResource().getCursorCImg())).getImage();
-        imgsCursor[1][2] = (new ImageIcon(gameStateManager.getResource().getCursorRImg())).getImage();
-        imgsCursor[2][0] = (new ImageIcon(gameStateManager.getResource().getCursorLdImg())).getImage();
-        imgsCursor[2][1] = (new ImageIcon(gameStateManager.getResource().getCursorDImg())).getImage();
-        imgsCursor[2][2] = (new ImageIcon(gameStateManager.getResource().getCursorRdImg())).getImage();
+        imagesCursor[0][0] = (new ImageIcon(gameStateManager.getResource().getCursorLuImg())).getImage();
+        imagesCursor[0][1] = (new ImageIcon(gameStateManager.getResource().getCursorUImg())).getImage();
+        imagesCursor[0][2] = (new ImageIcon(gameStateManager.getResource().getCursorRuImg())).getImage();
+        imagesCursor[1][0] = (new ImageIcon(gameStateManager.getResource().getCursorLImg())).getImage();
+        imagesCursor[1][1] = (new ImageIcon(gameStateManager.getResource().getCursorCImg())).getImage();
+        imagesCursor[1][2] = (new ImageIcon(gameStateManager.getResource().getCursorRImg())).getImage();
+        imagesCursor[2][0] = (new ImageIcon(gameStateManager.getResource().getCursorLdImg())).getImage();
+        imagesCursor[2][1] = (new ImageIcon(gameStateManager.getResource().getCursorDImg())).getImage();
+        imagesCursor[2][2] = (new ImageIcon(gameStateManager.getResource().getCursorRdImg())).getImage();
     }
 
     public void pause() {
@@ -142,22 +142,22 @@ public class GamePanel extends JPanel {
 
     public void drawCursor(Graphics g) {
         if (gameStateManager.getMouseX() < player.getX() + player.getWidth() / 2 - 16 && gameStateManager.getMouseY() < player.getY() + player.getWidth() / 2 - 16)
-            g.drawImage(imgsCursor[0][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[0][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseX() < player.getX() + player.getWidth() / 2 - 16 && gameStateManager.getMouseY() > player.getY() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[2][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[2][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseX() > player.getX() + player.getWidth() / 2 + 16 && gameStateManager.getMouseY() < player.getY() + player.getWidth() / 2 - 16)
-            g.drawImage(imgsCursor[0][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[0][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseX() > player.getX() + player.getWidth() / 2 + 16 && gameStateManager.getMouseY() > player.getY() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[2][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[2][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseX() < player.getX() + player.getWidth() / 2 - 16 && gameStateManager.getMouseY() > player.getY() + player.getWidth() / 2 - 16 && gameStateManager.getMouseY() < player.getY() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[1][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[1][0], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseX() > player.getX() + player.getWidth() / 2 + 16 && gameStateManager.getMouseY() > player.getY() + player.getWidth() / 2 - 16 && gameStateManager.getMouseY() < player.getY() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[1][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[1][2], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseY() < player.getY() + player.getWidth() / 2 - 16 && gameStateManager.getMouseX() > player.getX() + player.getWidth() / 2 - 16 && gameStateManager.getMouseX() < player.getX() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[0][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[0][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
         else if (gameStateManager.getMouseY() > player.getY() + player.getWidth() / 2 + 16 && gameStateManager.getMouseX() > player.getX() + player.getWidth() / 2 - 16 && gameStateManager.getMouseX() < player.getX() + player.getWidth() / 2 + 16)
-            g.drawImage(imgsCursor[2][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
-        else g.drawImage(imgsCursor[1][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+            g.drawImage(imagesCursor[2][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
+        else g.drawImage(imagesCursor[1][1], gameStateManager.getMouseX(), gameStateManager.getMouseY(), 16, 16, null);
     }
 
     public GameStateManager getGameStateManager() {
@@ -213,25 +213,25 @@ public class GamePanel extends JPanel {
     }
 
 
-    public void setImgsCursor(Image[][] imgsCursor) {
-        this.imgsCursor = imgsCursor;
+    public void setImagesCursor(Image[][] imagesCursor) {
+        this.imagesCursor = imagesCursor;
     }
 
     public void end() {
         moveFlag = false;
     }
 
-    public void setCordinatesAndStatus(char[][] cordinatesAndStatus) {
-        player.setX(cordinatesAndStatus[0][0]);
-        player.setY(cordinatesAndStatus[0][1]);
-        player.setWidth(cordinatesAndStatus[0][2]);
-        player.setAlive(cordinatesAndStatus[0][3]);
+    public void setCoordinatesAndStatus(char[][] coordinatesAndStatus) {
+        player.setX(coordinatesAndStatus[0][0]);
+        player.setY(coordinatesAndStatus[0][1]);
+        player.setWidth(coordinatesAndStatus[0][2]);
+        player.setAlive(coordinatesAndStatus[0][3]);
 
-        for(int i = 1; i < cordinatesAndStatus.length; i++){
-            vec[i-1].setX(cordinatesAndStatus[i][0]);
-            vec[i-1].setY(cordinatesAndStatus[i][1]);
-            vec[i-1].setWidth(cordinatesAndStatus[i][2]);
-            vec[i-1].setAlive(cordinatesAndStatus[i][3]);
+        for(int i = 1; i < coordinatesAndStatus.length; i++){
+            vec[i-1].setX(coordinatesAndStatus[i][0]);
+            vec[i-1].setY(coordinatesAndStatus[i][1]);
+            vec[i-1].setWidth(coordinatesAndStatus[i][2]);
+            vec[i-1].setAlive(coordinatesAndStatus[i][3]);
         }
     }
 }

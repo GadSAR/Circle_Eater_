@@ -16,14 +16,14 @@ public class GameStateManager {
 
     private GameState currentGameState, previousGameState;
     private JFrame f;
-    private MusicControler musicControler;
+    private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
     private Resource resource;
     private int mouseX, mouseY;
     private Image cursor;
 
-    private boolean changedPanel = true, changedMode = true;
+    private boolean changedMode = true;
     private char playerType = 0;
 
     private GameMultiplayer gameMultiplayer;
@@ -39,10 +39,10 @@ public class GameStateManager {
     public GameStateManager() {
 
         setGameResources();
-        setStartGameStates();
         setFrame();
+        setStartGameStates();
         setFps();
-        setMusicControler();
+        setMusicController();
         setListeners();
     }
 
@@ -53,8 +53,7 @@ public class GameStateManager {
     }
 
     private void setStartGameStates() {
-        currentGameState = GameState.MENU;
-        previousGameState = null;
+        setCurrentGameState(GameState.MENU);
     }
 
     private void setListeners() {
@@ -104,9 +103,7 @@ public class GameStateManager {
                         setCurrentGameState(GameState.SETTINGS);
                     if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
                         System.exit(1);
-                }
-
-                else if (GameState.MULTIPLAYER == currentGameState) {
+                } else if (GameState.MULTIPLAYER == currentGameState) {
 
                     if (mouseX > gameMultiplayer.getxCreate() && mouseX < gameMultiplayer.getxCreate() + gameMultiplayer.getwCreate() && mouseY > gameMultiplayer.getyCreate() && mouseY < gameMultiplayer.getyCreate() + gameMultiplayer.gethCreate()) {
                         playerType = 1;
@@ -120,18 +117,14 @@ public class GameStateManager {
                         playerType = 2;
                         try {
                             newClient(gameMultiplayer.getJoinIpAdress().getText());
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (ClassNotFoundException ex) {
+                        } catch (IOException | ClassNotFoundException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
                     if (mouseX > gameMultiplayer.getxBack() && mouseX < gameMultiplayer.getxBack() + gameMultiplayer.getWBack() && mouseY > gameMultiplayer.getyBack() && mouseY < gameMultiplayer.getyBack() + gameMultiplayer.gethBack()) {
                         setCurrentGameState(GameState.MENU);
                     }
-                }
-
-                else if (GameState.GAMEOVER == currentGameState) {
+                } else if (GameState.GAMEOVER == currentGameState) {
 
                     if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
                         setCurrentGameState(GameState.GAME);
@@ -151,7 +144,7 @@ public class GameStateManager {
         });
     }
 
-    public void drawCursor(Graphics g){
+    public void drawCursor(Graphics g) {
         g.drawImage(cursor, mouseX - 10, mouseY, 30, 30, null);
     }
 
@@ -159,12 +152,12 @@ public class GameStateManager {
         server = new Server(this);
     }
 
-    private void newClient(String ipAdress) throws IOException, ClassNotFoundException {
-        client = new Client(this, ipAdress);
+    private void newClient(String ipAddress) throws IOException, ClassNotFoundException {
+        client = new Client(this, ipAddress);
     }
 
-    private void setMusicControler() {
-        musicControler = new MusicControler(resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), this);
+    private void setMusicController() {
+        musicController = new MusicController(resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), this);
     }
 
     private void setFrame() {
@@ -181,8 +174,8 @@ public class GameStateManager {
         fps.start();
     }
 
-    public void changePanel() {
-        switch (currentGameState) {
+    public void changePanel(GameState state) {
+        switch (state) {
             case MENU: {
                 setMenuPanel();
                 break;
@@ -208,7 +201,6 @@ public class GameStateManager {
                 break;
             }
         }
-        changedPanel = false;
     }
 
     private void setMultiplayerPanel() {
@@ -293,8 +285,8 @@ public class GameStateManager {
 
     public void setCurrentGameState(GameState currentGameState) {
         previousGameState = this.currentGameState;
+        changePanel(currentGameState);
         this.currentGameState = currentGameState;
-        this.changedPanel = true;
     }
 
     public GameMode getCurrentGameMode() {
@@ -313,12 +305,12 @@ public class GameStateManager {
         this.resource = resource;
     }
 
-    public MusicControler getMusicControler() {
-        return musicControler;
+    public MusicController getMusicController() {
+        return musicController;
     }
 
-    public void setMusicControler(MusicControler musicControler) {
-        this.musicControler = musicControler;
+    public void setMusicController(MusicController musicController) {
+        this.musicController = musicController;
     }
 
     public int getMouseX() {
@@ -335,14 +327,6 @@ public class GameStateManager {
 
     public void setMouseY(int mouseY) {
         this.mouseY = mouseY;
-    }
-
-    public boolean isChangedPanel() {
-        return changedPanel;
-    }
-
-    public void setChangedPanel(boolean changedPanel) {
-        this.changedPanel = changedPanel;
     }
 
     public boolean isChangedMode() {

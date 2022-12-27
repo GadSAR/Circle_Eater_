@@ -8,18 +8,14 @@ public class Fps extends Thread {
     public Fps(GameStateManager gSM) {
         this.gSM = gSM;
         startTime = System.currentTimeMillis();
-        delay = 1000/60;       //60fps
+        delay = (double)1000/60;       //60fps
     }
 
     public void update() {
         long elapsedTime = System.currentTimeMillis() - startTime;
         if (elapsedTime >= delay) {
-            if(gSM.isChangedPanel()){
-                gSM.changePanel();
-                gSM.setChangedPanel(false);
-            }
             if(gSM.isChangedMode()){
-                gSM.setMusicControler(gSM.getMusicControler());
+                gSM.setMusicController(gSM.getMusicController());
                 gSM.setChangedMode(false);
             }
             if(gSM.getCurrentGameState() == GameState.GAME) gSM.getGamePanel().repaint();
@@ -38,7 +34,7 @@ public class Fps extends Thread {
             update();
 
             try {
-                Thread.sleep(2);
+                Thread.sleep(1);
             }
             catch (InterruptedException e) {
                  throw new RuntimeException(e);

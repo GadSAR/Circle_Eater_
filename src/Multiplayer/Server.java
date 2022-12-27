@@ -1,10 +1,7 @@
 package Multiplayer;
+
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
 import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,12 +26,17 @@ public class Server extends Thread {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data, recivedData;
+    Data data, receivedData;
 
     public Server(GameStateManager gSM) throws IOException {
         this.gSM = gSM;
         serverConnection();
         this.gSM.setCurrentGameState(GameState.GAME);
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.game = this.gSM.getGamePanel();
         this.data = new Data(game);
 
@@ -53,50 +55,34 @@ public class Server extends Thread {
 
         String s = "start";
         objectOutputStream.writeObject(s);
+        System.out.println("server write");
     }
 
     public void run() {
 
         while (true) {
 
-            data.update();
-            try {
-                sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            data.update(game);
 
             try {
                 objectOutputStream.writeObject(data);
                 System.out.println("server write");
-
-                Object obj = objectInputStream.readObject();
-                System.out.println("server read");
-
-                if (obj instanceof Data) {
-                    recivedData = (Data)obj;
-                    game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);
-                }
-
             } catch (IOException e) {
-                try {
-                    socket.close();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                try {
-                    sleep(5000);
-                } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                System.exit(0);
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
+
+            Object obj;
+            try {
+                obj = objectInputStream.readObject();
+                System.out.println("server read");
+                if (obj instanceof Data) {
+                    receivedData = (Data) obj;
+                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }

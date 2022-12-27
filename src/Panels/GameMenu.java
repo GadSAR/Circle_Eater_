@@ -36,7 +36,8 @@ public class GameMenu extends JPanel {
         Exit = (new ImageIcon(gameStateManager.getResource().getExitButton())).getImage();
         onExit = (new ImageIcon(gameStateManager.getResource().getOnExitButton())).getImage();
 
-        Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
+        gameStateManager.getF().getToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 

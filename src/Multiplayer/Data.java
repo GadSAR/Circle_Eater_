@@ -1,69 +1,42 @@
 package Multiplayer;
-
-import Manage.*;
-import Multiplayer.*;
-import Music.*;
 import Objects.*;
 import Panels.*;
-import Resources.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 
-public class Data {
+public class Data implements Serializable {
 
-    GamePanel game;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    BallPlayer tempPlayer;
-    BallBot[] tempVec;
     char vecSize;
-    char[][] cordinatesAndStatus;
+    char[][] coordinatesAndStatus;
 
     public Data(GamePanel game) {
-        this.game = game;
         vecSize = game.getVecSize();
-        cordinatesAndStatus = new char[vecSize + 1][4];
-        update();
+        coordinatesAndStatus = new char[vecSize + 1][4];
     }
 
-    public void update() {
-        tempPlayer = game.getPlayer();
-        tempVec = game.getVec();
-        cordinatesAndStatus[0][0] = (char) tempPlayer.getX();
-        cordinatesAndStatus[0][1] = (char) tempPlayer.getY();
-        cordinatesAndStatus[0][2] = (char) tempPlayer.getWidth();
-        cordinatesAndStatus[0][3] = (char) tempPlayer.getAlive();
+    public void update(GamePanel game) {
 
-        for (int i = 1; i < cordinatesAndStatus.length; i++) {
-            cordinatesAndStatus[i][0] = (char) tempVec[i - 1].getX();
-            cordinatesAndStatus[i][1] = (char) tempVec[i - 1].getY();
-            cordinatesAndStatus[i][2] = (char) tempVec[i - 1].getWidth();
-            cordinatesAndStatus[i][3] = (char) tempVec[i - 1].getAlive();
+        BallBot[] tempBots = game.getVec();
+        BallPlayer tempPlayer = game.getPlayer();
+
+        coordinatesAndStatus[0][0] = (char) tempPlayer.getX();
+        coordinatesAndStatus[0][1] = (char) tempPlayer.getY();
+        coordinatesAndStatus[0][2] = (char) tempPlayer.getWidth();
+        coordinatesAndStatus[0][3] = (char) tempPlayer.getAlive();
+
+        for (int i = 1; i < coordinatesAndStatus.length; i++) {
+            coordinatesAndStatus[i][0] = (char) tempBots[i - 1].getX();
+            coordinatesAndStatus[i][1] = (char) tempBots[i - 1].getY();
+            coordinatesAndStatus[i][2] = (char) tempBots[i - 1].getWidth();
+            coordinatesAndStatus[i][3] = (char) tempBots[i - 1].getAlive();
         }
     }
 
-
-    public GamePanel getGame() {
-        return game;
-    }
-
-    public void setGame(GamePanel game) {
-        this.game = game;
-    }
-
-    public BallPlayer getTempPlayer() {
-        return tempPlayer;
-    }
-
-    public void setTempPlayer(BallPlayer tempPlayer) {
-        this.tempPlayer = tempPlayer;
-    }
-
-    public BallBot[] getTempVec() {
-        return tempVec;
-    }
-
-    public void setTempVec(BallBot[] tempVec) {
-        this.tempVec = tempVec;
-    }
 
     public char getVecSize() {
         return vecSize;
@@ -73,12 +46,12 @@ public class Data {
         this.vecSize = vecSize;
     }
 
-    public char[][] getCordinatesAndStatus() {
-        return cordinatesAndStatus;
+    public char[][] getCoordinatesAndStatus() {
+        return coordinatesAndStatus;
     }
 
-    public void setCordinatesAndStatus(char[][] cordinatesAndStatus) {
-        this.cordinatesAndStatus = cordinatesAndStatus;
+    public void setCoordinatesAndStatus(char[][] coordinatesAndStatus) {
+        this.coordinatesAndStatus = coordinatesAndStatus;
     }
 
 }

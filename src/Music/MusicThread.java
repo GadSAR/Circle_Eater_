@@ -5,12 +5,12 @@ public class MusicThread extends Thread {
     private MusicWavPlayer wav;
     private boolean flag, loop;
 
-    private GameStateManager gSM;
+    private GameStateManager gameStateManager;
 
 
-    public MusicThread(String Path, GameStateManager gSM, boolean loop) {
-        this.gSM = gSM;
-        wav = new MusicWavPlayer(Path, gSM);
+    public MusicThread(String Path, GameStateManager gameStateManager, boolean loop) {
+        this.gameStateManager = gameStateManager;
+        wav = new MusicWavPlayer(Path, gameStateManager);
         this.loop = loop;
         start();
     }
@@ -25,14 +25,13 @@ public class MusicThread extends Thread {
                     flag = false;
             }
 
-            if (gSM.getCurrentGameState() != GameState.GAME) {
+            if (gameStateManager.getCurrentGameState() != GameState.GAME) {
                 wav.stop();
             }
 
             try {
                 Thread.sleep(0, 5);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

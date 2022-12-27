@@ -1,28 +1,28 @@
 package Music;
 import Manage.*;
 
-public class MusicControler {
+public class MusicController {
 
-    private GameStateManager gSM;
+    private GameStateManager gameStateManager;
     private MusicThread good, bad, game, mouseOn, mousePressed,background;
 
-    public MusicControler(String goodPath, String badPath, String gamePath, GameStateManager gSM) {
-        this.gSM = gSM;
-        good = new MusicThread(goodPath, gSM, false);
-        bad = new MusicThread(badPath, gSM, false);
-        game = new MusicThread(gamePath, gSM, true);
+    public MusicController(String goodPath, String badPath, String gamePath, GameStateManager gameStateManager) {
+        this.gameStateManager = gameStateManager;
+        good = new MusicThread(goodPath, gameStateManager, false);
+        bad = new MusicThread(badPath, gameStateManager, false);
+        game = new MusicThread(gamePath, gameStateManager, true);
         /*mouseOn = new MusicThread(backgroundPath, gSM, false);
         mousePressed =  new MusicThread(backgroundPath, gSM, false);
         background = new MusicThread(backgroundPath, gSM, true);*/
 
     }
 
-    public GameStateManager getgSM() {
-        return gSM;
+    public GameStateManager getGameStateManager() {
+        return gameStateManager;
     }
 
-    public void setgSM(GameStateManager gSM) {
-        this.gSM = gSM;
+    public void setGameStateManager(GameStateManager gameStateManager) {
+        this.gameStateManager = gameStateManager;
     }
 
     public MusicThread getMouseOn() {

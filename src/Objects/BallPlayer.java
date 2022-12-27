@@ -17,7 +17,7 @@ public class BallPlayer extends Thread implements Serializable
 	private int x, y, width;
 	private Boolean alive;
 	private long startTime;
-	private double delay = 1000/60;
+	private double delay = (double)1000/60;
 	private double dx, dy, angle;
 	private Image playerImage, player2Image;
 
@@ -62,7 +62,6 @@ public class BallPlayer extends Thread implements Serializable
 			try {
 				wait();
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}	
 		}		
@@ -141,7 +140,7 @@ public class BallPlayer extends Thread implements Serializable
 	}
 
 	public void setAlive(char alive) {
-		this.alive = alive == 1? true : false;
+		this.alive = alive == 1;
 	}
 
 	public boolean isPlayerAlive() {
@@ -182,10 +181,6 @@ public class BallPlayer extends Thread implements Serializable
 
 	public void setPlayerImage(Image playerImage) {
 		this.playerImage = playerImage;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

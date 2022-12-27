@@ -3,7 +3,6 @@ import Manage.*;
 import Panels.*;
 
 import java.awt.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -12,13 +11,10 @@ import javax.swing.ImageIcon;
 
 public class BallBot extends Thread implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-
     private GamePanel panel;
     private int x, y, width;
     long startTime;
-    double delay = 1000 / 120;
+    double delay = (double)1000 / 120;
     private boolean alive;
     private int dirX, dirY;
     private Random random = new Random();
@@ -62,9 +58,9 @@ public class BallBot extends Thread implements Serializable {
 
     private void soundEffect(boolean bol) {
         if (bol)
-            panel.getGameStateManager().getMusicControler().getGood().setFlag(true);
+            panel.getGameStateManager().getMusicController().getGood().setFlag(true);
         else
-            panel.getGameStateManager().getMusicControler().getBad().setFlag(true);
+            panel.getGameStateManager().getMusicController().getBad().setFlag(true);
     }
 
     private boolean interaction() {
@@ -87,9 +83,7 @@ public class BallBot extends Thread implements Serializable {
 
             if (panel.getPlayer().getWidth() <= width) {
                 if (panel.getPlayer().getWidth() < 25) {
-                    panel.getGameStateManager().setCurrentGameState(GameState.GAMEOVER);
-                    panel.getGameStateManager().setChangedPanel(true);
-                    //System.exit(1);
+                    panel.getGameStateManager().setCurrentGameState(GameState.GAMEOVER);        ///game over
                 }
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() - 8);        ///decrease size
                 soundEffect(false);
@@ -152,7 +146,6 @@ public class BallBot extends Thread implements Serializable {
                 try {
                     wait();
                 } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         }
@@ -199,7 +192,7 @@ public class BallBot extends Thread implements Serializable {
     }
 
     public void setAlive(char alive) {
-        this.alive = alive == 1? true : false;
+        this.alive = alive == 1;
     }
 
     public boolean isBotAlive() {
@@ -276,7 +269,4 @@ public class BallBot extends Thread implements Serializable {
         this.preventionDistance = preventionDistance;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 }

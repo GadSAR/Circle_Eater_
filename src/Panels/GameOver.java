@@ -23,7 +23,8 @@ public class GameOver extends JPanel {
         Menu = (new ImageIcon(gameStateManager.getResource().getMenuButton())).getImage();
         onMenu = (new ImageIcon(gameStateManager.getResource().getOnMenuButton())).getImage();
 
-        Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
+        gameStateManager.getF().getToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 

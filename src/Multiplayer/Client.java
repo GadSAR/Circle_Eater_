@@ -21,7 +21,7 @@ public class Client extends Thread {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data, recivedData;
+    Data data, receivedData;
 
 
     public Client(GameStateManager gSM, String serverIP) throws IOException, ClassNotFoundException {
@@ -29,12 +29,17 @@ public class Client extends Thread {
         this.serverIP = serverIP;
         connectToServer(Server.port);
         gSM.setCurrentGameState(GameState.GAME);
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         game = gSM.getGamePanel();
         data = new Data(game);
 
         Object obj = objectInputStream.readObject();
-        if (obj instanceof String) {
-            String command = (String) obj;
+        System.out.println("client received");
+        if (obj instanceof String command) {
             if (command.equals("start")) {
                 start();
             }
@@ -45,9 +50,9 @@ public class Client extends Thread {
         socket = new Socket(serverIP, port);
 
         inputStream = socket.getInputStream();
-        outputStream = socket.getOutputStream();
-
         objectInputStream = new ObjectInputStream(inputStream);
+
+        outputStream = socket.getOutputStream();
         objectOutputStream = new ObjectOutputStream(outputStream);
     }
 
@@ -55,43 +60,28 @@ public class Client extends Thread {
 
         while (true) {
 
-            data.update();
-            try {
-                sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            data.update(game);
 
             try {
                 objectOutputStream.writeObject(data);
                 System.out.println("client write");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-                Object obj = objectInputStream.readObject();
+            Object obj;
+            try {
+                obj = objectInputStream.readObject();
                 System.out.println("client read");
                 if (obj instanceof Data) {
-                    recivedData = (Data)obj;
-                    game.setCordinatesAndStatus(recivedData.cordinatesAndStatus);
+                    receivedData = (Data) obj;
+                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
                 }
-
-            } catch (IOException e) {
-                try {
-                    socket.close();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                try {
-                    sleep(5000);
-                } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                System.exit(0);
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
+
+
         }
     }
 

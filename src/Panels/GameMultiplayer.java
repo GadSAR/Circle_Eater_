@@ -17,7 +17,7 @@ public class GameMultiplayer extends JPanel {
             wText, hText, xText, yText,
             wJoin, hJoin, xJoin, yJoin,
             WBack, hBack, xBack, yBack;
-    private JTextField joinIpAdress, MyIpAdress;
+    private JTextField joinIpAdress, MyIpAddress;
     private String myIpAddress;
 
 
@@ -32,7 +32,8 @@ public class GameMultiplayer extends JPanel {
         Back = (new ImageIcon(gameStateManager.getResource().getBackButton())).getImage();
         onBack = (new ImageIcon(gameStateManager.getResource().getOnBackButton())).getImage();
 
-        Toolkit tk = gameStateManager.getF().getToolkit().getDefaultToolkit();
+        gameStateManager.getF().getToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
@@ -43,7 +44,7 @@ public class GameMultiplayer extends JPanel {
             // If the local host could not be resolved, set the IP address to "unknown"
             myIpAddress = "unknown";
         }
-        MyIpAdress = new JTextField(myIpAddress);
+        MyIpAddress = new JTextField(myIpAddress);
 
         wCreate = 240;
         hCreate = 120;
@@ -74,10 +75,10 @@ public class GameMultiplayer extends JPanel {
         joinIpAdress.setBounds(xText, yText, wText, hText);
         add(joinIpAdress);
 
-        MyIpAdress.setFont(font);
-        MyIpAdress.setBounds(0, 0, 130, 25);
-        MyIpAdress.setEditable(false);
-        add(MyIpAdress);
+        MyIpAddress.setFont(font);
+        MyIpAddress.setBounds(0, 0, 130, 25);
+        MyIpAddress.setEditable(false);
+        add(MyIpAddress);
 
     }
 
