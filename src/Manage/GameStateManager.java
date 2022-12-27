@@ -119,7 +119,7 @@ public class GameStateManager {
                     if (mouseX > gameMultiplayer.getxJoin() && mouseX < gameMultiplayer.getxJoin() + gameMultiplayer.getwJoin() && mouseY > gameMultiplayer.getyJoin() && mouseY < gameMultiplayer.getyJoin() + gameMultiplayer.gethJoin()) {
                         playerType = 2;
                         try {
-                            newClient();
+                            newClient(gameMultiplayer.getJoinIpAdress().getText());
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         } catch (ClassNotFoundException ex) {
@@ -152,15 +152,15 @@ public class GameStateManager {
     }
 
     public void drawCursor(Graphics g){
-        g.drawImage(cursor, mouseX, mouseY, 30, 30, null);
+        g.drawImage(cursor, mouseX - 10, mouseY, 30, 30, null);
     }
 
     private void newServer() throws IOException {
         server = new Server(this);
     }
 
-    private void newClient() throws IOException, ClassNotFoundException {
-        client = new Client(this);
+    private void newClient(String ipAdress) throws IOException, ClassNotFoundException {
+        client = new Client(this, ipAdress);
     }
 
     private void setMusicControler() {

@@ -1,11 +1,7 @@
 package Multiplayer;
 
 import Manage.*;
-import Multiplayer.*;
-import Music.*;
 import Panels.*;
-import Objects.*;
-import Resources.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +12,7 @@ import java.net.Socket;
 
 public class Client extends Thread {
 
+    String serverIP;
     Socket socket;
     InputStream inputStream;
     OutputStream outputStream;
@@ -27,8 +24,9 @@ public class Client extends Thread {
     Data data, recivedData;
 
 
-    public Client(GameStateManager gSM) throws IOException, ClassNotFoundException {
+    public Client(GameStateManager gSM, String serverIP) throws IOException, ClassNotFoundException {
         this.gSM = gSM;
+        this.serverIP = serverIP;
         connectToServer(Server.port);
         gSM.setCurrentGameState(GameState.GAME);
         game = gSM.getGamePanel();
@@ -44,7 +42,7 @@ public class Client extends Thread {
     }
 
     public void connectToServer(int port) throws IOException {
-        socket = new Socket("192.168.1.12", port+1);
+        socket = new Socket(serverIP, port);
 
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();

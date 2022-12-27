@@ -18,6 +18,9 @@ public class GameMenu extends JPanel {
             wExit, hExit, xExit, yExit;
 
 
+
+
+
     public GameMenu(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
