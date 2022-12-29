@@ -71,9 +71,8 @@ public class Server extends Thread {
                 throw new RuntimeException(e);
             }
 
-            Object obj;
             try {
-                obj = objectInputStream.readObject();
+                Object obj = objectInputStream.readObject();
                 System.out.println("server read");
                 if (obj instanceof Data) {
                     receivedData = (Data) obj;

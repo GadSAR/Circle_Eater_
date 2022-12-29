@@ -60,9 +60,8 @@ public class Client extends Thread {
 
         while (true) {
 
-            Object obj;
             try {
-                obj = objectInputStream.readObject();
+                Object obj = objectInputStream.readObject();
                 System.out.println("client read");
                 if (obj instanceof Data) {
                     receivedData = (Data) obj;
@@ -73,7 +72,6 @@ public class Client extends Thread {
             }
 
             data.update(game);
-
             try {
                 objectOutputStream.writeObject(data);
                 System.out.println("client write");
