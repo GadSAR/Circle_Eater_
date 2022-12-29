@@ -95,7 +95,7 @@ public class GameMultiplayer extends JPanel {
             g.drawImage(onJoin, xJoin, yJoin, wJoin, hJoin, null);
         else g.drawImage(Join, xJoin, yJoin, wJoin, hJoin, null);
 
-        if (gameStateManager.getMouseX() > xText - 10 && gameStateManager.getMouseX() < xText + wText + 10 && gameStateManager.getMouseY() > yText - 10 && gameStateManager.getMouseY() < yText + hText + 10) {
+        if (gameStateManager.getMouseX() > xText - 40 && gameStateManager.getMouseX() < xText + wText + 40 && gameStateManager.getMouseY() > yText - 40 && gameStateManager.getMouseY() < yText + hText + 40) {
             // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
             if (joinIpAdress.getText().equals("Type lobby Ip Address..."))
                 joinIpAdress.setText("");

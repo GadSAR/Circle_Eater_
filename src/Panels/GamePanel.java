@@ -44,15 +44,18 @@ public class GamePanel extends JPanel {
     }
 
     public void setPlayers(int index) {
+        gameStateManager.getF().getToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+
         if (index == 0) {
             player = new BallPlayer(this);
             player2 = null;
         } else if (index == 1) {
             player = new BallPlayer(this);
-            player2 = new BallPlayer(this, 100, 100);
+            player2 = new BallPlayer(this, tk.getScreenSize().width - player.getWidth(), 0);
         } else if (index == 2) {
-            player = new BallPlayer(this, 100, 100);
             player2 = new BallPlayer(this);
+            player = new BallPlayer(this, tk.getScreenSize().width - player2.getWidth(), 0);
         }
     }
 

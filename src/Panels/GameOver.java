@@ -12,6 +12,7 @@ public class GameOver extends JPanel {
     private int xMiddleScreen, yMiddleScreen,
             wReplay, hReplay, xReplay, yReplay,
             wMenu, hMenu, xMenu, yMenu;
+    private JTextField MyIpAddress;
 
 
     public GameOver(GameStateManager gameStateManager) {
@@ -27,6 +28,17 @@ public class GameOver extends JPanel {
         Toolkit tk = Toolkit.getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
+
+        MyIpAddress = new JTextField("GAME OVER!", 20);
+        Font font = new Font("Arial", Font.BOLD, 100);
+        setLayout(null);
+        MyIpAddress.setFont(font);
+        MyIpAddress.setBounds(xMiddleScreen - 250, 100, 1000, 100);
+        MyIpAddress.setEditable(false);
+        MyIpAddress.setOpaque(false);
+        MyIpAddress.setBorder(null);
+        MyIpAddress.setForeground(Color.WHITE);
+        add(MyIpAddress);
 
         wReplay = 180;
         hReplay = 90;

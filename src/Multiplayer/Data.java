@@ -11,11 +11,10 @@ public class Data implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    char vecSize;
     char[][] coordinatesAndStatus;
 
     public Data(GamePanel game) {
-        vecSize = game.getVecSize();
+        char vecSize = game.getVecSize();
         coordinatesAndStatus = new char[vecSize + 1][4];
     }
 
@@ -37,14 +36,6 @@ public class Data implements Serializable {
         }
     }
 
-
-    public char getVecSize() {
-        return vecSize;
-    }
-
-    public void setVecSize(char vecSize) {
-        this.vecSize = vecSize;
-    }
 
     public char[][] getCoordinatesAndStatus() {
         return coordinatesAndStatus;

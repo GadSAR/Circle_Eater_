@@ -60,15 +60,6 @@ public class Client extends Thread {
 
         while (true) {
 
-            data.update(game);
-
-            try {
-                objectOutputStream.writeObject(data);
-                System.out.println("client write");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
             Object obj;
             try {
                 obj = objectInputStream.readObject();
@@ -78,6 +69,15 @@ public class Client extends Thread {
                     game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
                 }
             } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            data.update(game);
+
+            try {
+                objectOutputStream.writeObject(data);
+                System.out.println("client write");
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 

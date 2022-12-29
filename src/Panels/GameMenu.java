@@ -18,9 +18,6 @@ public class GameMenu extends JPanel {
             wExit, hExit, xExit, yExit;
 
 
-
-
-
     public GameMenu(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
@@ -38,6 +35,7 @@ public class GameMenu extends JPanel {
 
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
+
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
