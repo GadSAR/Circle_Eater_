@@ -91,7 +91,7 @@ public class BallPlayer extends Thread implements Serializable
 
 	public void drawPlayer2(Graphics g)
 	{
-		g.drawImage(playerImage, x,y, width, width,null);
+		g.drawImage(player2Image, x,y, width, width,null);
 	}
 	
 	/*public void drawAnimatedPlayer(Graphics g)
@@ -139,7 +139,7 @@ public class BallPlayer extends Thread implements Serializable
 		return alive? 1:0;
 	}
 
-	public void setAlive(char alive) {
+	public void setAlive(int alive) {
 		this.alive = alive == 1;
 	}
 

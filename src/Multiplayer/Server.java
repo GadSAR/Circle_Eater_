@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Server extends Thread {
 
@@ -67,6 +68,8 @@ public class Server extends Thread {
             try {
                 objectOutputStream.writeObject(data);
                 System.out.println("server write");
+                for(int i = 0; i < 3; i++)
+                    System.out.println(Arrays.toString(data.botsCoordinatesAndStatus[i]));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -76,9 +79,20 @@ public class Server extends Thread {
                 System.out.println("server read");
                 if (obj instanceof Data) {
                     receivedData = (Data) obj;
-                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
+                    game.getPlayer2().setX(data.p.x);
+                    game.getPlayer2().setY(data.p.y);
+
+                    game.setCoordinatesAndStatus(receivedData.botsCoordinatesAndStatus);
+                    for(int i = 0; i < 3; i++)
+                        System.out.println(Arrays.toString(receivedData.botsCoordinatesAndStatus[i]));
                 }
             } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 

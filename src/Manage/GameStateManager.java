@@ -127,7 +127,22 @@ public class GameStateManager {
                 } else if (GameState.GAMEOVER == currentGameState) {
 
                     if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
-                        setCurrentGameState(GameState.GAME);
+                        if(playerType == 1) {
+                            try {
+                                newServer();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        else if(playerType == 2) {
+                            try {
+                                newClient(client.getServerIP());
+                            } catch (IOException | ClassNotFoundException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        else
+                            setCurrentGameState(GameState.GAME);
                     }
                     if (mouseX > gameOver.getxMenu() && mouseX < gameOver.getxMenu() + gameOver.getwMenu() && mouseY > gameOver.getyMenu() && mouseY < gameOver.getyMenu() + gameOver.gethMenu())
                         setCurrentGameState(GameState.MENU);

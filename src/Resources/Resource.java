@@ -28,7 +28,7 @@ public class Resource {
         CHILLgoodBallImg = "src/Resources/pictures/blue.gif";
         CHILLbadBallImg = "src/Resources/pictures/red.gif";
         CHILLplayer1BallImg = "src/Resources/pictures/pause.gif";
-        CHILLplayer2BallImg = "src/Resources/pictures/pause.gif";
+        CHILLplayer2BallImg = "src/Resources/pictures/enemy.png";
         GLITCHgoodBallImg = null;
         GLITCHbadBallImg = null;
         GLITCHplayer1BallImg = null;

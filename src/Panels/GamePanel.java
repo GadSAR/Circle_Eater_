@@ -34,7 +34,17 @@ public class GamePanel extends JPanel {
         setMusic();
     }
 
-    private void setMusic() {
+    public void checkIfOver() {
+        char countDead = 0;
+        for (int i = 0; i < vecSize; i++) {
+            if (!vec[i].isBotAlive())
+                countDead++;
+        }
+        if (countDead == vecSize)
+            gameStateManager.setCurrentGameState(GameState.GAMEOVER);
+    }
+
+    public void setMusic() {
         gameStateManager.getMusicController().getGame().setFlag(true);
     }
 
@@ -77,17 +87,13 @@ public class GamePanel extends JPanel {
             int x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
             int y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
 
-            if(player2 != null)
-            {
-                while((((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) || (((x < player2.getX() + player.getWidth() + space) || (x < player2.getY() - space)) && ((y < player2.getY() + player.getWidth() + space) || (y < player2.getY() - space)))){
+            if (player2 != null) {
+                while ((((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) || (((x < player2.getX() + player.getWidth() + space) || (x < player2.getY() - space)) && ((y < player2.getY() + player.getWidth() + space) || (y < player2.getY() - space)))) {
                     x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
                     y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
                 }
-            }
-            else
-            {
-                while(((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space)))
-                {
+            } else {
+                while (((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) {
                     x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
                     y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
                 }
@@ -140,7 +146,7 @@ public class GamePanel extends JPanel {
 
         drawCursor(g);
         player.drawPlayer(g);
-        if(player2 != null) player2.drawPlayer2(g);
+        if (player2 != null) player2.drawPlayer2(g);
     }
 
     public void drawCursor(Graphics g) {
@@ -224,17 +230,18 @@ public class GamePanel extends JPanel {
         moveFlag = false;
     }
 
-    public void setCoordinatesAndStatus(char[][] coordinatesAndStatus) {
-        player.setX(coordinatesAndStatus[0][0]);
-        player.setY(coordinatesAndStatus[0][1]);
-        player.setWidth(coordinatesAndStatus[0][2]);
-        player.setAlive(coordinatesAndStatus[0][3]);
 
-        for(int i = 1; i < coordinatesAndStatus.length; i++){
-            vec[i-1].setX(coordinatesAndStatus[i][0]);
-            vec[i-1].setY(coordinatesAndStatus[i][1]);
-            vec[i-1].setWidth(coordinatesAndStatus[i][2]);
-            vec[i-1].setAlive(coordinatesAndStatus[i][3]);
+    public void setCoordinatesAndStatus(Integer[][] coordinatesAndStatus) {
+        player2.setX(coordinatesAndStatus[0][0]);
+        player2.setY(coordinatesAndStatus[0][1]);
+        player2.setWidth(coordinatesAndStatus[0][2]);
+        player2.setAlive(coordinatesAndStatus[0][3]);
+
+        for (int i = 1; i < coordinatesAndStatus.length; i++) {
+            vec[i - 1].setX(coordinatesAndStatus[i][0]);
+            vec[i - 1].setY(coordinatesAndStatus[i][1]);
+            vec[i - 1].setWidth(coordinatesAndStatus[i][2]);
+            vec[i - 1].setAlive(coordinatesAndStatus[i][3]);
         }
     }
 }
