@@ -103,6 +103,12 @@ public class GameStateManager {
                         setCurrentGameState(GameState.SETTINGS);
                     if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
                         System.exit(1);
+
+                } else if (GameState.SETTINGS == currentGameState) {
+
+                    if (mouseX > gameSettings.getxBack() && mouseX < gameSettings.getxBack() + gameSettings.getWBack() && mouseY > gameSettings.getyBack() && mouseY < gameSettings.getyBack() + gameSettings.gethBack())
+                        setCurrentGameState(GameState.MENU);
+
                 } else if (GameState.MULTIPLAYER == currentGameState) {
 
                     if (mouseX > gameMultiplayer.getxCreate() && mouseX < gameMultiplayer.getxCreate() + gameMultiplayer.getwCreate() && mouseY > gameMultiplayer.getyCreate() && mouseY < gameMultiplayer.getyCreate() + gameMultiplayer.gethCreate()) {

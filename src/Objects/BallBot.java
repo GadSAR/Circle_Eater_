@@ -14,7 +14,7 @@ public class BallBot extends Thread implements Serializable {
     private GamePanel panel;
     private int x, y, width;
     long startTime;
-    double delay = (double)1000 / 120;
+    double delay = (double)1000 / 240;
     private boolean alive;
     private int dirX, dirY;
     private Random random = new Random();

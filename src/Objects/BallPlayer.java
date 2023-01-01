@@ -17,7 +17,7 @@ public class BallPlayer extends Thread implements Serializable
 	private int x, y, width;
 	private Boolean alive;
 	private long startTime;
-	private double delay = (double)1000/60;
+	private double delay = (double)1000/120;
 	private double dx, dy, angle;
 	private Image playerImage, player2Image;
 
