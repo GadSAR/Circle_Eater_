@@ -9,10 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class Client extends Thread {
-
 
     String serverIP;
     Socket socket;
@@ -67,14 +65,15 @@ public class Client extends Thread {
                 System.out.println("client read");
                 if (obj instanceof Data) {
                     receivedData = (Data) obj;
-                    game.getPlayer2().setX(data.p.x);
-                    game.getPlayer2().setY(data.p.y);
-
-                    game.setCoordinatesAndStatus(receivedData.botsCoordinatesAndStatus);
-                    for(int i = 0; i < 3; i++)
-                        System.out.println(Arrays.toString(receivedData.botsCoordinatesAndStatus[i]));
+                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
                 }
             } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
@@ -82,29 +81,13 @@ public class Client extends Thread {
             try {
                 objectOutputStream.writeObject(data);
                 System.out.println("client write");
-                for(int i = 0; i < 3; i++)
-                    System.out.println(Arrays.toString(data.botsCoordinatesAndStatus[i]));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
 
         }
     }
-
-    public String getServerIP() {
-        return serverIP;
-    }
-
-    public void setServerIP(String serverIP) {
-        this.serverIP = serverIP;
-    }
-
 
 }
 

@@ -140,7 +140,7 @@ public class BallPlayer extends Thread implements Serializable
 		return alive? 1:0;
 	}
 
-	public void setAlive(int alive) {
+	public void setAlive(char alive) {
 		this.alive = alive == 1;
 	}
 
