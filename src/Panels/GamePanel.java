@@ -20,8 +20,6 @@ public class GamePanel extends JPanel {
 
     private boolean moveFlag = false;
 
-
-    private MusicThread mt;
     private Image backgroundImg, pauseImg;
     private Image[][] imagesCursor = new Image[3][3];
 

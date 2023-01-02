@@ -12,7 +12,7 @@ public class GameOver extends JPanel {
     private int xMiddleScreen, yMiddleScreen,
             wReplay, hReplay, xReplay, yReplay,
             wMenu, hMenu, xMenu, yMenu;
-    private JTextField MyIpAddress;
+    private JTextField GameOverText;
 
 
     public GameOver(GameStateManager gameStateManager) {
@@ -29,16 +29,20 @@ public class GameOver extends JPanel {
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
-        MyIpAddress = new JTextField("GAME OVER!", 20);
-        Font font = new Font("Arial", Font.BOLD, 100);
+        boolean win = gameStateManager.getGamePanel().getPlayer().isPlayerAlive();
+        if(win)
+            GameOverText = new JTextField("GAME OVER! YOU WON :)", 20);
+        else
+            GameOverText = new JTextField("GAME OVER! YOU LOST :(", 20);
+        Font font = new Font("Arial", Font.BOLD, 70);
         setLayout(null);
-        MyIpAddress.setFont(font);
-        MyIpAddress.setBounds(xMiddleScreen - 250, 100, 1000, 100);
-        MyIpAddress.setEditable(false);
-        MyIpAddress.setOpaque(false);
-        MyIpAddress.setBorder(null);
-        MyIpAddress.setForeground(Color.WHITE);
-        add(MyIpAddress);
+        GameOverText.setFont(font);
+        GameOverText.setBounds(xMiddleScreen - 500, 100, 1000, 100);
+        GameOverText.setEditable(false);
+        GameOverText.setOpaque(false);
+        GameOverText.setBorder(null);
+        GameOverText.setForeground(Color.WHITE);
+        add(GameOverText);
 
         wReplay = 180;
         hReplay = 90;

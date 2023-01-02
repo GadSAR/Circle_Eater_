@@ -19,6 +19,8 @@ public class GameStateManager {
     private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
+    private char speedLevel = 2;
+    private char[] settings = new char[4];
     private Resource resource;
     private int mouseX, mouseY;
     private Image cursor;
@@ -82,6 +84,31 @@ public class GameStateManager {
                     if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.GAME);
                 }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    if (currentGameState == GameState.GAME){
+                        mouseX = gamePanel.getPlayer().getX() - 60;
+                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth()/2;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    if (currentGameState == GameState.GAME){
+                        mouseX = gamePanel.getPlayer().getX() + 60;
+                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth()/2;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    if (currentGameState == GameState.GAME){
+                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth()/2;
+                        mouseY = gamePanel.getPlayer().getY() - 60;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    if (currentGameState == GameState.GAME){
+                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth()/2;
+                        mouseY = gamePanel.getPlayer().getY() + 60;
+                    }
+                }
+
             }
         });
 
@@ -454,5 +481,27 @@ public class GameStateManager {
         this.playerType = playerType;
     }
 
+    public char[] getSettings() {
+        return settings;
+    }
 
+    public void setSettings(char[] settings) {
+        this.settings = settings;
+    }
+
+    public char getSpeedLevel() {
+        return speedLevel;
+    }
+
+    public void setSpeedLevel(char speedLevel) {
+        this.speedLevel = speedLevel;
+    }
+
+    public Image getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(Image cursor) {
+        this.cursor = cursor;
+    }
 }

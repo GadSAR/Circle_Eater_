@@ -14,7 +14,7 @@ public class BallBot extends Thread implements Serializable {
     private GamePanel panel;
     private int x, y, width;
     long startTime;
-    double delay = (double)1000 / 240;
+    double delay;
     private boolean alive;
     private int dirX, dirY;
     private Random random = new Random();
@@ -28,15 +28,16 @@ public class BallBot extends Thread implements Serializable {
         this.x = x;
         this.y = y;
         this.width = width;
-        startTime = System.currentTimeMillis();
+        delay = (double)1000/(60*panel.getGameStateManager().getSpeedLevel());
         dirX = random.nextBoolean() ? 1 : -1;
         dirY = random.nextBoolean() ? 1 : -1;
         alive = true;
         preventionDistance = 0;
-        this.ballImage = ballsImage;
         this.panel = p;
+        this.ballImage = ballsImage;
         goodBall = new ImageIcon(panel.getGameStateManager().getResource().getgoodBallImg());
         badBall = new ImageIcon(panel.getGameStateManager().getResource().getbadBallImg());
+        startTime = System.currentTimeMillis();
         start();
     }
 
@@ -87,6 +88,7 @@ public class BallBot extends Thread implements Serializable {
 
             else if (panel.getPlayer().getWidth() <= width) {
                 if (panel.getPlayer().getWidth() < 25) {
+                    panel.getPlayer().setPlayerAlive(false);
                     panel.getGameStateManager().setCurrentGameState(GameState.GAMEOVER);        ///game over
                 }
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() - 8);        ///decrease size

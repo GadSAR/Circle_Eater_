@@ -17,7 +17,7 @@ public class BallPlayer extends Thread implements Serializable
 	private int x, y, width;
 	private Boolean alive;
 	private long startTime;
-	private double delay = (double)1000/120;
+	private double delay;
 	private double dx, dy, angle;
 	private Image playerImage, player2Image;
 
@@ -30,6 +30,7 @@ public class BallPlayer extends Thread implements Serializable
 		this.x = x;
 		this.y = y;
 		this.width = 30;
+		delay = (double)1000/(30*panel.getGameStateManager().getSpeedLevel());
 		alive = true;
 		playerImage = new ImageIcon(panel.getGameStateManager().getResource().getplayer1BallImg()).getImage();
 		player2Image = new ImageIcon(panel.getGameStateManager().getResource().getplayer2BallImg()).getImage();
