@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class Server extends Thread {
 
@@ -28,7 +27,7 @@ public class Server extends Thread {
     GameStateManager gSM;
     GamePanel game;
     DataServer data;
-    DataClient receivedData;
+
 
     public Server(GameStateManager gSM) throws IOException {
         this.gSM = gSM;
@@ -65,7 +64,7 @@ public class Server extends Thread {
         while (true) {
 
             data.update(game);
-            DataClient receivedData = null;
+            DataClient receivedData;
 
             try {
                 objectOutputStream.writeObject(data);

@@ -60,7 +60,7 @@ public class Client extends Thread {
 
         while (true) {
 
-            DataServer receivedData = null;
+            DataServer receivedData;
 
             try {
                 Object obj = objectInputStream.readObject();

@@ -1,6 +1,4 @@
 package Multiplayer;
-import Manage.GameStateManager;
-import Objects.*;
 import Panels.*;
 
 import java.io.Serial;
@@ -24,14 +22,6 @@ public class DataClient implements Serializable {
         playerCoordinatesAndStatus[1] = (char) gamePanel.getPlayer().getY();
         playerCoordinatesAndStatus[2] = (char) gamePanel.getPlayer().getWidth();
         playerCoordinatesAndStatus[3] = (char) gamePanel.getPlayer().getAlive();
-    }
-
-    public char[] getPlayerCoordinatesAndStatus() {
-        return playerCoordinatesAndStatus;
-    }
-
-    public void setPlayerCoordinatesAndStatus(char[] playerCoordinatesAndStatus) {
-        this.playerCoordinatesAndStatus = playerCoordinatesAndStatus;
     }
 
 }

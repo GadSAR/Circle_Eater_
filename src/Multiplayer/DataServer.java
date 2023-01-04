@@ -40,28 +40,4 @@ public class DataServer implements Serializable {
         }
     }
 
-    public char[] getPlayerCoordinatesAndStatus() {
-        return playerCoordinatesAndStatus;
-    }
-
-    public void setPlayerCoordinatesAndStatus(char[] playerCoordinatesAndStatus) {
-        this.playerCoordinatesAndStatus = playerCoordinatesAndStatus;
-    }
-
-    public char[][] getBallsCoordinatesAndStatus() {
-        return ballsCoordinatesAndStatus;
-    }
-
-    public void setBallsCoordinatesAndStatus(char[][] ballsCoordinatesAndStatus) {
-        this.ballsCoordinatesAndStatus = ballsCoordinatesAndStatus;
-    }
-
-    public boolean isMoveFlag() {
-        return moveFlag;
-    }
-
-    public void setMoveFlag(boolean moveFlag) {
-        this.moveFlag = moveFlag;
-    }
-
 }
