@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Server extends Thread {
 
@@ -26,7 +27,8 @@ public class Server extends Thread {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data, receivedData;
+    DataServer data;
+    DataClient receivedData;
 
     public Server(GameStateManager gSM) throws IOException {
         this.gSM = gSM;
@@ -38,7 +40,7 @@ public class Server extends Thread {
             throw new RuntimeException(e);
         }
         this.game = this.gSM.getGamePanel();
-        this.data = new Data(game);
+        this.data = new DataServer(game);
 
         start();
     }
@@ -63,6 +65,7 @@ public class Server extends Thread {
         while (true) {
 
             data.update(game);
+            DataClient receivedData = null;
 
             try {
                 objectOutputStream.writeObject(data);
@@ -72,19 +75,20 @@ public class Server extends Thread {
             }
 
             try {
-                sleep(100);
-            } catch (InterruptedException e) {
+                Object obj = objectInputStream.readObject();
+                System.out.println("server read");
+                if (obj instanceof DataClient) {
+                    receivedData = (DataClient) obj;
+                    System.out.println("Trying to read: " + (int) receivedData.playerCoordinatesAndStatus[0]);
+                    game.setPlayer2CoordinatesAndStatus(receivedData.playerCoordinatesAndStatus);
+                }
+            } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
 
             try {
-                Object obj = objectInputStream.readObject();
-                System.out.println("server read");
-                if (obj instanceof Data) {
-                    receivedData = (Data) obj;
-                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
-                }
-            } catch (IOException | ClassNotFoundException e) {
+                sleep(10);
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 

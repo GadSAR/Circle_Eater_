@@ -1,4 +1,5 @@
 package Panels;
+
 import Manage.*;
 
 import javax.swing.*;
@@ -8,11 +9,11 @@ public class GameOver extends JPanel {
 
     private GameStateManager gameStateManager;
 
-    private Image bgOver, Replay, onReplay, Menu, onMenu;
+    private Image bgOver, Replay, onReplay, Menu, onMenu, gameOver;
     private int xMiddleScreen, yMiddleScreen,
             wReplay, hReplay, xReplay, yReplay,
-            wMenu, hMenu, xMenu, yMenu;
-    private JTextField GameOverText;
+            wMenu, hMenu, xMenu, yMenu,
+            wGameOver, hGameOver, xGameOver, yGameOver;
 
 
     public GameOver(GameStateManager gameStateManager) {
@@ -24,30 +25,26 @@ public class GameOver extends JPanel {
         Menu = (new ImageIcon(gameStateManager.getResource().getMenuButton())).getImage();
         onMenu = (new ImageIcon(gameStateManager.getResource().getOnMenuButton())).getImage();
 
+        boolean win = gameStateManager.getGamePanel().getPlayer().isPlayerAlive();
+        if (win)
+            gameOver = (new ImageIcon(gameStateManager.getResource().getGameOverWon())).getImage();
+        else
+            gameOver = (new ImageIcon(gameStateManager.getResource().getGameOverLost())).getImage();
+
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
-        boolean win = gameStateManager.getGamePanel().getPlayer().isPlayerAlive();
-        if(win)
-            GameOverText = new JTextField("GAME OVER! YOU WON :)", 20);
-        else
-            GameOverText = new JTextField("GAME OVER! YOU LOST :(", 20);
-        Font font = new Font("Arial", Font.BOLD, 70);
-        setLayout(null);
-        GameOverText.setFont(font);
-        GameOverText.setBounds(xMiddleScreen - 500, 100, 1000, 100);
-        GameOverText.setEditable(false);
-        GameOverText.setOpaque(false);
-        GameOverText.setBorder(null);
-        GameOverText.setForeground(Color.WHITE);
-        add(GameOverText);
+        wGameOver = 380;
+        hGameOver = 190;
+        xGameOver = xMiddleScreen - wGameOver / 2;
+        yGameOver = yMiddleScreen - hGameOver / 2 - 150;
 
         wReplay = 180;
         hReplay = 90;
         xReplay = xMiddleScreen - wReplay / 2;
-        yReplay = yMiddleScreen - hReplay / 2 - 50;
+        yReplay = yMiddleScreen - hReplay / 2;
 
         wMenu = 140;
         hMenu = 70;
@@ -60,6 +57,7 @@ public class GameOver extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(bgOver, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(gameOver, xGameOver, yGameOver, wGameOver, hGameOver, null);
         if (gameStateManager.getMouseX() > xReplay && gameStateManager.getMouseX() < xReplay + wReplay && gameStateManager.getMouseY() > yReplay && gameStateManager.getMouseY() < yReplay + hReplay)
             g.drawImage(onReplay, xReplay, yReplay, wReplay, hReplay, null);
         else g.drawImage(Replay, xReplay, yReplay, wReplay, hReplay, null);

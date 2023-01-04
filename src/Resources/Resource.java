@@ -13,7 +13,7 @@ public class Resource {
             cursorImg, cursorLuImg, cursorUImg, cursorRuImg, cursorLImg, cursorCImg, cursorRImg, cursorLdImg, cursorDImg, cursorRdImg,
             playButton, onPlayButton, howToPlayButton, onHowToPlayButton, exitButton, onExitButton, settingsButton, onSettingsButton,
             lobbyButton, onLobbyButton, creatButton, onCreatButton, joinButton, onJoinButton, backButton, onBackButton,
-            replayButton, onReplayButton, menuButton, onMenuButton;
+            replayButton, onReplayButton, menuButton, onMenuButton, gameOverLost, gameOverWon;
 
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
@@ -75,6 +75,8 @@ public class Resource {
         onReplayButton = "src/Resources/pictures/onreplayButton.png";
         menuButton = "src/Resources/pictures/menuButton.png";
         onMenuButton = "src/Resources/pictures/onmenuButton.png";
+        gameOverLost = "src/Resources/pictures/gameOverLost.png";
+        gameOverWon = "src/Resources/pictures/gameOverWon.png";
 
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
@@ -86,9 +88,9 @@ public class Resource {
         UNKNOWNbadBallPathSound = null;
         UNKNOWNgameBackgroundPathSound = null;
 
-        clickButtonPathSound = null;
-        onButtonPathSound = null;
-        backgroundPathSound = null;
+        clickButtonPathSound = "src/Resources/Sounds/click.wav";
+        onButtonPathSound = "src/Resources/Sounds/onbutton.wav";
+        backgroundPathSound = "src/Resources/Sounds/background.wav";
     }
 
 
@@ -675,4 +677,21 @@ public class Resource {
     public void setOnBackButton(String onBackButton) {
         this.onBackButton = onBackButton;
     }
+
+    public String getGameOverLost() {
+        return gameOverLost;
+    }
+
+    public void setGameOverLost(String gameOverLost) {
+        this.gameOverLost = gameOverLost;
+    }
+
+    public String getGameOverWon() {
+        return gameOverWon;
+    }
+
+    public void setGameOverWon(String gameOverWon) {
+        this.gameOverWon = gameOverWon;
+    }
+
 }

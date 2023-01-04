@@ -3,42 +3,32 @@ import Manage.*;
 
 public class MusicController {
 
-    private GameStateManager gameStateManager;
-    private MusicThread good, bad, game, mouseOn, mousePressed,background;
+    private MusicThread good, bad, game, click, onbutton, background;
 
-    public MusicController(String goodPath, String badPath, String gamePath, GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
+    public MusicController(GameStateManager gameStateManager, String goodPath, String badPath, String gamePath, String clickPath, String onbuttonPath, String backgroundPath) {
         good = new MusicThread(goodPath, gameStateManager, false);
         bad = new MusicThread(badPath, gameStateManager, false);
         game = new MusicThread(gamePath, gameStateManager, true);
-        /*mouseOn = new MusicThread(backgroundPath, gSM, false);
-        mousePressed =  new MusicThread(backgroundPath, gSM, false);
-        background = new MusicThread(backgroundPath, gSM, true);*/
+        click = new MusicThread(clickPath, gameStateManager, false);
+        onbutton =  new MusicThread(onbuttonPath, gameStateManager, false);
+        background = new MusicThread(backgroundPath, gameStateManager, true);
 
     }
 
-    public GameStateManager getGameStateManager() {
-        return gameStateManager;
+    public MusicThread getClick() {
+        return click;
     }
 
-    public void setGameStateManager(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
+    public void setClick(MusicThread click) {
+        this.click = click;
     }
 
-    public MusicThread getMouseOn() {
-        return mouseOn;
+    public MusicThread getOnbutton() {
+        return onbutton;
     }
 
-    public void setMouseOn(MusicThread mouseOn) {
-        this.mouseOn = mouseOn;
-    }
-
-    public MusicThread getMousePressed() {
-        return mousePressed;
-    }
-
-    public void setMousePressed(MusicThread mousePressed) {
-        this.mousePressed = mousePressed;
+    public void setOnbutton(MusicThread onbutton) {
+        this.onbutton = onbutton;
     }
 
     public MusicThread getBackground() {

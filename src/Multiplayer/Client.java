@@ -21,7 +21,7 @@ public class Client extends Thread {
 
     GameStateManager gSM;
     GamePanel game;
-    Data data, receivedData;
+    DataClient data;
 
 
     public Client(GameStateManager gSM, String serverIP) throws IOException, ClassNotFoundException {
@@ -35,7 +35,7 @@ public class Client extends Thread {
             throw new RuntimeException(e);
         }
         game = gSM.getGamePanel();
-        data = new Data(game);
+        data = new DataClient();
 
         Object obj = objectInputStream.readObject();
         System.out.println("client received");
@@ -60,31 +60,34 @@ public class Client extends Thread {
 
         while (true) {
 
+            DataServer receivedData = null;
+
             try {
                 Object obj = objectInputStream.readObject();
                 System.out.println("client read");
-                if (obj instanceof Data) {
-                    receivedData = (Data) obj;
-                    game.setCoordinatesAndStatus(receivedData.coordinatesAndStatus);
+                if (obj instanceof DataServer) {
+                    receivedData = (DataServer) obj;
+                    game.setBallsCoordinatesAndStatus(receivedData.ballsCoordinatesAndStatus);
                 }
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
 
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
             data.update(game);
+
             try {
+                System.out.println("Trying to write: " + (int)data.playerCoordinatesAndStatus[0]);
                 objectOutputStream.writeObject(data);
                 System.out.println("client write");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
+            try {
+                sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }

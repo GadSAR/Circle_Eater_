@@ -61,7 +61,7 @@ public class GamePanel extends JPanel {
         vec = new BallBot[vecSize];
 
         Random rnd = new Random();
-        int space = 30;
+        int space = 50;
 
         for (int i = 0; i < vec.length; i++) {
 
@@ -77,7 +77,8 @@ public class GamePanel extends JPanel {
 
             if(player2 != null)
             {
-                while((((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) || (((x < player2.getX() + player.getWidth() + space) || (x < player2.getY() - space)) && ((y < player2.getY() + player.getWidth() + space) || (y < player2.getY() - space)))){
+                while((((x < player.getX() + player.getWidth() + space) || (x < player.getX() - space)) && ((y < player.getY() + player.getWidth() + space) || (y < player.getY() - space))) || (((x < player2.getX() + player.getWidth() + space) || (x < player2.getY() - space)) && ((y < player2.getY() + player.getWidth() + space) || (y < player2.getY() - space))))
+                {
                     x = rnd.nextInt(gameStateManager.getF().getWidth() - w);
                     y = rnd.nextInt(gameStateManager.getF().getHeight() - w);
                 }
@@ -92,8 +93,7 @@ public class GamePanel extends JPanel {
 
             }
 
-
-            vec[i] = new BallBot(x, rnd.nextInt(gameStateManager.getF().getHeight() - w), w, ballsImage, this);
+            vec[i] = new BallBot(x, y, w, ballsImage, this);
         }
     }
 
@@ -222,17 +222,23 @@ public class GamePanel extends JPanel {
         moveFlag = false;
     }
 
-    public void setCoordinatesAndStatus(char[][] coordinatesAndStatus) {
-        player2.setX(coordinatesAndStatus[0][0]);
-        player2.setY(coordinatesAndStatus[0][1]);
-        player2.setWidth(coordinatesAndStatus[0][2]);
-        player2.setAlive(coordinatesAndStatus[0][3]);
+    public void setBallsCoordinatesAndStatus(char[][] coordinatesAndStatus) {
 
-        for(int i = 1; i < coordinatesAndStatus.length; i++){
-            vec[i-1].setX(coordinatesAndStatus[i][0]);
-            vec[i-1].setY(coordinatesAndStatus[i][1]);
-            vec[i-1].setWidth(coordinatesAndStatus[i][2]);
-            vec[i-1].setAlive(coordinatesAndStatus[i][3]);
+        for(int i = 0; i < coordinatesAndStatus.length; i++){
+            vec[i].setX(coordinatesAndStatus[i][0]);
+            vec[i].setY(coordinatesAndStatus[i][1]);
+            vec[i].setWidth(coordinatesAndStatus[i][2]);
+            vec[i].setAlive(coordinatesAndStatus[i][3]);
+            vec[i].setDirX(coordinatesAndStatus[i][4]);
+            vec[i].setDirY(coordinatesAndStatus[i][5]);
         }
+    }
+
+    public void setPlayer2CoordinatesAndStatus(char[] coordinatesAndStatus) {
+
+        player2.setX(coordinatesAndStatus[0]);
+        player2.setY(coordinatesAndStatus[1]);
+        player2.setWidth(coordinatesAndStatus[2]);
+        player2.setAlive(coordinatesAndStatus[3]);
     }
 }

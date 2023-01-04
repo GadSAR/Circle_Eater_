@@ -190,7 +190,7 @@ public class GameStateManager {
     }
 
     private void setMusicController() {
-        musicController = new MusicController(resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), this);
+        musicController = new MusicController(this, resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getOnButtonPathSound(), resource.getBackgroundPathSound());
     }
 
     private void setFrame() {
