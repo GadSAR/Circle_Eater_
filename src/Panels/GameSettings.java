@@ -81,16 +81,6 @@ public class GameSettings extends JPanel {
             g.drawImage(onMinus, xJoin, yJoin, wJoin, hJoin, null);
         else g.drawImage(Minus, xJoin, yJoin, wJoin, hJoin, null);
 
-      /*  if (gameStateManager.getMouseX() > xText - 10 && gameStateManager.getMouseX() < xText + wText + 10 && gameStateManager.getMouseY() > yText - 10 && gameStateManager.getMouseY() < yText + hText + 10) {
-            // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
-            if (joinIpAdress.getText().equals("Type lobby Ip Address..."))
-                joinIpAdress.setText("");
-        } else if (joinIpAdress.getText().isEmpty()) {
-            // If the mouse is not within the bounds of the text field and the text is empty, set the text to "Type lobby Ip Address..."
-            joinIpAdress.setText("Type lobby Ip Address...");
-
-        }*/
-
         if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack)
             g.drawImage(onEmpty, xBack, yBack, WBack, hBack, null);
         else g.drawImage(Empty, xBack, yBack, WBack, hBack, null);

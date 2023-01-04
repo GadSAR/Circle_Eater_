@@ -72,10 +72,10 @@ public class BallPlayer extends Thread implements Serializable
 	{
 		if(System.currentTimeMillis() - startTime >= delay) {
 
-			dx = panel.getGameStateManager().getMouseX() - panel.getPlayer().getX() - panel.getPlayer().getWidth() / 2 + 7.5;
-			dy = panel.getGameStateManager().getMouseY() - panel.getPlayer().getY() - panel.getPlayer().getWidth() / 2 + 7.5;
+			dx = panel.getGameStateManager().getMouseX() - panel.getPlayer().getX() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
+			dy = panel.getGameStateManager().getMouseY() - panel.getPlayer().getY() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
 
-			if (dx * dx + dy * dy > panel.getPlayer().width / 2) {    //minimum to move
+			if (dx * dx + dy * dy > (double) panel.getPlayer().width / 2) {    //minimum to move
 				angle = Math.atan2(dy, dx);
 				panel.getPlayer().x += (int) (5 * Math.cos(angle));
 				panel.getPlayer().y += (int) (5 * Math.sin(angle));
@@ -94,16 +94,7 @@ public class BallPlayer extends Thread implements Serializable
 	{
 		g.drawImage(player2Image, x,y, width, width,null);
 	}
-	
-	/*public void drawAnimatedPlayer(Graphics g)
-	{
-		Graphics2D g2 = (Graphics2D)g;
-		
-		Point p = new Point(x+ width /2,y+ width /2);
-		g2.rotate(Math.toRadians(degrees),p.x,p.y);
-		g2.drawImage(playerImage,x,y, width, width, null);
-	}*/
-	
+
 	public GamePanel getPanel() {
 		return panel;
 	}

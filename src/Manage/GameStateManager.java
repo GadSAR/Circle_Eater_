@@ -149,7 +149,7 @@ public class GameStateManager {
                     if (mouseX > gameMultiplayer.getxJoin() && mouseX < gameMultiplayer.getxJoin() + gameMultiplayer.getwJoin() && mouseY > gameMultiplayer.getyJoin() && mouseY < gameMultiplayer.getyJoin() + gameMultiplayer.gethJoin()) {
                         playerType = 2;
                         try {
-                            newClient(gameMultiplayer.getJoinIpAdress().getText());
+                            newClient(gameMultiplayer.getJoinIpAddress().getText());
                         } catch (IOException | ClassNotFoundException ex) {
                             throw new RuntimeException(ex);
                         }

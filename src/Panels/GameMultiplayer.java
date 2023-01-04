@@ -17,8 +17,7 @@ public class GameMultiplayer extends JPanel {
             wText, hText, xText, yText,
             wJoin, hJoin, xJoin, yJoin,
             WBack, hBack, xBack, yBack;
-    private JTextField joinIpAdress, MyIpAddress;
-    private String myIpAddress;
+    private JTextField joinIpAddress;
 
 
     public GameMultiplayer(GameStateManager gameStateManager) {
@@ -37,6 +36,7 @@ public class GameMultiplayer extends JPanel {
         xMiddleScreen = tk.getScreenSize().width / 2;
         yMiddleScreen = tk.getScreenSize().height / 2;
 
+        String myIpAddress;
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
             myIpAddress = inetAddress.getHostAddress();
@@ -44,7 +44,7 @@ public class GameMultiplayer extends JPanel {
             // If the local host could not be resolved, set the IP address to "unknown"
             myIpAddress = "unknown";
         }
-        MyIpAddress = new JTextField(myIpAddress);
+        JTextField myIpAddress1 = new JTextField(myIpAddress);
 
         wCreate = 240;
         hCreate = 120;
@@ -56,7 +56,7 @@ public class GameMultiplayer extends JPanel {
         xJoin = xMiddleScreen + 20;
         yJoin = yCreate + hCreate + 20;
 
-        joinIpAdress = new JTextField("Type lobby Ip Address...", 30);
+        joinIpAddress = new JTextField("Type lobby Ip Address...", 30);
         wText = 200;
         hText = hJoin - 50;
         xText = xJoin - 220;
@@ -69,16 +69,14 @@ public class GameMultiplayer extends JPanel {
 
         Font font = new Font("Arial", Font.BOLD, 15);
         setLayout(null);
-        //joinIpAdress.setOpaque(true);
-        //joinIpAdress.setForeground(Color.black);
-        joinIpAdress.setFont(font);
-        joinIpAdress.setBounds(xText, yText, wText, hText);
-        add(joinIpAdress);
+        joinIpAddress.setFont(font);
+        joinIpAddress.setBounds(xText, yText, wText, hText);
+        add(joinIpAddress);
 
-        MyIpAddress.setFont(font);
-        MyIpAddress.setBounds(0, 0, 130, 25);
-        MyIpAddress.setEditable(false);
-        add(MyIpAddress);
+        myIpAddress1.setFont(font);
+        myIpAddress1.setBounds(0, 0, 130, 25);
+        myIpAddress1.setEditable(false);
+        add(myIpAddress1);
 
     }
 
@@ -97,11 +95,11 @@ public class GameMultiplayer extends JPanel {
 
         if (gameStateManager.getMouseX() > xText - 40 && gameStateManager.getMouseX() < xText + wText + 40 && gameStateManager.getMouseY() > yText - 40 && gameStateManager.getMouseY() < yText + hText + 40) {
             // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
-            if (joinIpAdress.getText().equals("Type lobby Ip Address..."))
-                joinIpAdress.setText("");
-        } else if (joinIpAdress.getText().isEmpty()) {
+            if (joinIpAddress.getText().equals("Type lobby Ip Address..."))
+                joinIpAddress.setText("");
+        } else if (joinIpAddress.getText().isEmpty()) {
             // If the mouse is not within the bounds of the text field and the text is empty, set the text to "Type lobby Ip Address..."
-            joinIpAdress.setText("Type lobby Ip Address...");
+            joinIpAddress.setText("Type lobby Ip Address...");
 
         }
 
@@ -114,12 +112,12 @@ public class GameMultiplayer extends JPanel {
     }
 
 
-    public JTextField getJoinIpAdress() {
-        return joinIpAdress;
+    public JTextField getJoinIpAddress() {
+        return joinIpAddress;
     }
 
-    public void setJoinIpAdress(JTextField joinIpAdress) {
-        this.joinIpAdress = joinIpAdress;
+    public void setJoinIpAddress(JTextField joinIpAddress) {
+        this.joinIpAddress = joinIpAddress;
     }
 
     public int getwText() {

@@ -74,7 +74,7 @@ public class BallBot extends Thread implements Serializable {
         ballImage = width < panel.getPlayer().getWidth() ? goodBall.getImage() : badBall.getImage();
 
 
-        if (distance(x + width / 2 - cx1, y + width / 2 - cy1) < width / 2 + panel.getPlayer().getWidth() / 2) {
+        if (distance(x + width / 2 - cx1, y + width / 2 - cy1) < (double) width / 2 + (double) panel.getPlayer().getWidth() / 2) {
 
             if (panel.getPlayer().getWidth() > width) {
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() + 1);        ///increase size
@@ -126,7 +126,7 @@ public class BallBot extends Thread implements Serializable {
             for (int i = 0; i < panel.getVec().length; i++) {
                 if (panel.getVec()[i] != this && panel.getVec()[i].isAlive()) {
                     double d = distance(x, y, panel.getVec()[i].x, panel.getVec()[i].y);
-                    if (d <= width / 2 + panel.getVec()[i].width / 2) {
+                    if (d <= (double) width / 2 + (double) panel.getVec()[i].width / 2) {
                         int temp = (width / 2 + panel.getVec()[i].width / 2) - (int) d;
                         if (temp > preventionDistance) {
                             dirX *= -1;
@@ -204,7 +204,6 @@ public class BallBot extends Thread implements Serializable {
     public void setBotAlive(Boolean alive) {
         this.alive = alive;
     }
-
 
 
     public int getDirX() {
