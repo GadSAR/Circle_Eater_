@@ -78,7 +78,7 @@ public class GameStateManager {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (currentGameState == GameState.GAME)
-                        gamePanel.pause();
+                        gamePanel.setMoveFlag(!gamePanel.getMoveFlag());
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
@@ -142,7 +142,7 @@ public class GameStateManager {
                         playerType = 1;
                         try {
                             newServer();
-                        } catch (IOException ex) {
+                        } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
@@ -150,7 +150,7 @@ public class GameStateManager {
                         playerType = 2;
                         try {
                             newClient(gameMultiplayer.getJoinIpAddress().getText());
-                        } catch (IOException | ClassNotFoundException ex) {
+                        } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }
                     }
@@ -181,12 +181,14 @@ public class GameStateManager {
         g.drawImage(cursor, mouseX - 10, mouseY, 30, 30, null);
     }
 
-    private void newServer() throws IOException {
+    private void newServer() throws IOException, InterruptedException {
         server = new Server(this);
+        server.start();
     }
 
-    private void newClient(String ipAddress) throws IOException, ClassNotFoundException {
+    private void newClient(String ipAddress) throws Exception {
         client = new Client(this, ipAddress);
+        client.start();
     }
 
     private void setMusicController() {

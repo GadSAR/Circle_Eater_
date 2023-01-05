@@ -53,19 +53,6 @@ public class GameSettings extends JPanel {
         xBack = xMiddleScreen - WBack / 2;
         yBack = yJoin + hJoin + 20;
 
-        Font font = new Font("Arial", Font.BOLD, 15);
-        setLayout(null);
-        //joinIpAdress.setOpaque(true);
-        //joinIpAdress.setForeground(Color.black);
-        /*joinIpAdress.setFont(font);
-        joinIpAdress.setBounds(xText, yText, wText, hText);
-        add(joinIpAdress);
-
-        MyIpAddress.setFont(font);
-        MyIpAddress.setBounds(0, 0, 130, 25);
-        MyIpAddress.setEditable(false);
-        add(MyIpAddress);*/
-
     }
 
     public void paintComponent(Graphics g) {

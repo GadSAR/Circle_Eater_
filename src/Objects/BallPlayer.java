@@ -79,6 +79,15 @@ public class BallPlayer extends Thread implements Serializable
 				angle = Math.atan2(dy, dx);
 				panel.getPlayer().x += (int) (5 * Math.cos(angle));
 				panel.getPlayer().y += (int) (5 * Math.sin(angle));
+				if(panel.getPlayer().x < -panel.getPlayer().width/2)
+					panel.getPlayer().x = -panel.getPlayer().width / 2;
+				if(panel.getPlayer().x + panel.getPlayer().width/2 > panel.getWidth())
+					panel.getPlayer().x = panel.getWidth() - panel.getPlayer().width/2;
+				if(panel.getPlayer().y < -panel.getPlayer().width/2)
+					panel.getPlayer().y = -panel.getPlayer().width/2;
+				if(panel.getPlayer().y + panel.getPlayer().width/2 > panel.getHeight())
+					panel.getPlayer().y = panel.getHeight() - panel.getPlayer().width/2;
+
 			}
 			startTime = System.currentTimeMillis();
 		}
@@ -131,7 +140,7 @@ public class BallPlayer extends Thread implements Serializable
 		return alive? 1:0;
 	}
 
-	public void setAlive(char alive) {
+	public void setAlive(int alive) {
 		this.alive = alive == 1;
 	}
 

@@ -1,7 +1,6 @@
 package Panels;
 
 import Manage.*;
-import Music.*;
 import Objects.*;
 
 import java.awt.*;
@@ -109,8 +108,8 @@ public class GamePanel extends JPanel {
         imagesCursor[2][2] = (new ImageIcon(gameStateManager.getResource().getCursorRdImg())).getImage();
     }
 
-    public void pause() {
-        if (!moveFlag) {
+    public void unPause() {
+        if (moveFlag) {
             for (int i = 0; i < vec.length; i++) {
                 synchronized (vec[i]) {
                     vec[i].notify();
@@ -120,7 +119,6 @@ public class GamePanel extends JPanel {
                 player.notify();
             }
         }
-        moveFlag = !moveFlag;
     }
 
     public void paintComponent(Graphics g) {
@@ -129,7 +127,7 @@ public class GamePanel extends JPanel {
         g.drawImage(backgroundImg, 0, 0, getWidth(), getHeight(), null);
 
         for (int i = 0; i < vec.length; i++)
-            if (vec[i].isAlive())
+            if (vec[i].isBotAlive())
                 vec[i].drawBall(g);
 
         if (!moveFlag) {
@@ -203,6 +201,7 @@ public class GamePanel extends JPanel {
 
     public void setMoveFlag(boolean moveFlag) {
         this.moveFlag = moveFlag;
+        unPause();
     }
 
     public Image getBackgroundImg() {
@@ -222,7 +221,7 @@ public class GamePanel extends JPanel {
         moveFlag = false;
     }
 
-    public void setBallsCoordinatesAndStatus(char[][] coordinatesAndStatus) {
+    public void setBallsCoordinatesAndStatus(Integer[][] coordinatesAndStatus) {
 
         for(int i = 0; i < coordinatesAndStatus.length; i++){
             vec[i].setX(coordinatesAndStatus[i][0]);
@@ -234,7 +233,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void setPlayer2CoordinatesAndStatus(char[] coordinatesAndStatus) {
+    public void setPlayer2CoordinatesAndStatus(Integer[] coordinatesAndStatus) {
 
         player2.setX(coordinatesAndStatus[0]);
         player2.setY(coordinatesAndStatus[1]);

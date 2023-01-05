@@ -30,6 +30,7 @@ public class BallBot extends Thread implements Serializable {
         this.width = width;
         dirX = random.nextBoolean() ? 1 : -1;
         dirY = random.nextBoolean() ? 1 : -1;
+        alive = true;
         preventionDistance = 0;
         this.panel = p;
         this.ballImage = ballsImage;
@@ -76,6 +77,7 @@ public class BallBot extends Thread implements Serializable {
 
         if (distance(x + width / 2 - cx1, y + width / 2 - cy1) < (double) width / 2 + (double) panel.getPlayer().getWidth() / 2) {
 
+            alive = false;
             if (panel.getPlayer().getWidth() > width) {
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() + 1);        ///increase size
                 soundEffect(true);
@@ -91,7 +93,6 @@ public class BallBot extends Thread implements Serializable {
                 soundEffect(false);
                 return true;
             }
-            alive = false;
         }
         return false;
     }
@@ -193,7 +194,7 @@ public class BallBot extends Thread implements Serializable {
         return alive ? 1:0;
     }
 
-    public void setAlive(char alive) {
+    public void setAlive(int alive) {
         this.alive = alive == 1;
     }
 

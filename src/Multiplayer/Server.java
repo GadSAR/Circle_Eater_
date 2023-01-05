@@ -1,126 +1,83 @@
 package Multiplayer;
 
-import Manage.*;
-import Panels.*;
+import Manage.GameState;
+import Manage.GameStateManager;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends Thread {
-
-    static int port = 8888;
-
-    ServerSocket server;
+    final static int PORT = 8888;
     Socket socket;
-
-    InputStream inputStream;
-    OutputStream outputStream;
-
-    ObjectOutputStream objectOutputStream;
-    ObjectInputStream objectInputStream;
-
-    GameStateManager gSM;
-    GamePanel game;
-    DataServer dataServer;
+    ObjectOutputStream outputStream;
+    ObjectInputStream inputStream;
 
 
-    public Server(GameStateManager gSM) throws IOException {
+    GameStateManager gameStateManager;
 
-        this.gSM = gSM;
-        this.gSM.setCurrentGameState(GameState.GAME);
-
+    public Server(GameStateManager gameStateManager) throws InterruptedException {
+        this.gameStateManager = gameStateManager;
         serverConnection();
+    }
 
-        game = this.gSM.getGamePanel();
-        dataServer = new DataServer(game);
+    private void serverConnection() throws InterruptedException {
 
         try {
-            sleep(1000);
-        } catch (InterruptedException e) {
+            // create a server socket
+            try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+
+                // wait for a client to connect
+                socket = serverSocket.accept();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // get the input and output streams
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
+            inputStream = new ObjectInputStream(socket.getInputStream());
+
+            gameStateManager.setCurrentGameState(GameState.GAME);
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        start();
+        sleep(1000);
     }
 
-    public void serverConnection() throws IOException {
-
-        server = new ServerSocket(port);
-        socket = server.accept();
-
-        outputStream = socket.getOutputStream();
-        objectOutputStream = new ObjectOutputStream(outputStream);
-
-        inputStream = socket.getInputStream();
-        objectInputStream = new ObjectInputStream(inputStream);
-
-        String s = "start";
-        objectOutputStream.writeObject(s);
-        System.out.println("server write");
-    }
-
+    @Override
     public void run() {
 
-        read();
-        write();
+        while (true) {
 
-    }
-
-    private void write() {
-
-        Thread thread = new Thread(() -> {
-
-            while (true) {
-
-                dataServer.update(game);
-
-                try {
-                    System.out.println("server Trying to write: " + (int) dataServer.playerCoordinatesAndStatus[0]);
-                    objectOutputStream.writeObject(dataServer);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                try {
-                    sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
+            // write a Data object to the client
+            DataServer dataServer = new DataServer(gameStateManager.getGamePanel());
+            try {
+                outputStream.writeObject(dataServer);
+                System.out.println("Sent data to client: " + dataServer.playerCoordinatesAndStatus[0] + ", " + dataServer.playerCoordinatesAndStatus[1] + ", " + dataServer.playerCoordinatesAndStatus[2] + ", " + dataServer.playerCoordinatesAndStatus[3] + ", " + dataServer.moveFlag.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        });
-        thread.start();
 
-    }
-
-    private void read() {
-
-        Thread thread = new Thread(() -> {
-
-            while (true) {
-
-                try {
-                    Object obj = objectInputStream.readObject();
-                    if (obj instanceof DataClient receivedData) {
-                        System.out.println("server Trying to read: " + (int) receivedData.playerCoordinatesAndStatus[0]);
-                        game.setPlayer2CoordinatesAndStatus(receivedData.playerCoordinatesAndStatus);
-                    }
-                } catch (IOException | ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-
-                try {
-                    sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+            // read a Data object from the client
+            DataClient dataClient;
+            try {
+                dataClient = (DataClient) inputStream.readObject();
+                System.out.println("Received data from client: " + dataClient.playerCoordinatesAndStatus[0] + ", " + dataClient.playerCoordinatesAndStatus[1] + ", " + dataClient.playerCoordinatesAndStatus[2] + ", " + dataClient.playerCoordinatesAndStatus[3]);
+                gameStateManager.getGamePanel().setPlayer2CoordinatesAndStatus(dataClient.playerCoordinatesAndStatus);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
-        });
-        thread.start();
+
+            // sleep
+            try {
+                sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
