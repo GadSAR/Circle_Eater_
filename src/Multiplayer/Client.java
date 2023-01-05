@@ -25,15 +25,14 @@ public class Client extends Thread {
 
 
     public Client(GameStateManager gSM, String serverIP) throws IOException, ClassNotFoundException {
+
         this.gSM = gSM;
         this.serverIP = serverIP;
+
         connectToServer(Server.port);
+
         gSM.setCurrentGameState(GameState.GAME);
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
         game = gSM.getGamePanel();
         data = new DataClient();
 
@@ -58,38 +57,70 @@ public class Client extends Thread {
 
     public void run() {
 
-        while (true) {
+        read();
+        write();
 
-            DataServer receivedData;
+    }
 
-            try {
-                Object obj = objectInputStream.readObject();
-                System.out.println("client read");
-                if (obj instanceof DataServer) {
-                    receivedData = (DataServer) obj;
-                    game.setBallsCoordinatesAndStatus(receivedData.ballsCoordinatesAndStatus);
+    private void write() {
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+
+                    data.update(game);
+
+                    try {
+                        System.out.println("client Trying to write: " + (int) data.playerCoordinatesAndStatus[0]);
+                        objectOutputStream.writeObject(data);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    try {
+                        sleep(10);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
             }
+        });
+        thread.start();
+    }
 
-            data.update(game);
+    private void read() {
 
-            try {
-                System.out.println("Trying to write: " + (int)data.playerCoordinatesAndStatus[0]);
-                objectOutputStream.writeObject(data);
-                System.out.println("client write");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+
+                    try {
+                        Object obj = objectInputStream.readObject();
+                        if (obj instanceof DataServer receivedData) {
+                            System.out.println("client Trying to read: " + (int) receivedData.playerCoordinatesAndStatus[0]);
+                            game.setPlayer2CoordinatesAndStatus(receivedData.playerCoordinatesAndStatus);
+                            game.setBallsCoordinatesAndStatus(receivedData.ballsCoordinatesAndStatus);
+                            game.setMoveFlag(receivedData.moveFlag);
+                        }
+                    } catch (IOException | ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    try {
+                        sleep(10);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
             }
-
-            try {
-                sleep(10);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
+        });
+        thread.start();
     }
 
 }

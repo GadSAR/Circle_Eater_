@@ -26,25 +26,30 @@ public class Server extends Thread {
 
     GameStateManager gSM;
     GamePanel game;
-    DataServer data;
+    DataServer dataServer;
 
 
     public Server(GameStateManager gSM) throws IOException {
+
         this.gSM = gSM;
-        serverConnection();
         this.gSM.setCurrentGameState(GameState.GAME);
+
+        serverConnection();
+
+        game = this.gSM.getGamePanel();
+        dataServer = new DataServer(game);
+
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        this.game = this.gSM.getGamePanel();
-        this.data = new DataServer(game);
 
         start();
     }
 
     public void serverConnection() throws IOException {
+
         server = new ServerSocket(port);
         socket = server.accept();
 
@@ -61,36 +66,61 @@ public class Server extends Thread {
 
     public void run() {
 
-        while (true) {
+        read();
+        write();
 
-            data.update(game);
-            DataClient receivedData;
+    }
 
-            try {
-                objectOutputStream.writeObject(data);
-                System.out.println("server write");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    private void write() {
 
-            try {
-                Object obj = objectInputStream.readObject();
-                System.out.println("server read");
-                if (obj instanceof DataClient) {
-                    receivedData = (DataClient) obj;
-                    System.out.println("Trying to read: " + (int) receivedData.playerCoordinatesAndStatus[0]);
-                    game.setPlayer2CoordinatesAndStatus(receivedData.playerCoordinatesAndStatus);
+        Thread thread = new Thread(() -> {
+
+            while (true) {
+
+                dataServer.update(game);
+
+                try {
+                    System.out.println("server Trying to write: " + (int) dataServer.playerCoordinatesAndStatus[0]);
+                    objectOutputStream.writeObject(dataServer);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
 
-            try {
-                sleep(10);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-        }
+            }
+        });
+        thread.start();
+
+    }
+
+    private void read() {
+
+        Thread thread = new Thread(() -> {
+
+            while (true) {
+
+                try {
+                    Object obj = objectInputStream.readObject();
+                    if (obj instanceof DataClient receivedData) {
+                        System.out.println("server Trying to read: " + (int) receivedData.playerCoordinatesAndStatus[0]);
+                        game.setPlayer2CoordinatesAndStatus(receivedData.playerCoordinatesAndStatus);
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        thread.start();
     }
 }
