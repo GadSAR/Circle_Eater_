@@ -3,13 +3,13 @@ import Manage.*;
 import Panels.*;
 
 import java.awt.*;
-import java.io.Serializable;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 
-public class BallBot extends Thread implements Serializable {
+public class BallBot extends Thread {
 
     private GamePanel panel;
     private int x, y, width;
@@ -45,8 +45,12 @@ public class BallBot extends Thread implements Serializable {
         while (true) {
             checkpause();
             update();
-            if (interaction())
-                break;
+            try {
+                if (interaction())
+                    break;
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             try {
                 Thread.sleep(0, 50);
@@ -65,7 +69,7 @@ public class BallBot extends Thread implements Serializable {
             panel.getGameStateManager().getMusicController().getBad().setFlag(true);
     }
 
-    private boolean interaction() {
+    private boolean interaction() throws IOException, InterruptedException {
 
         int x1 = panel.getPlayer().getX();
         int y1 = panel.getPlayer().getY();
@@ -87,7 +91,8 @@ public class BallBot extends Thread implements Serializable {
             if (panel.getPlayer().getWidth() <= width) {
                 if (panel.getPlayer().getWidth() < 25) {
                     panel.getPlayer().setPlayerAlive(false);
-                    panel.getGameStateManager().setCurrentGameState(GameState.GAMEOVER);        ///game over
+                    panel.gameOver(panel.getGameStateManager().getPlayerType());       ///game over
+
                 }
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() - 8);        ///decrease size
                 soundEffect(false);

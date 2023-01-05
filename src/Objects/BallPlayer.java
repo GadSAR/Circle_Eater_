@@ -3,15 +3,10 @@ import Manage.*;
 import Panels.*;
 
 import java.awt.*;
-import java.io.Serial;
-import java.io.Serializable;
 
 import javax.swing.*;
 
-public class BallPlayer extends Thread implements Serializable
-{
-	@Serial
-	private static final long serialVersionUID = 1L;
+public class BallPlayer extends Thread {
 	
 	private GamePanel panel;
 	private int x, y, width;
@@ -29,7 +24,7 @@ public class BallPlayer extends Thread implements Serializable
 		this.panel = panel;
 		this.x = x;
 		this.y = y;
-		this.width = 30;
+		this.width = panel.getGameStateManager().getWidthStart();
 		delay = (double)1000/(30*panel.getGameStateManager().getSpeedLevel());
 		alive = true;
 		playerImage = new ImageIcon(panel.getGameStateManager().getResource().getplayer1BallImg()).getImage();
@@ -102,14 +97,6 @@ public class BallPlayer extends Thread implements Serializable
 	public void drawPlayer2(Graphics g)
 	{
 		g.drawImage(player2Image, x,y, width, width,null);
-	}
-
-	public GamePanel getPanel() {
-		return panel;
-	}
-
-	public void setPanel(GamePanel panel) {
-		this.panel = panel;
 	}
 
 	public int getX() {

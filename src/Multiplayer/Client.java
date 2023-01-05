@@ -32,6 +32,19 @@ public class Client extends Thread {
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
 
+            // read a Data Settings from the server
+            DataSettings dataSettings;
+            try {
+                dataSettings = (DataSettings) inputStream.readObject();
+                System.out.println("Received data from server: " + dataSettings.settings[0]);
+                gameStateManager.setSpeedLevel(dataSettings.settings[0]);
+                gameStateManager.setMode(dataSettings.settings[1]);
+                gameStateManager.setVecSize(dataSettings.settings[2]);
+                gameStateManager.setWidthStart(dataSettings.settings[3]);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             gameStateManager.setCurrentGameState(GameState.GAME);
 
         } catch (IOException e) {
@@ -63,7 +76,7 @@ public class Client extends Thread {
             gameStateManager.getGamePanel().setPlayer2CoordinatesAndStatus(dataServer.playerCoordinatesAndStatus);
             gameStateManager.getGamePanel().setBallsCoordinatesAndStatus(dataServer.ballsCoordinatesAndStatus);
             gameStateManager.getGamePanel().setMoveFlag(dataServer.moveFlag);
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
@@ -74,5 +87,10 @@ public class Client extends Thread {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void endClient() throws IOException, InterruptedException {
+        sleep(100);
+        socket.close();
     }
 }

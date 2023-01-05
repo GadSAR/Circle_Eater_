@@ -1,9 +1,11 @@
 package Panels;
 
 import Manage.*;
+import Multiplayer.Server;
 import Objects.*;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.*;
@@ -15,7 +17,7 @@ public class GamePanel extends JPanel {
     private BallPlayer player;
     private BallPlayer player2;
     private BallBot[] vec;
-    private char vecSize = 60;
+    private int vecSize;
 
     private boolean moveFlag = false;
 
@@ -57,7 +59,7 @@ public class GamePanel extends JPanel {
     }
 
     public void setBallsGame() {
-        vec = new BallBot[vecSize];
+        vec = new BallBot[gameStateManager.getVecSize()];
 
         Random rnd = new Random();
         int space = 50;
@@ -191,7 +193,7 @@ public class GamePanel extends JPanel {
         this.vec = vec;
     }
 
-    public char getVecSize() {
+    public int getVecSize() {
         return vecSize;
     }
 
@@ -227,17 +229,37 @@ public class GamePanel extends JPanel {
             vec[i].setX(coordinatesAndStatus[i][0]);
             vec[i].setY(coordinatesAndStatus[i][1]);
             vec[i].setWidth(coordinatesAndStatus[i][2]);
-            vec[i].setAlive(coordinatesAndStatus[i][3]);
+            if(vec[i].isBotAlive())
+                vec[i].setAlive(coordinatesAndStatus[i][3]);
             vec[i].setDirX(coordinatesAndStatus[i][4]);
             vec[i].setDirY(coordinatesAndStatus[i][5]);
         }
     }
 
-    public void setPlayer2CoordinatesAndStatus(Integer[] coordinatesAndStatus) {
+    public void setBallsStatus(Integer[] ballsStatus) {
+
+        for(int i = 0; i < ballsStatus.length; i++){
+            if(vec[i].isBotAlive())
+                vec[i].setAlive(ballsStatus[i]);
+        }
+    }
+
+    public void setPlayer2CoordinatesAndStatus(Integer[] coordinatesAndStatus) throws IOException, InterruptedException {
 
         player2.setX(coordinatesAndStatus[0]);
         player2.setY(coordinatesAndStatus[1]);
         player2.setWidth(coordinatesAndStatus[2]);
         player2.setAlive(coordinatesAndStatus[3]);
+        if(!player2.isPlayerAlive())
+            gameOver(3);
+    }
+
+    public void gameOver(int playerNum) throws IOException, InterruptedException {
+        gameStateManager.setLastPlayerWon(playerNum);
+        gameStateManager.setCurrentGameState(GameState.GAMEOVER);
+        if(gameStateManager.getPlayerType() == 1)
+            gameStateManager.getServer().endServer();
+        else if(gameStateManager.getPlayerType() == 2)
+            gameStateManager.getClient().endClient();
     }
 }

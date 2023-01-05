@@ -9,7 +9,7 @@ public class GameOver extends JPanel {
 
     private GameStateManager gameStateManager;
 
-    private Image bgOver, Replay, onReplay, Menu, onMenu, gameOver;
+    private Image bgOver, Replay, onReplay, Menu, onMenu, gameOverWon, gameOverLose;
     private int xMiddleScreen, yMiddleScreen,
             wReplay, hReplay, xReplay, yReplay,
             wMenu, hMenu, xMenu, yMenu,
@@ -24,12 +24,8 @@ public class GameOver extends JPanel {
         onReplay = (new ImageIcon(gameStateManager.getResource().getOnReplayButton())).getImage();
         Menu = (new ImageIcon(gameStateManager.getResource().getMenuButton())).getImage();
         onMenu = (new ImageIcon(gameStateManager.getResource().getOnMenuButton())).getImage();
-
-        boolean win = gameStateManager.getGamePanel().getPlayer().isPlayerAlive();
-        if (win)
-            gameOver = (new ImageIcon(gameStateManager.getResource().getGameOverWon())).getImage();
-        else
-            gameOver = (new ImageIcon(gameStateManager.getResource().getGameOverLost())).getImage();
+        gameOverWon = (new ImageIcon(gameStateManager.getResource().getGameOverWon())).getImage();
+        gameOverLose = (new ImageIcon(gameStateManager.getResource().getGameOverLost())).getImage();
 
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -57,7 +53,10 @@ public class GameOver extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(bgOver, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(gameOver, xGameOver, yGameOver, wGameOver, hGameOver, null);
+        if (gameStateManager.getPlayerType() == gameStateManager.getLastPlayerWon())
+            g.drawImage(gameOverWon, xGameOver, yGameOver, wGameOver, hGameOver, null);
+        else
+            g.drawImage(gameOverLose, xGameOver, yGameOver, wGameOver, hGameOver, null);
         if (gameStateManager.getMouseX() > xReplay && gameStateManager.getMouseX() < xReplay + wReplay && gameStateManager.getMouseY() > yReplay && gameStateManager.getMouseY() < yReplay + hReplay)
             g.drawImage(onReplay, xReplay, yReplay, wReplay, hReplay, null);
         else g.drawImage(Replay, xReplay, yReplay, wReplay, hReplay, null);

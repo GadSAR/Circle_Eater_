@@ -19,14 +19,15 @@ public class GameStateManager {
     private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
-    private char speedLevel = 2;
-    private char[] settings = new char[4];
+    private Integer[] defaultsSettings = {2,0,60,30};
+    private int speedLevel = defaultsSettings[0], mode = defaultsSettings[1], vecSize = defaultsSettings[2], widthStart = defaultsSettings[3];
     private Resource resource;
     private int mouseX, mouseY;
     private Image cursor;
 
     private boolean changedMode = true;
     private char playerType = 0;
+    private int lastPlayerWon;
 
     private GameMultiplayer gameMultiplayer;
     private Client client;
@@ -78,33 +79,34 @@ public class GameStateManager {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (currentGameState == GameState.GAME)
-                        gamePanel.setMoveFlag(!gamePanel.getMoveFlag());
+                        if (playerType != 2)
+                            gamePanel.setMoveFlag(!gamePanel.getMoveFlag());
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.GAME);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    if (currentGameState == GameState.GAME){
+                    if (currentGameState == GameState.GAME) {
                         mouseX = gamePanel.getPlayer().getX() - 60;
-                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth()/2;
+                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    if (currentGameState == GameState.GAME){
+                    if (currentGameState == GameState.GAME) {
                         mouseX = gamePanel.getPlayer().getX() + 60;
-                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth()/2;
+                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (currentGameState == GameState.GAME){
-                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth()/2;
+                    if (currentGameState == GameState.GAME) {
+                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
                         mouseY = gamePanel.getPlayer().getY() - 60;
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (currentGameState == GameState.GAME){
-                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth()/2;
+                    if (currentGameState == GameState.GAME) {
+                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
                         mouseY = gamePanel.getPlayer().getY() + 60;
                     }
                 }
@@ -160,7 +162,22 @@ public class GameStateManager {
                 } else if (GameState.GAMEOVER == currentGameState) {
 
                     if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
-                        setCurrentGameState(GameState.GAME);
+                        if(playerType == 1) {
+                            try {
+                                newServer();
+                            } catch (IOException | InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        else if(playerType == 2) {
+                            try {
+                                newClient(gameMultiplayer.getJoinIpAddress().getText());
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        else
+                            setCurrentGameState(GameState.GAME);
                     }
                     if (mouseX > gameOver.getxMenu() && mouseX < gameOver.getxMenu() + gameOver.getwMenu() && mouseY > gameOver.getyMenu() && mouseY < gameOver.getyMenu() + gameOver.gethMenu())
                         setCurrentGameState(GameState.MENU);
@@ -468,19 +485,19 @@ public class GameStateManager {
         this.playerType = playerType;
     }
 
-    public char[] getSettings() {
-        return settings;
+    public Integer[] getSettings() {
+        return defaultsSettings;
     }
 
-    public void setSettings(char[] settings) {
-        this.settings = settings;
+    public void setSettings(Integer[] settings) {
+        this.defaultsSettings = settings;
     }
 
-    public char getSpeedLevel() {
+    public int getSpeedLevel() {
         return speedLevel;
     }
 
-    public void setSpeedLevel(char speedLevel) {
+    public void setSpeedLevel(int speedLevel) {
         this.speedLevel = speedLevel;
     }
 
@@ -490,5 +507,56 @@ public class GameStateManager {
 
     public void setCursor(Image cursor) {
         this.cursor = cursor;
+    }
+
+    public void setLastPlayerWon(int playerNum) {
+        lastPlayerWon = playerNum;
+    }
+
+    public int getLastPlayerWon() {
+        return lastPlayerWon;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+        switch (mode){
+            case 0:
+                currentGameMode = GameMode.CHILL;
+                break;
+            case 1:
+                currentGameMode = GameMode.GLITCH;
+                break;
+            case 2:
+                currentGameMode = GameMode.UNKNOWN;
+                break;
+        }
+        changedMode = true;
+    }
+
+    public int getVecSize() {
+        return vecSize;
+    }
+
+    public void setVecSize(int vecSize) {
+        this.vecSize = vecSize;
+    }
+
+    public int getWidthStart() {
+        return widthStart;
+    }
+
+    public void setWidthStart(int widthStart) {
+        this.widthStart = widthStart;
+    }
+
+    public void restoreSettings(){
+        setSpeedLevel(defaultsSettings[0]);
+        setMode(defaultsSettings[1]);
+        setVecSize(defaultsSettings[2]);
+        setWidthStart(defaultsSettings[3]);
     }
 }

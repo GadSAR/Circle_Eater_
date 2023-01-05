@@ -12,25 +12,27 @@ public class DataServer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     Integer[] playerCoordinatesAndStatus = new Integer[4];
-    Integer[][] ballsCoordinatesAndStatus = new Integer[60][6];
+    Integer[][] ballsCoordinatesAndStatus;
     Boolean moveFlag;
 
-        public DataServer(GamePanel game) {
+    public DataServer(GamePanel gamePanel) {
 
-        moveFlag = game.getMoveFlag();
+        ballsCoordinatesAndStatus = new Integer[gamePanel.getGameStateManager().getVecSize()][6];
 
-        playerCoordinatesAndStatus[0] = game.getPlayer().getX();
-        playerCoordinatesAndStatus[1] = game.getPlayer().getY();
-        playerCoordinatesAndStatus[2] = game.getPlayer().getWidth();
-        playerCoordinatesAndStatus[3] = game.getPlayer().getAlive();
+        moveFlag = gamePanel.getMoveFlag();
+
+        playerCoordinatesAndStatus[0] = gamePanel.getPlayer().getX();
+        playerCoordinatesAndStatus[1] = gamePanel.getPlayer().getY();
+        playerCoordinatesAndStatus[2] = gamePanel.getPlayer().getWidth();
+        playerCoordinatesAndStatus[3] = gamePanel.getPlayer().getAlive();
 
         for (int i = 0; i < ballsCoordinatesAndStatus.length; i++) {
-            ballsCoordinatesAndStatus[i][0] = game.getVec()[i].getX();
-            ballsCoordinatesAndStatus[i][1] = game.getVec()[i].getY();
-            ballsCoordinatesAndStatus[i][2] = game.getVec()[i].getWidth();
-            ballsCoordinatesAndStatus[i][3] = game.getVec()[i].getAlive();
-            ballsCoordinatesAndStatus[i][4] = game.getVec()[i].getDirX();
-            ballsCoordinatesAndStatus[i][5] = game.getVec()[i].getDirY();
+            ballsCoordinatesAndStatus[i][0] = gamePanel.getVec()[i].getX();
+            ballsCoordinatesAndStatus[i][1] = gamePanel.getVec()[i].getY();
+            ballsCoordinatesAndStatus[i][2] = gamePanel.getVec()[i].getWidth();
+            ballsCoordinatesAndStatus[i][3] = gamePanel.getVec()[i].getAlive();
+            ballsCoordinatesAndStatus[i][4] = gamePanel.getVec()[i].getDirX();
+            ballsCoordinatesAndStatus[i][5] = gamePanel.getVec()[i].getDirY();
         }
     }
 
