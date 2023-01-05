@@ -69,21 +69,21 @@ public class GameMenu extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(bgMenu, 0, 0, getWidth(), getHeight(), null);
-        if (gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay)
+        if (gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay) {
             g.drawImage(onPlay, xPlay, yPlay, wPlay, hPlay, null);
-        else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
-        if (gameStateManager.getMouseX() > xLobby && gameStateManager.getMouseX() < xLobby + wLobby && gameStateManager.getMouseY() > yLobby && gameStateManager.getMouseY() < yLobby + hLobby)
+        } else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
+        if (gameStateManager.getMouseX() > xLobby && gameStateManager.getMouseX() < xLobby + wLobby && gameStateManager.getMouseY() > yLobby && gameStateManager.getMouseY() < yLobby + hLobby) {
             g.drawImage(onLobby, xLobby, yLobby, wLobby, hLobby, null);
-        else g.drawImage(Lobby, xLobby, yLobby, wLobby, hLobby, null);
-        if (gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings)
+        } else g.drawImage(Lobby, xLobby, yLobby, wLobby, hLobby, null);
+        if (gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings) {
             g.drawImage(onSettings, xSettings, ySettings, wSettings, hSettings, null);
-        else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
-        if (gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay)
+        } else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
+        if (gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay) {
             g.drawImage(onHowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
-        else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
-        if (gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit)
+        } else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
+        if (gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit) {
             g.drawImage(onExit, xExit, yExit, wExit, hExit, null);
-        else g.drawImage(Exit, xExit, yExit, wExit, hExit, null);
+        } else g.drawImage(Exit, xExit, yExit, wExit, hExit, null);
 
         gameStateManager.drawCursor(g);
 

@@ -18,7 +18,7 @@ public class Resource {
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
             UNKNOWNgoodBallPathSound, UNKNOWNbadBallPathSound, UNKNOWNgameBackgroundPathSound,
-            clickButtonPathSound, onButtonPathSound, backgroundPathSound;
+            clickButtonPathSound, backgroundPathSound;
 
     public Resource(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
@@ -89,7 +89,6 @@ public class Resource {
         UNKNOWNgameBackgroundPathSound = null;
 
         clickButtonPathSound = "src/Resources/Sounds/click.wav";
-        onButtonPathSound = "src/Resources/Sounds/onbutton.wav";
         backgroundPathSound = "src/Resources/Sounds/background.wav";
     }
 
@@ -580,14 +579,6 @@ public class Resource {
 
     public void setClickButtonPathSound(String clickButtonPathSound) {
         this.clickButtonPathSound = clickButtonPathSound;
-    }
-
-    public String getOnButtonPathSound() {
-        return onButtonPathSound;
-    }
-
-    public void setOnButtonPathSound(String onButtonPathSound) {
-        this.onButtonPathSound = onButtonPathSound;
     }
 
     public String getBackgroundPathSound() {

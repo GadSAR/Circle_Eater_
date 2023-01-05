@@ -6,14 +6,12 @@ import java.io.File;
 
 public class MusicWavPlayer {
     private String filename;
-    GameStateManager gSM;
     SourceDataLine auLine = null;
 
 
-    public MusicWavPlayer(String wavFile, GameStateManager gSM) {
+    public MusicWavPlayer(String wavFile) {
         wavFile = wavFile.replaceAll("%20", " "); //sometimes the URL encoded representation will be showed as "%20"
         filename = wavFile;
-        this.gSM = gSM;
     }
 
     public void play() {
@@ -34,7 +32,7 @@ public class MusicWavPlayer {
             // 128kB
             int EXTERNAL_BUFFER_SIZE = 128 * 1024;
             byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
-            while (nBytesRead != -1 && gSM.getCurrentGameState() == GameState.GAME) {
+            while (nBytesRead != -1) {
                 nBytesRead = audioInputStream.read(abData, 0, abData.length);
                 if (nBytesRead >= 0)
                     auLine.write(abData, 0, nBytesRead);

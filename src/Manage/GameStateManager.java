@@ -64,8 +64,13 @@ public class GameStateManager {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    if (currentGameState == GameState.GAME)
-                        setCurrentGameState(GameState.MENU);
+                    if (currentGameState == GameState.GAME) {
+                        try {
+                            gamePanel.gameOver(playerType);
+                        } catch (IOException | InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
                     else if (currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.SETTINGS)
@@ -119,6 +124,7 @@ public class GameStateManager {
             public void mouseClicked(MouseEvent e) {
                 mouseX = e.getX();
                 mouseY = e.getY();
+                clickSound();
 
                 if (GameState.MENU == currentGameState) {
 
@@ -209,7 +215,8 @@ public class GameStateManager {
     }
 
     private void setMusicController() {
-        musicController = new MusicController(this, resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getOnButtonPathSound(), resource.getBackgroundPathSound());
+        musicController = new MusicController(this, resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getBackgroundPathSound());
+        musicController.getBackground().setFlag(true);
     }
 
     private void setFrame() {
@@ -263,8 +270,10 @@ public class GameStateManager {
 
     private void setMenuPanel() {
         if (previousGameState != null) {
-            if (previousGameState == GameState.GAME)
+            if (previousGameState == GameState.GAME) {
+                musicController.getBackground().setFlag(true);
                 f.remove(gamePanel);
+            }
             else if (previousGameState == GameState.MULTIPLAYER)
                 f.remove(gameMultiplayer);
             else if (previousGameState == GameState.GAMEOVER)
@@ -285,6 +294,7 @@ public class GameStateManager {
     }
 
     public void removeGamePreviousPanels() {
+        musicController.getBackground().stopWav();
         if (previousGameState != null) {
             if (previousGameState == GameState.MENU)
                 f.remove(gameMenu);
@@ -302,6 +312,7 @@ public class GameStateManager {
     }
 
     private void setGameOverPanel() {
+        musicController.getBackground().setFlag(true);
         f.remove(gamePanel);
         gameOver = new GameOver(this);
         setNewPanel(gameOver);
@@ -329,6 +340,10 @@ public class GameStateManager {
                 cursorImg, new Point(0, 0), "blank cursor");
         // Set the blank cursor to the JPanel.
         f.setCursor(blankCursor);
+    }
+
+    public void clickSound(){
+        musicController.getClick().setFlag(true);
     }
 
     public GameState getCurrentGameState() {

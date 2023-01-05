@@ -10,7 +10,7 @@ public class MusicThread extends Thread {
 
     public MusicThread(String Path, GameStateManager gameStateManager, boolean loop) {
         this.gameStateManager = gameStateManager;
-        wav = new MusicWavPlayer(Path, gameStateManager);
+        wav = new MusicWavPlayer(Path);
         this.loop = loop;
         start();
     }
@@ -25,16 +25,17 @@ public class MusicThread extends Thread {
                     flag = false;
             }
 
-            if (gameStateManager.getCurrentGameState() != GameState.GAME) {
-                wav.stop();
-            }
-
             try {
                 Thread.sleep(0, 5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void stopWav(){
+        flag = false;
+        wav.stop();
     }
 
     public boolean isFlag() {

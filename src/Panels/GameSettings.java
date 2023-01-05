@@ -60,17 +60,17 @@ public class GameSettings extends JPanel {
 
         g.drawImage(bgSettings, 0, 0, getWidth(), getHeight(), null);
 
-        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate)
+        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate) {
             g.drawImage(onPlus, xCreate, yCreate, wCreate, hCreate, null);
-        else g.drawImage(Plus, xCreate, yCreate, wCreate, hCreate, null);
+        } else g.drawImage(Plus, xCreate, yCreate, wCreate, hCreate, null);
 
-        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin)
+        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin) {
             g.drawImage(onMinus, xJoin, yJoin, wJoin, hJoin, null);
-        else g.drawImage(Minus, xJoin, yJoin, wJoin, hJoin, null);
+        } else g.drawImage(Minus, xJoin, yJoin, wJoin, hJoin, null);
 
-        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack)
+        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack) {
             g.drawImage(onEmpty, xBack, yBack, WBack, hBack, null);
-        else g.drawImage(Empty, xBack, yBack, WBack, hBack, null);
+        } else g.drawImage(Empty, xBack, yBack, WBack, hBack, null);
 
         gameStateManager.drawCursor(g);
 

@@ -85,13 +85,13 @@ public class GameMultiplayer extends JPanel {
 
         g.drawImage(bgMultiplayer, 0, 0, getWidth(), getHeight(), null);
 
-        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate)
+        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate) {
             g.drawImage(onCreate, xCreate, yCreate, wCreate, hCreate, null);
-        else g.drawImage(Create, xCreate, yCreate, wCreate, hCreate, null);
+        } else g.drawImage(Create, xCreate, yCreate, wCreate, hCreate, null);
 
-        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin)
+        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin) {
             g.drawImage(onJoin, xJoin, yJoin, wJoin, hJoin, null);
-        else g.drawImage(Join, xJoin, yJoin, wJoin, hJoin, null);
+        } else g.drawImage(Join, xJoin, yJoin, wJoin, hJoin, null);
 
         if (gameStateManager.getMouseX() > xText - 40 && gameStateManager.getMouseX() < xText + wText + 40 && gameStateManager.getMouseY() > yText - 40 && gameStateManager.getMouseY() < yText + hText + 40) {
             // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
@@ -103,9 +103,9 @@ public class GameMultiplayer extends JPanel {
 
         }
 
-        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack)
+        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack) {
             g.drawImage(onBack, xBack, yBack, WBack, hBack, null);
-        else g.drawImage(Back, xBack, yBack, WBack, hBack, null);
+        } else g.drawImage(Back, xBack, yBack, WBack, hBack, null);
 
         gameStateManager.drawCursor(g);
 
