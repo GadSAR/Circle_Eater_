@@ -255,9 +255,9 @@ public class GamePanel extends JPanel {
     }
 
     public void gameOver(int playerNum) throws IOException, InterruptedException {
-        gameStateManager.getMusicController().getGame().stopWav();
         gameStateManager.setLastPlayerWon(playerNum);
         gameStateManager.setCurrentGameState(GameState.GAMEOVER);
+        gameStateManager.getMusicController().getGame().stopWav();
         if(gameStateManager.getPlayerType() == 1)
             gameStateManager.getServer().endServer();
         else if(gameStateManager.getPlayerType() == 2)

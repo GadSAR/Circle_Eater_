@@ -81,12 +81,12 @@ public class Resource {
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
         CHILLgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
-        GLITCHgoodBallPathSound = null;
-        GLITCHbadBallPathSound = null;
+        GLITCHgoodBallPathSound = "src/Resources/Sounds/goodGlitch.wav";;
+        GLITCHbadBallPathSound = "src/Resources/Sounds/badGlitch.wav";;
         GLITCHgameBackgroundPathSound = null;
         UNKNOWNgoodBallPathSound = null;
         UNKNOWNbadBallPathSound = null;
-        UNKNOWNgameBackgroundPathSound = null;
+        UNKNOWNgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
 
         clickButtonPathSound = "src/Resources/Sounds/click.wav";
         backgroundPathSound = "src/Resources/Sounds/background.wav";

@@ -64,8 +64,7 @@ public class Client extends Thread {
             try {
                 outputStream.writeObject(dataClient);
                 System.out.println("Sent data to server: " + dataClient.playerCoordinatesAndStatus[0] + ", " + dataClient.playerCoordinatesAndStatus[1] + ", " + dataClient.playerCoordinatesAndStatus[2] + ", " + dataClient.playerCoordinatesAndStatus[3]);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException ignored) {
             }
 
             // read a Data object from the server
@@ -76,13 +75,12 @@ public class Client extends Thread {
             gameStateManager.getGamePanel().setPlayer2CoordinatesAndStatus(dataServer.playerCoordinatesAndStatus);
             gameStateManager.getGamePanel().setBallsCoordinatesAndStatus(dataServer.ballsCoordinatesAndStatus);
             gameStateManager.getGamePanel().setMoveFlag(dataServer.moveFlag);
-            } catch (IOException | ClassNotFoundException | InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (IOException | ClassNotFoundException | InterruptedException ignored) {
             }
 
             // sleep
             try {
-                sleep(10);
+                sleep(5);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

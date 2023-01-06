@@ -66,7 +66,7 @@ public class GameStateManager {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     if (currentGameState == GameState.GAME) {
                         try {
-                            gamePanel.gameOver(playerType);
+                            gamePanel.gameOver(3);
                         } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }

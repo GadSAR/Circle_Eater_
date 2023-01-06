@@ -57,15 +57,13 @@ public class BallPlayer extends Thread {
     }
 
     private void checkWin() throws IOException, InterruptedException {
-        if (panel.getGameStateManager().getPlayerType() == 0) {
             int counter = 0;
             for (int i = 0; i < panel.getVec().length; i++) {
                 counter += panel.getVec()[i].getAlive();
             }
             if(counter == 0){
-                panel.gameOver(0);
+                panel.gameOver(panel.getGameStateManager().getPlayerType());
             }
-        }
     }
 
     private void checkpause() {
