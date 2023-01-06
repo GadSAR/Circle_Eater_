@@ -19,7 +19,7 @@ public class GameStateManager {
     private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
-    private Integer[] defaultsSettings = {2,0,60,80};
+    private Integer[] defaultsSettings = {2, 0, 60, 80};
     private int speedLevel = defaultsSettings[0], mode = defaultsSettings[1], vecSize = defaultsSettings[2], widthStart = defaultsSettings[3];
     private Resource resource;
     private int mouseX, mouseY;
@@ -47,10 +47,11 @@ public class GameStateManager {
         setFps();
         setMusicController();
         setListeners();
+        musicController.getBackground().setFlag(true);
     }
 
     private void setGameResources() {
-        currentGameMode = GameMode.CHILL;
+        setMode(mode);
         resource = new Resource(this);
         cursor = (new ImageIcon(resource.getCursorImg())).getImage();
     }
@@ -70,8 +71,7 @@ public class GameStateManager {
                         } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
-                    }
-                    else if (currentGameState == GameState.GAMEOVER)
+                    } else if (currentGameState == GameState.GAMEOVER)
                         setCurrentGameState(GameState.MENU);
                     else if (currentGameState == GameState.SETTINGS)
                         setCurrentGameState(GameState.MENU);
@@ -168,21 +168,19 @@ public class GameStateManager {
                 } else if (GameState.GAMEOVER == currentGameState) {
 
                     if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
-                        if(playerType == 1) {
+                        if (playerType == 1) {
                             try {
                                 newServer();
                             } catch (IOException | InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
-                        }
-                        else if(playerType == 2) {
+                        } else if (playerType == 2) {
                             try {
                                 newClient(gameMultiplayer.getJoinIpAddress().getText());
                             } catch (Exception ex) {
                                 throw new RuntimeException(ex);
                             }
-                        }
-                        else
+                        } else
                             setCurrentGameState(GameState.GAME);
                     }
                     if (mouseX > gameOver.getxMenu() && mouseX < gameOver.getxMenu() + gameOver.getwMenu() && mouseY > gameOver.getyMenu() && mouseY < gameOver.getyMenu() + gameOver.gethMenu())
@@ -214,7 +212,7 @@ public class GameStateManager {
         client.start();
     }
 
-    private void setMusicController() {
+    public void setMusicController() {
         musicController = new MusicController(this, resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getBackgroundPathSound());
         musicController.getBackground().setFlag(true);
     }
@@ -273,8 +271,7 @@ public class GameStateManager {
             if (previousGameState == GameState.GAME) {
                 musicController.getBackground().setFlag(true);
                 f.remove(gamePanel);
-            }
-            else if (previousGameState == GameState.MULTIPLAYER)
+            } else if (previousGameState == GameState.MULTIPLAYER)
                 f.remove(gameMultiplayer);
             else if (previousGameState == GameState.GAMEOVER)
                 f.remove(gameOver);
@@ -342,7 +339,7 @@ public class GameStateManager {
         f.setCursor(blankCursor);
     }
 
-    public void clickSound(){
+    public void clickSound() {
         musicController.getClick().setFlag(true);
     }
 
@@ -538,7 +535,7 @@ public class GameStateManager {
 
     public void setMode(int mode) {
         this.mode = mode;
-        switch (mode){
+        switch (mode) {
             case 0:
                 currentGameMode = GameMode.CHILL;
                 break;
@@ -568,7 +565,7 @@ public class GameStateManager {
         this.widthStart = widthStart;
     }
 
-    public void restoreSettings(){
+    public void restoreSettings() {
         setSpeedLevel(defaultsSettings[0]);
         setMode(defaultsSettings[1]);
         setVecSize(defaultsSettings[2]);

@@ -23,16 +23,16 @@ public class Resource {
     public Resource(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         CHILLgameBackgroundImg = "src/Resources/pictures/original.gif";
-        GLITCHgameBackgroundImg = null;
+        GLITCHgameBackgroundImg = "src/Resources/pictures/gameGlitch.gif";
         UNKNOWNgameBackgroundImg = null;
         CHILLgoodBallImg = "src/Resources/pictures/blue.gif";
         CHILLbadBallImg = "src/Resources/pictures/red.gif";
         CHILLplayer1BallImg = "src/Resources/pictures/pause.gif";
         CHILLplayer2BallImg = "src/Resources/pictures/enemy.png";
-        GLITCHgoodBallImg = null;
-        GLITCHbadBallImg = null;
-        GLITCHplayer1BallImg = null;
-        GLITCHplayer2BallImg = null;
+        GLITCHgoodBallImg = "src/Resources/pictures/power.png";
+        GLITCHbadBallImg = "src/Resources/pictures/red.gif";
+        GLITCHplayer1BallImg = "src/Resources/pictures/ball.png";
+        GLITCHplayer2BallImg = "src/Resources/pictures/enemy.png";
         UNKNOWNgoodBallImg = null;
         UNKNOWNbadBallImg = null;
         UNKNOWNplayer1BallImg = null;
@@ -83,10 +83,10 @@ public class Resource {
         CHILLgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
         GLITCHgoodBallPathSound = "src/Resources/Sounds/goodGlitch.wav";;
         GLITCHbadBallPathSound = "src/Resources/Sounds/badGlitch.wav";;
-        GLITCHgameBackgroundPathSound = null;
+        GLITCHgameBackgroundPathSound = "src/Resources/Sounds/groove.wav";
         UNKNOWNgoodBallPathSound = null;
         UNKNOWNbadBallPathSound = null;
-        UNKNOWNgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
+        UNKNOWNgameBackgroundPathSound = "src/Resources/Sounds/groove.wav";
 
         clickButtonPathSound = "src/Resources/Sounds/click.wav";
         backgroundPathSound = "src/Resources/Sounds/background.wav";

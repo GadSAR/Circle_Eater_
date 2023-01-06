@@ -33,6 +33,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setMusic() {
+        gameStateManager.setMusicController();
         gameStateManager.getMusicController().getGame().setFlag(true);
     }
 
