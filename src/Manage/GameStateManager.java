@@ -19,7 +19,7 @@ public class GameStateManager {
     private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
-    private Integer[] defaultsSettings = {2,0,60,30};
+    private Integer[] defaultsSettings = {2,0,60,80};
     private int speedLevel = defaultsSettings[0], mode = defaultsSettings[1], vecSize = defaultsSettings[2], widthStart = defaultsSettings[3];
     private Resource resource;
     private int mouseX, mouseY;

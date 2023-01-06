@@ -1,7 +1,6 @@
 package Panels;
 
 import Manage.*;
-import Multiplayer.Server;
 import Objects.*;
 
 import java.awt.*;
@@ -223,7 +222,7 @@ public class GamePanel extends JPanel {
         moveFlag = false;
     }
 
-    public void setBallsCoordinatesAndStatus(Integer[][] coordinatesAndStatus) {
+    public void setBallsCoordinatesAndStatus(Short[][] coordinatesAndStatus) {
 
         for(int i = 0; i < coordinatesAndStatus.length; i++){
             vec[i].setX(coordinatesAndStatus[i][0]);
@@ -236,7 +235,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void setBallsStatus(Integer[] ballsStatus) {
+    public void setBallsStatus(Short[] ballsStatus) {
 
         for(int i = 0; i < ballsStatus.length; i++){
             if(vec[i].isBotAlive())
@@ -244,7 +243,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void setPlayer2CoordinatesAndStatus(Integer[] coordinatesAndStatus) throws IOException, InterruptedException {
+    public void setPlayer2CoordinatesAndStatus(Short[] coordinatesAndStatus) throws IOException, InterruptedException {
 
         player2.setX(coordinatesAndStatus[0]);
         player2.setY(coordinatesAndStatus[1]);

@@ -80,7 +80,7 @@ public class Client extends Thread {
 
             // sleep
             try {
-                sleep(5);
+                sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

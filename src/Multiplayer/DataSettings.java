@@ -11,14 +11,14 @@ public class DataSettings implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    Integer[] settings = new Integer[4];
+    Short[] settings = new Short[4];
 
     public DataSettings(GameStateManager gameStateManager) {
 
-        settings[0] = gameStateManager.getSpeedLevel();
-        settings[1] = gameStateManager.getMode();
-        settings[2] = gameStateManager.getVecSize();
-        settings[3] = gameStateManager.getWidthStart();
+        settings[0] = (short) gameStateManager.getSpeedLevel();
+        settings[1] = (short) gameStateManager.getMode();
+        settings[2] = (short) gameStateManager.getVecSize();
+        settings[3] = (short) gameStateManager.getWidthStart();
 
     }
 }
