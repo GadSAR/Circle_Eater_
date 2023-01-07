@@ -13,7 +13,7 @@ public class Resource {
             cursorImg, cursorLuImg, cursorUImg, cursorRuImg, cursorLImg, cursorCImg, cursorRImg, cursorLdImg, cursorDImg, cursorRdImg,
             playButton, onPlayButton, howToPlayButton, onHowToPlayButton, exitButton, onExitButton, settingsButton, onSettingsButton,
             lobbyButton, onLobbyButton, creatButton, onCreatButton, joinButton, onJoinButton, backButton, onBackButton,
-            replayButton, onReplayButton, menuButton, onMenuButton, gameOverLost, gameOverWon;
+            replayButton, onReplayButton, menuButton, onMenuButton, gameOverLost, gameOverWon, plusButton, minusButton;
 
     private String CHILLgoodBallPathSound, CHILLbadBallPathSound, CHILLgameBackgroundPathSound,
             GLITCHgoodBallPathSound, GLITCHbadBallPathSound, GLITCHgameBackgroundPathSound,
@@ -24,19 +24,19 @@ public class Resource {
         this.gameStateManager = gameStateManager;
         CHILLgameBackgroundImg = "src/Resources/pictures/original.gif";
         GLITCHgameBackgroundImg = "src/Resources/pictures/gameGlitch.gif";
-        UNKNOWNgameBackgroundImg = null;
+        UNKNOWNgameBackgroundImg = "src/Resources/pictures/backgroundUnknown.gif";
         CHILLgoodBallImg = "src/Resources/pictures/blue.gif";
         CHILLbadBallImg = "src/Resources/pictures/red.gif";
         CHILLplayer1BallImg = "src/Resources/pictures/pause.gif";
         CHILLplayer2BallImg = "src/Resources/pictures/enemy.png";
         GLITCHgoodBallImg = "src/Resources/pictures/power.png";
-        GLITCHbadBallImg = "src/Resources/pictures/red.gif";
+        GLITCHbadBallImg = "src/Resources/pictures/red.png";
         GLITCHplayer1BallImg = "src/Resources/pictures/ball.png";
         GLITCHplayer2BallImg = "src/Resources/pictures/enemy.png";
-        UNKNOWNgoodBallImg = null;
-        UNKNOWNbadBallImg = null;
-        UNKNOWNplayer1BallImg = null;
-        UNKNOWNplayer2BallImg = null;
+        UNKNOWNgoodBallImg = "src/Resources/pictures/greenUnknown.png";
+        UNKNOWNbadBallImg = "src/Resources/pictures/redUnknown.png";
+        UNKNOWNplayer1BallImg = "src/Resources/pictures/playerUnknown.gif";
+        UNKNOWNplayer2BallImg = "src/Resources/pictures/enemy.png";
         gameMenuBackgroundImg = "src/Resources/pictures/bgMenu.gif";
         gameOverBackgroundImg = "src/Resources/pictures/space.png";
         gameSettingsBackgroundImg = "src/Resources/pictures/original.gif";
@@ -44,7 +44,6 @@ public class Resource {
         pauseImg = "src/Resources/pictures/pauseScreen.png";
 
         cursorImg = "src/Resources/pictures/cursor.gif";
-
         cursorLuImg = "src/Resources/pictures/lu.png";
         cursorUImg = "src/Resources/pictures/u.png";
         cursorRuImg = "src/Resources/pictures/ru.png";
@@ -77,6 +76,8 @@ public class Resource {
         onMenuButton = "src/Resources/pictures/onmenuButton.png";
         gameOverLost = "src/Resources/pictures/gameOverLost.png";
         gameOverWon = "src/Resources/pictures/gameOverWon.png";
+        plusButton = "src/Resources/pictures/plus.png";
+        minusButton = "src/Resources/pictures/minus.png";
 
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
@@ -84,12 +85,13 @@ public class Resource {
         GLITCHgoodBallPathSound = "src/Resources/Sounds/goodGlitch.wav";;
         GLITCHbadBallPathSound = "src/Resources/Sounds/badGlitch.wav";;
         GLITCHgameBackgroundPathSound = "src/Resources/Sounds/groove.wav";
-        UNKNOWNgoodBallPathSound = null;
-        UNKNOWNbadBallPathSound = null;
-        UNKNOWNgameBackgroundPathSound = "src/Resources/Sounds/groove.wav";
+        UNKNOWNgoodBallPathSound = "src/Resources/Sounds/goodUnknown.wav";
+        UNKNOWNbadBallPathSound = "src/Resources/Sounds/badUnknown.wav";
+        UNKNOWNgameBackgroundPathSound = "src/Resources/Sounds/musicUnknown.wav";
 
         clickButtonPathSound = "src/Resources/Sounds/click.wav";
         backgroundPathSound = "src/Resources/Sounds/background.wav";
+
     }
 
 
@@ -685,4 +687,19 @@ public class Resource {
         this.gameOverWon = gameOverWon;
     }
 
+    public String getPlusButton() {
+        return plusButton;
+    }
+
+    public void setPlusButton(String plusButton) {
+        this.plusButton = plusButton;
+    }
+
+    public String getMinusButton() {
+        return minusButton;
+    }
+
+    public void setMinusButton(String minusButton) {
+        this.minusButton = minusButton;
+    }
 }

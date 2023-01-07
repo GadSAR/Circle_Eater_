@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client extends Thread {
+
+    private int[] previousSettings;
     private String HOST = "localhost";
     static final int PORT = Server.PORT;
     Socket socket;
@@ -16,8 +18,11 @@ public class Client extends Thread {
     ObjectOutputStream outputStream;
     GameStateManager gameStateManager;
 
+
     public Client(GameStateManager gameStateManager, String ipAddress) throws Exception {
         this.gameStateManager = gameStateManager;
+        int speed = gameStateManager.getSpeedLevel(), mode = gameStateManager.getMode(), vecSize = gameStateManager.getVecSize(), playersSize = gameStateManager.getWidthStart();
+        previousSettings = new int[]{speed, mode, vecSize, playersSize};
         HOST = ipAddress;
         clientConnection();
     }
@@ -72,9 +77,9 @@ public class Client extends Thread {
             try {
                 dataServer = (DataServer) inputStream.readObject();
                 System.out.println("Received data from server: " + dataServer.playerCoordinatesAndStatus[0] + ", " + dataServer.playerCoordinatesAndStatus[1] + ", " + dataServer.playerCoordinatesAndStatus[2] + ", " + dataServer.playerCoordinatesAndStatus[3] + ", " + dataServer.moveFlag.toString());
-            gameStateManager.getGamePanel().setPlayer2CoordinatesAndStatus(dataServer.playerCoordinatesAndStatus);
-            gameStateManager.getGamePanel().setBallsCoordinatesAndStatus(dataServer.ballsCoordinatesAndStatus);
-            gameStateManager.getGamePanel().setMoveFlag(dataServer.moveFlag);
+                gameStateManager.getGamePanel().setPlayer2CoordinatesAndStatus(dataServer.playerCoordinatesAndStatus);
+                gameStateManager.getGamePanel().setBallsCoordinatesAndStatus(dataServer.ballsCoordinatesAndStatus);
+                gameStateManager.getGamePanel().setMoveFlag(dataServer.moveFlag);
             } catch (IOException | ClassNotFoundException | InterruptedException ignored) {
             }
 
@@ -88,6 +93,11 @@ public class Client extends Thread {
     }
 
     public void endClient() throws IOException, InterruptedException {
+        gameStateManager.getGamePanel().getPlayer().setPlayerAlive(false);
+        gameStateManager.setSpeedLevel(previousSettings[0]);
+        gameStateManager.setMode(previousSettings[1]);
+        gameStateManager.setVecSize(previousSettings[2]);
+        gameStateManager.setWidthStart(previousSettings[3]);
         sleep(100);
         socket.close();
     }

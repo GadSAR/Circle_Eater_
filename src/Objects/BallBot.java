@@ -91,7 +91,7 @@ public class BallBot extends Thread {
             if (panel.getPlayer().getWidth() <= width) {
                 if (panel.getPlayer().getWidth() < 25) {
                     panel.getPlayer().setPlayerAlive(false);
-                    panel.gameOver(3);       ///game over
+                    panel.gameOver(-1);       ///game over
 
                 }
                 panel.getPlayer().setWidth(panel.getPlayer().getWidth() - 8);        ///decrease size

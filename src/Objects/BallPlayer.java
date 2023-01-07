@@ -62,7 +62,14 @@ public class BallPlayer extends Thread {
                 counter += panel.getVec()[i].getAlive();
             }
             if(counter == 0){
-                panel.gameOver(panel.getGameStateManager().getPlayerType());
+                if (panel.getGameStateManager().getPlayerType() == 0)
+                    panel.gameOver(0);
+                else {
+                    if(panel.getPlayer().width > panel.getPlayer2().width)
+                        panel.gameOver(panel.getGameStateManager().getPlayerType());
+                    else
+                        panel.gameOver(-1);
+                }
             }
     }
 

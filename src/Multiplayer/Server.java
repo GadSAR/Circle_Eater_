@@ -90,6 +90,7 @@ public class Server extends Thread {
     }
 
     public void endServer() throws IOException, InterruptedException {
+        gameStateManager.getGamePanel().getPlayer().setPlayerAlive(false);
         sleep(100);
         socket.close();
     }

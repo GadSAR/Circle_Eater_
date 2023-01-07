@@ -19,7 +19,7 @@ public class GameStateManager {
     private MusicController musicController;
     private Fps fps;
     private GameMode currentGameMode;
-    private Integer[] defaultsSettings = {2, 1, 60, 30};
+    private Integer[] defaultsSettings = {2, 0, 60, 30};
     private int speedLevel = defaultsSettings[0], mode = defaultsSettings[1], vecSize = defaultsSettings[2], widthStart = defaultsSettings[3];
     private Resource resource;
     private int mouseX, mouseY;
@@ -67,7 +67,7 @@ public class GameStateManager {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     if (currentGameState == GameState.GAME) {
                         try {
-                            gamePanel.gameOver(3);
+                            gamePanel.gameOver(-1);
                         } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -141,8 +141,27 @@ public class GameStateManager {
 
                 } else if (GameState.SETTINGS == currentGameState) {
 
-                    if (mouseX > gameSettings.getxBack() && mouseX < gameSettings.getxBack() + gameSettings.getWBack() && mouseY > gameSettings.getyBack() && mouseY < gameSettings.getyBack() + gameSettings.gethBack())
+                    if(mouseX > gameSettings.getxRestore() && mouseX < gameSettings.getxRestore() + gameSettings.getwRestore() && mouseY > gameSettings.getyRestore() && mouseY < gameSettings.getyRestore() + gameSettings.gethRestore())
+                        gameSettings.restoreDefaultSettings();
+                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText1() && mouseY < gameSettings.getyText1() + gameSettings.gethPlusMinus())
+                        gameSettings.increaseSpeed();
+                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText1() && mouseY < gameSettings.getyText1() + gameSettings.gethPlusMinus())
+                        gameSettings.decreaseSpeed();
+                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText2() && mouseY < gameSettings.getyText2() + gameSettings.gethPlusMinus())
+                        gameSettings.increaseMode();
+                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText2() && mouseY < gameSettings.getyText2() + gameSettings.gethPlusMinus())
+                        gameSettings.decreaseMode();
+                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText3() && mouseY < gameSettings.getyText3() + gameSettings.gethPlusMinus())
+                        gameSettings.increaseVecSize();
+                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText3() && mouseY < gameSettings.getyText3() + gameSettings.gethPlusMinus())
+                        gameSettings.decreaseVecSize();
+                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText4() && mouseY < gameSettings.getyText4() + gameSettings.gethPlusMinus())
+                        gameSettings.increaseWidthStart();
+                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText4() && mouseY < gameSettings.getyText4() + gameSettings.gethPlusMinus())
+                        gameSettings.decreaseWidthStart();
+                    else if (mouseX > gameSettings.getxBack() && mouseX < gameSettings.getxBack() + gameSettings.getwBack() && mouseY > gameSettings.getyBack() && mouseY < gameSettings.getyBack() + gameSettings.gethBack())
                         setCurrentGameState(GameState.MENU);
+
 
                 } else if (GameState.MULTIPLAYER == currentGameState) {
 

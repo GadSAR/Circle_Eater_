@@ -34,6 +34,7 @@ public class GamePanel extends JPanel {
 
     private void setMusic() {
         gameStateManager.setMusicController();
+        gameStateManager.getMusicController().getBackground().setFlag(false);
         gameStateManager.getMusicController().getGame().setFlag(true);
     }
 
@@ -251,7 +252,7 @@ public class GamePanel extends JPanel {
         player2.setWidth(coordinatesAndStatus[2]);
         player2.setAlive(coordinatesAndStatus[3]);
         if(!player2.isPlayerAlive())
-            gameOver(3);
+            gameOver(gameStateManager.getPlayerType());
     }
 
     public void gameOver(int playerNum) throws IOException, InterruptedException {
