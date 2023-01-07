@@ -10,8 +10,7 @@ public class GameMenu extends JPanel {
     private GameStateManager gameStateManager;
 
     private Image bgMenu, Play, onPlay, Lobby, onLobby, Settings, onSettings, HowToPlay, onHowToPlay, Exit, onExit;
-    private int xMiddleScreen, yMiddleScreen,
-            wPlay, hPlay, xPlay, yPlay,
+    private int wPlay, hPlay, xPlay, yPlay,
             wLobby, hLobby, xLobby, yLobby,
             wSettings, hSettings, xSettings, ySettings,
             wHowToPlay, hHowToPlay, xHowToPlay, yHowToPlay,
@@ -36,8 +35,8 @@ public class GameMenu extends JPanel {
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
 
-        xMiddleScreen = tk.getScreenSize().width / 2;
-        yMiddleScreen = tk.getScreenSize().height / 2;
+        int xMiddleScreen = tk.getScreenSize().width / 2;
+        int yMiddleScreen = tk.getScreenSize().height / 2;
 
         wPlay = 240;
         hPlay = 120;
@@ -89,275 +88,68 @@ public class GameMenu extends JPanel {
 
     }
 
-    public GameStateManager getGameStateManager() {
-        return gameStateManager;
-    }
-
-    public void setGameStateManager(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
-    }
-
-    public Image getBgMenu() {
-        return bgMenu;
-    }
-
-    public void setBgMenu(Image bgMenu) {
-        this.bgMenu = bgMenu;
-    }
-
-    public Image getPlay() {
-        return Play;
-    }
-
-    public void setPlay(Image play) {
-        Play = play;
-    }
-
-    public Image getOnPlay() {
-        return onPlay;
-    }
-
-    public void setOnPlay(Image onPlay) {
-        this.onPlay = onPlay;
-    }
-
-    public Image getSettings() {
-        return Settings;
-    }
-
-    public void setSettings(Image settings) {
-        Settings = settings;
-    }
-
-    public Image getOnSettings() {
-        return onSettings;
-    }
-
-    public void setOnSettings(Image onSettings) {
-        this.onSettings = onSettings;
-    }
-
-    public Image getHowToPlay() {
-        return HowToPlay;
-    }
-
-    public void setHowToPlay(Image howToPlay) {
-        HowToPlay = howToPlay;
-    }
-
-    public Image getOnHowToPlay() {
-        return onHowToPlay;
-    }
-
-    public void setOnHowToPlay(Image onHowToPlay) {
-        this.onHowToPlay = onHowToPlay;
-    }
-
-    public Image getExit() {
-        return Exit;
-    }
-
-    public void setExit(Image exit) {
-        Exit = exit;
-    }
-
-    public Image getOnExit() {
-        return onExit;
-    }
-
-    public void setOnExit(Image onExit) {
-        this.onExit = onExit;
-    }
-
-    public int getxMiddleScreen() {
-        return xMiddleScreen;
-    }
-
-    public void setxMiddleScreen(int xMiddleScreen) {
-        this.xMiddleScreen = xMiddleScreen;
-    }
-
-    public int getyMiddleScreen() {
-        return yMiddleScreen;
-    }
-
-    public void setyMiddleScreen(int yMiddleScreen) {
-        this.yMiddleScreen = yMiddleScreen;
-    }
-
     public int getwPlay() {
         return wPlay;
-    }
-
-    public void setwPlay(int wPlay) {
-        this.wPlay = wPlay;
     }
 
     public int gethPlay() {
         return hPlay;
     }
 
-    public void sethPlay(int hPlay) {
-        this.hPlay = hPlay;
-    }
-
     public int getxPlay() {
         return xPlay;
-    }
-
-    public void setxPlay(int xPlay) {
-        this.xPlay = xPlay;
     }
 
     public int getyPlay() {
         return yPlay;
     }
 
-    public void setyPlay(int yPlay) {
-        this.yPlay = yPlay;
-    }
-
     public int getwSettings() {
         return wSettings;
-    }
-
-    public void setwSettings(int wSettings) {
-        this.wSettings = wSettings;
     }
 
     public int gethSettings() {
         return hSettings;
     }
 
-    public void sethSettings(int hSettings) {
-        this.hSettings = hSettings;
-    }
-
     public int getxSettings() {
         return xSettings;
-    }
-
-    public void setxSettings(int xSettings) {
-        this.xSettings = xSettings;
     }
 
     public int getySettings() {
         return ySettings;
     }
 
-    public void setySettings(int ySettings) {
-        this.ySettings = ySettings;
-    }
-
-    public int getwHowToPlay() {
-        return wHowToPlay;
-    }
-
-    public void setwHowToPlay(int wHowToPlay) {
-        this.wHowToPlay = wHowToPlay;
-    }
-
-    public int gethHowToPlay() {
-        return hHowToPlay;
-    }
-
-    public void sethHowToPlay(int hHowToPlay) {
-        this.hHowToPlay = hHowToPlay;
-    }
-
-    public int getxHowToPlay() {
-        return xHowToPlay;
-    }
-
-    public void setxHowToPlay(int xHowToPlay) {
-        this.xHowToPlay = xHowToPlay;
-    }
-
-    public int getyHowToPlay() {
-        return yHowToPlay;
-    }
-
-    public void setyHowToPlay(int yHowToPlay) {
-        this.yHowToPlay = yHowToPlay;
-    }
-
     public int getwExit() {
         return wExit;
-    }
-
-    public void setwExit(int wExit) {
-        this.wExit = wExit;
     }
 
     public int gethExit() {
         return hExit;
     }
 
-    public void sethExit(int hExit) {
-        this.hExit = hExit;
-    }
-
     public int getxExit() {
         return xExit;
-    }
-
-    public void setxExit(int xExit) {
-        this.xExit = xExit;
     }
 
     public int getyExit() {
         return yExit;
     }
 
-    public void setyExit(int yExit) {
-        this.yExit = yExit;
-    }
-
-    public Image getLobby() {
-        return Lobby;
-    }
-
-    public void setLobby(Image lobby) {
-        Lobby = lobby;
-    }
-
-    public Image getOnLobby() {
-        return onLobby;
-    }
-
-    public void setOnLobby(Image onLobby) {
-        this.onLobby = onLobby;
-    }
-
     public int getwLobby() {
         return wLobby;
-    }
-
-    public void setwLobby(int wLobby) {
-        this.wLobby = wLobby;
     }
 
     public int gethLobby() {
         return hLobby;
     }
 
-    public void sethLobby(int hLobby) {
-        this.hLobby = hLobby;
-    }
-
     public int getxLobby() {
         return xLobby;
-    }
-
-    public void setxLobby(int xLobby) {
-        this.xLobby = xLobby;
     }
 
     public int getyLobby() {
         return yLobby;
     }
 
-    public void setyLobby(int yLobby) {
-        this.yLobby = yLobby;
-    }
 }

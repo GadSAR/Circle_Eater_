@@ -17,7 +17,6 @@ public class BallBot extends Thread {
     double delay;
     private boolean alive;
     private int dirX, dirY;
-    private Random random = new Random();
     private Image ballImage;
     private ImageIcon goodBall, badBall;
 
@@ -28,6 +27,7 @@ public class BallBot extends Thread {
         this.x = x;
         this.y = y;
         this.width = width;
+        Random random = new Random();
         dirX = random.nextBoolean() ? 1 : -1;
         dirY = random.nextBoolean() ? 1 : -1;
         alive = true;
@@ -46,7 +46,7 @@ public class BallBot extends Thread {
             checkpause();
             update();
             try {
-                if (interaction())
+                if (interaction() || !alive)
                     break;
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
@@ -207,11 +207,6 @@ public class BallBot extends Thread {
         return alive;
     }
 
-    public void setBotAlive(Boolean alive) {
-        this.alive = alive;
-    }
-
-
     public int getDirX() {
         return dirX;
     }
@@ -226,54 +221,6 @@ public class BallBot extends Thread {
 
     public void setDirY(int dirY) {
         this.dirY = dirY;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-
-    public Image getBallImage() {
-        return ballImage;
-    }
-
-    public void setBallImage(Image ballImage) {
-        this.ballImage = ballImage;
-    }
-
-    public ImageIcon getGoodBall() {
-        return goodBall;
-    }
-
-    public void setGoodBall(ImageIcon goodBall) {
-        this.goodBall = goodBall;
-    }
-
-    public ImageIcon getBadBall() {
-        return badBall;
-    }
-
-    public void setBadBall(ImageIcon badBall) {
-        this.badBall = badBall;
-    }
-
-    public GamePanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(GamePanel panel) {
-        this.panel = panel;
-    }
-
-    public int getPreventionDistance() {
-        return preventionDistance;
-    }
-
-    public void setPreventionDistance(int preventionDistance) {
-        this.preventionDistance = preventionDistance;
     }
 
 }

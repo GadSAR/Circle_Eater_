@@ -10,8 +10,7 @@ public class GameOver extends JPanel {
     private GameStateManager gameStateManager;
 
     private Image bgOver, Replay, onReplay, Menu, onMenu, gameOverWon, gameOverLose;
-    private int xMiddleScreen, yMiddleScreen,
-            wReplay, hReplay, xReplay, yReplay,
+    private int wReplay, hReplay, xReplay, yReplay,
             wMenu, hMenu, xMenu, yMenu,
             wGameOver, hGameOver, xGameOver, yGameOver;
 
@@ -19,7 +18,7 @@ public class GameOver extends JPanel {
     public GameOver(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
-        bgOver = (new ImageIcon(gameStateManager.getResource().getGameMenuBackgroundImg())).getImage();
+        bgOver = (new ImageIcon(gameStateManager.getResource().getGameOverBackgroundImg())).getImage();
         Replay = (new ImageIcon(gameStateManager.getResource().getReplayButton())).getImage();
         onReplay = (new ImageIcon(gameStateManager.getResource().getOnReplayButton())).getImage();
         Menu = (new ImageIcon(gameStateManager.getResource().getMenuButton())).getImage();
@@ -29,8 +28,8 @@ public class GameOver extends JPanel {
 
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
-        xMiddleScreen = tk.getScreenSize().width / 2;
-        yMiddleScreen = tk.getScreenSize().height / 2;
+        int xMiddleScreen = tk.getScreenSize().width / 2;
+        int yMiddleScreen = tk.getScreenSize().height / 2;
 
         wGameOver = 380;
         hGameOver = 190;
@@ -68,132 +67,36 @@ public class GameOver extends JPanel {
 
     }
 
-    public GameStateManager getGameStateManager() {
-        return gameStateManager;
-    }
-
-    public void setGameStateManager(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
-    }
-
-    public Image getBgOver() {
-        return bgOver;
-    }
-
-    public void setBgOver(Image bgOver) {
-        this.bgOver = bgOver;
-    }
-
-    public Image getReplay() {
-        return Replay;
-    }
-
-    public void setReplay(Image replay) {
-        Replay = replay;
-    }
-
-    public Image getOnReplay() {
-        return onReplay;
-    }
-
-    public void setOnReplay(Image onReplay) {
-        this.onReplay = onReplay;
-    }
-
-    public Image getMenu() {
-        return Menu;
-    }
-
-    public void setMenu(Image menu) {
-        Menu = menu;
-    }
-
-    public Image getOnMenu() {
-        return onMenu;
-    }
-
-    public void setOnMenu(Image onMenu) {
-        this.onMenu = onMenu;
-    }
-
-    public int getxMiddleScreen() {
-        return xMiddleScreen;
-    }
-
-    public void setxMiddleScreen(int xMiddleScreen) {
-        this.xMiddleScreen = xMiddleScreen;
-    }
-
-    public int getyMiddleScreen() {
-        return yMiddleScreen;
-    }
-
-    public void setyMiddleScreen(int yMiddleScreen) {
-        this.yMiddleScreen = yMiddleScreen;
-    }
-
     public int getwReplay() {
         return wReplay;
-    }
-
-    public void setwReplay(int wReplay) {
-        this.wReplay = wReplay;
     }
 
     public int gethReplay() {
         return hReplay;
     }
 
-    public void sethReplay(int hReplay) {
-        this.hReplay = hReplay;
-    }
-
     public int getxReplay() {
         return xReplay;
-    }
-
-    public void setxReplay(int xReplay) {
-        this.xReplay = xReplay;
     }
 
     public int getyReplay() {
         return yReplay;
     }
 
-    public void setyReplay(int yReplay) {
-        this.yReplay = yReplay;
-    }
-
     public int getwMenu() {
         return wMenu;
-    }
-
-    public void setwMenu(int wMenu) {
-        this.wMenu = wMenu;
     }
 
     public int gethMenu() {
         return hMenu;
     }
 
-    public void sethMenu(int hMenu) {
-        this.hMenu = hMenu;
-    }
-
     public int getxMenu() {
         return xMenu;
     }
 
-    public void setxMenu(int xMenu) {
-        this.xMenu = xMenu;
-    }
-
     public int getyMenu() {
         return yMenu;
-    }
-
-    public void setyMenu(int yMenu) {
-        this.yMenu = yMenu;
     }
 
 }

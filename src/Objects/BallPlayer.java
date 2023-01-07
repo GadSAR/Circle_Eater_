@@ -15,7 +15,6 @@ public class BallPlayer extends Thread {
     private Boolean alive;
     private long startTime;
     private double delay;
-    private double dx, dy, angle;
     private Image playerImage, player2Image;
 
 
@@ -87,11 +86,11 @@ public class BallPlayer extends Thread {
     private void update() {
         if (System.currentTimeMillis() - startTime >= delay) {
 
-            dx = panel.getGameStateManager().getMouseX() - panel.getPlayer().getX() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
-            dy = panel.getGameStateManager().getMouseY() - panel.getPlayer().getY() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
+            double dx = panel.getGameStateManager().getMouseX() - panel.getPlayer().getX() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
+            double dy = panel.getGameStateManager().getMouseY() - panel.getPlayer().getY() - (double) panel.getPlayer().getWidth() / 2 + 7.5;
 
             if (dx * dx + dy * dy > (double) panel.getPlayer().width / 2) {    //minimum to move
-                angle = Math.atan2(dy, dx);
+                double angle = Math.atan2(dy, dx);
                 panel.getPlayer().x += (int) (5 * Math.cos(angle));
                 panel.getPlayer().y += (int) (5 * Math.sin(angle));
                 if (panel.getPlayer().x < -panel.getPlayer().width / 2)
@@ -156,37 +155,4 @@ public class BallPlayer extends Thread {
     public void setPlayerAlive(boolean alive) {
         this.alive = alive;
     }
-
-    public double getDx() {
-        return dx;
-    }
-
-    public void setDx(double dx) {
-        this.dx = dx;
-    }
-
-    public double getDy() {
-        return dy;
-    }
-
-    public void setDy(double dy) {
-        this.dy = dy;
-    }
-
-    public double getAngle() {
-        return angle;
-    }
-
-    public void setAngle(double angle) {
-        this.angle = angle;
-    }
-
-    public Image getPlayerImage() {
-        return playerImage;
-    }
-
-    public void setPlayerImage(Image playerImage) {
-        this.playerImage = playerImage;
-    }
-
 }

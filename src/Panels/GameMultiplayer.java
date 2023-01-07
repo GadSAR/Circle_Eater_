@@ -12,8 +12,7 @@ public class GameMultiplayer extends JPanel {
     private GameStateManager gameStateManager;
 
     private Image bgMultiplayer, Create, onCreate, Join, onJoin, Back, onBack;
-    private int xMiddleScreen, yMiddleScreen,
-            wCreate, hCreate, xCreate, yCreate,
+    private int wCreate, hCreate, xCreate, yCreate,
             wText, hText, xText, yText,
             wJoin, hJoin, xJoin, yJoin,
             WBack, hBack, xBack, yBack;
@@ -33,8 +32,8 @@ public class GameMultiplayer extends JPanel {
 
         gameStateManager.getF().getToolkit();
         Toolkit tk = Toolkit.getDefaultToolkit();
-        xMiddleScreen = tk.getScreenSize().width / 2;
-        yMiddleScreen = tk.getScreenSize().height / 2;
+        int xMiddleScreen = tk.getScreenSize().width / 2;
+        int yMiddleScreen = tk.getScreenSize().height / 2;
 
         String myIpAddress;
         try {
@@ -116,216 +115,52 @@ public class GameMultiplayer extends JPanel {
         return joinIpAddress;
     }
 
-    public void setJoinIpAddress(JTextField joinIpAddress) {
-        this.joinIpAddress = joinIpAddress;
-    }
-
-    public int getwText() {
-        return wText;
-    }
-
-    public void setwText(int wText) {
-        this.wText = wText;
-    }
-
-    public int gethText() {
-        return hText;
-    }
-
-    public void sethText(int hText) {
-        this.hText = hText;
-    }
-
-    public int getxText() {
-        return xText;
-    }
-
-    public void setxText(int xText) {
-        this.xText = xText;
-    }
-
-    public int getyText() {
-        return yText;
-    }
-
-    public void setyText(int yText) {
-        this.yText = yText;
-    }
-
-    public GameStateManager getGameStateManager() {
-        return gameStateManager;
-    }
-
-    public void setGameStateManager(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
-    }
-
-    public Image getBgMultiplayer() {
-        return bgMultiplayer;
-    }
-
-    public void setBgMultiplayer(Image bgMultiplayer) {
-        this.bgMultiplayer = bgMultiplayer;
-    }
-
-    public Image getCreate() {
-        return Create;
-    }
-
-    public void setCreate(Image create) {
-        Create = create;
-    }
-
-    public Image getOnCreate() {
-        return onCreate;
-    }
-
-    public void setOnCreate(Image onCreate) {
-        this.onCreate = onCreate;
-    }
-
-    public Image getJoin() {
-        return Join;
-    }
-
-    public void setJoin(Image join) {
-        Join = join;
-    }
-
-    public Image getOnJoin() {
-        return onJoin;
-    }
-
-    public void setOnJoin(Image onJoin) {
-        this.onJoin = onJoin;
-    }
-
-    public Image getBack() {
-        return Back;
-    }
-
-    public void setBack(Image back) {
-        Back = back;
-    }
-
-    public Image getOnBack() {
-        return onBack;
-    }
-
-    public void setOnBack(Image onBack) {
-        this.onBack = onBack;
-    }
-
-    public int getxMiddleScreen() {
-        return xMiddleScreen;
-    }
-
-    public void setxMiddleScreen(int xMiddleScreen) {
-        this.xMiddleScreen = xMiddleScreen;
-    }
-
-    public int getyMiddleScreen() {
-        return yMiddleScreen;
-    }
-
-    public void setyMiddleScreen(int yMiddleScreen) {
-        this.yMiddleScreen = yMiddleScreen;
-    }
-
     public int getwCreate() {
         return wCreate;
-    }
-
-    public void setwCreate(int wCreate) {
-        this.wCreate = wCreate;
     }
 
     public int gethCreate() {
         return hCreate;
     }
 
-    public void sethCreate(int hCreate) {
-        this.hCreate = hCreate;
-    }
-
     public int getxCreate() {
         return xCreate;
-    }
-
-    public void setxCreate(int xCreate) {
-        this.xCreate = xCreate;
     }
 
     public int getyCreate() {
         return yCreate;
     }
 
-    public void setyCreate(int yCreate) {
-        this.yCreate = yCreate;
-    }
-
     public int getwJoin() {
         return wJoin;
-    }
-
-    public void setwJoin(int wJoin) {
-        this.wJoin = wJoin;
     }
 
     public int gethJoin() {
         return hJoin;
     }
 
-    public void sethJoin(int hJoin) {
-        this.hJoin = hJoin;
-    }
-
     public int getxJoin() {
         return xJoin;
-    }
-
-    public void setxJoin(int xJoin) {
-        this.xJoin = xJoin;
     }
 
     public int getyJoin() {
         return yJoin;
     }
 
-    public void setyJoin(int yJoin) {
-        this.yJoin = yJoin;
-    }
-
     public int getWBack() {
         return WBack;
-    }
-
-    public void setWBack(int WBack) {
-        this.WBack = WBack;
     }
 
     public int gethBack() {
         return hBack;
     }
 
-    public void sethBack(int hBack) {
-        this.hBack = hBack;
-    }
-
     public int getxBack() {
         return xBack;
     }
 
-    public void setxBack(int xBack) {
-        this.xBack = xBack;
-    }
-
     public int getyBack() {
         return yBack;
-    }
-
-    public void setyBack(int yBack) {
-        this.yBack = yBack;
     }
 
 }

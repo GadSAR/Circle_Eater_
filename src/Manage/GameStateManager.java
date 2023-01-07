@@ -17,7 +17,6 @@ public class GameStateManager {
     private GameState currentGameState, previousGameState;
     private JFrame f;
     private MusicController musicController;
-    private Fps fps;
     private GameMode currentGameMode;
     private Integer[] defaultsSettings = {2, 0, 60, 30};
     private int speedLevel = defaultsSettings[0], mode = defaultsSettings[1], vecSize = defaultsSettings[2], widthStart = defaultsSettings[3];
@@ -232,7 +231,7 @@ public class GameStateManager {
     }
 
     public void setMusicController() {
-        musicController = new MusicController(this, resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getBackgroundPathSound());
+        musicController = new MusicController(resource.getgoodBallPathSound(), resource.getbadBallPathSound(), resource.getgameBackgroundPathSound(), resource.getClickButtonPathSound(), resource.getBackgroundPathSound());
         musicController.getBackground().setFlag(true);
     }
 
@@ -246,7 +245,7 @@ public class GameStateManager {
     }
 
     public void setFps() {
-        fps = new Fps(this);
+        Fps fps = new Fps(this);
         fps.start();
     }
 
@@ -358,200 +357,6 @@ public class GameStateManager {
         f.setCursor(blankCursor);
     }
 
-    public void clickSound() {
-        musicController.getClick().setFlag(true);
-    }
-
-    public GameState getCurrentGameState() {
-        return currentGameState;
-    }
-
-    public void setCurrentGameState(GameState currentGameState) {
-        previousGameState = this.currentGameState;
-        changePanel(currentGameState);
-        this.currentGameState = currentGameState;
-    }
-
-    public GameMode getCurrentGameMode() {
-        return currentGameMode;
-    }
-
-    public void setCurrentGameMode(GameMode currentGameMode) {
-        this.currentGameMode = currentGameMode;
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public MusicController getMusicController() {
-        return musicController;
-    }
-
-    public void setMusicController(MusicController musicController) {
-        this.musicController = musicController;
-    }
-
-    public int getMouseX() {
-        return mouseX;
-    }
-
-    public void setMouseX(int mouseX) {
-        this.mouseX = mouseX;
-    }
-
-    public int getMouseY() {
-        return mouseY;
-    }
-
-    public void setMouseY(int mouseY) {
-        this.mouseY = mouseY;
-    }
-
-    public boolean isChangedMode() {
-        return changedMode;
-    }
-
-    public void setChangedMode(boolean changedMode) {
-        this.changedMode = changedMode;
-    }
-
-    public GameState getPreviousGameState() {
-        return previousGameState;
-    }
-
-    public void setPreviousGameState(GameState previousGameState) {
-        this.previousGameState = previousGameState;
-    }
-
-    public JFrame getF() {
-        return f;
-    }
-
-    public void setF(JFrame f) {
-        this.f = f;
-    }
-
-    public Fps getFps() {
-        return fps;
-    }
-
-    public void setFps(Fps fps) {
-        this.fps = fps;
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
-    }
-
-    public void setGamePanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-    }
-
-    public GameMenu getGameMenu() {
-        return gameMenu;
-    }
-
-    public void setGameMenu(GameMenu gameMenu) {
-        this.gameMenu = gameMenu;
-    }
-
-    public GameMultiplayer getGameMultiplayer() {
-        return gameMultiplayer;
-    }
-
-    public void setGameMultiplayer(GameMultiplayer gameMultiplayer) {
-        this.gameMultiplayer = gameMultiplayer;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Server getServer() {
-        return server;
-    }
-
-    public void setServer(Server server) {
-        this.server = server;
-    }
-
-    public GameHowToPlay getGameHowToPlay() {
-        return gameHowToPlay;
-    }
-
-    public void setGameHowToPlay(GameHowToPlay gameHowToPlay) {
-        this.gameHowToPlay = gameHowToPlay;
-    }
-
-    public GameOver getGameOver() {
-        return gameOver;
-    }
-
-    public void setGameOver(GameOver gameOver) {
-        this.gameOver = gameOver;
-    }
-
-    public GameSettings getGameSettings() {
-        return gameSettings;
-    }
-
-    public void setGameSettings(GameSettings gameSettings) {
-        this.gameSettings = gameSettings;
-    }
-
-    public char getPlayerType() {
-        return playerType;
-    }
-
-    public void setPlayerType(char playerType) {
-        this.playerType = playerType;
-    }
-
-    public Integer[] getSettings() {
-        return defaultsSettings;
-    }
-
-    public void setSettings(Integer[] settings) {
-        this.defaultsSettings = settings;
-    }
-
-    public int getSpeedLevel() {
-        return speedLevel;
-    }
-
-    public void setSpeedLevel(int speedLevel) {
-        this.speedLevel = speedLevel;
-    }
-
-    public Image getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(Image cursor) {
-        this.cursor = cursor;
-    }
-
-    public void setLastPlayerWon(int playerNum) {
-        lastPlayerWon = playerNum;
-    }
-
-    public int getLastPlayerWon() {
-        return lastPlayerWon;
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
     public void setMode(int mode) {
         this.mode = mode;
         switch (mode) {
@@ -566,6 +371,118 @@ public class GameStateManager {
                 break;
         }
         changedMode = true;
+    }
+
+    public void restoreSettings() {
+        setSpeedLevel(defaultsSettings[0]);
+        setMode(defaultsSettings[1]);
+        setVecSize(defaultsSettings[2]);
+        setWidthStart(defaultsSettings[3]);
+    }
+
+    public void setCurrentGameState(GameState currentGameState) {
+        previousGameState = this.currentGameState;
+        changePanel(currentGameState);
+        this.currentGameState = currentGameState;
+    }
+
+    public void clickSound() {
+        musicController.getClick().setFlag(true);
+    }
+    public GameState getCurrentGameState() {
+        return currentGameState;
+    }
+
+    public GameMode getCurrentGameMode() {
+        return currentGameMode;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public MusicController getMusicController() {
+        return musicController;
+    }
+
+    public void setMusicController(MusicController musicController) {
+        this.musicController = musicController;
+    }
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
+    }
+
+    public boolean isChangedMode() {
+        return changedMode;
+    }
+
+    public void setChangedMode(boolean changedMode) {
+        this.changedMode = changedMode;
+    }
+
+    public JFrame getF() {
+        return f;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public GameMenu getGameMenu() {
+        return gameMenu;
+    }
+
+    public GameMultiplayer getGameMultiplayer() {
+        return gameMultiplayer;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public GameHowToPlay getGameHowToPlay() {
+        return gameHowToPlay;
+    }
+
+    public GameOver getGameOver() {
+        return gameOver;
+    }
+
+    public GameSettings getGameSettings() {
+        return gameSettings;
+    }
+
+    public char getPlayerType() {
+        return playerType;
+    }
+
+    public int getSpeedLevel() {
+        return speedLevel;
+    }
+
+    public void setSpeedLevel(int speedLevel) {
+        this.speedLevel = speedLevel;
+    }
+
+    public void setLastPlayerWon(int playerNum) {
+        lastPlayerWon = playerNum;
+    }
+
+    public int getLastPlayerWon() {
+        return lastPlayerWon;
+    }
+
+    public int getMode() {
+        return mode;
     }
 
     public int getVecSize() {
@@ -584,10 +501,5 @@ public class GameStateManager {
         this.widthStart = widthStart;
     }
 
-    public void restoreSettings() {
-        setSpeedLevel(defaultsSettings[0]);
-        setMode(defaultsSettings[1]);
-        setVecSize(defaultsSettings[2]);
-        setWidthStart(defaultsSettings[3]);
-    }
+
 }

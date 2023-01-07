@@ -16,7 +16,6 @@ public class GamePanel extends JPanel {
     private BallPlayer player;
     private BallPlayer player2;
     private BallBot[] vec;
-    private int vecSize;
 
     private boolean moveFlag = false;
 
@@ -174,28 +173,12 @@ public class GamePanel extends JPanel {
         return player;
     }
 
-    public void setPlayer(BallPlayer player) {
-        this.player = player;
-    }
-
     public BallPlayer getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(BallPlayer player2) {
-        this.player2 = player2;
-    }
-
     public BallBot[] getVec() {
         return vec;
-    }
-
-    public void setVec(BallBot[] vec) {
-        this.vec = vec;
-    }
-
-    public int getVecSize() {
-        return vecSize;
     }
 
     public boolean getMoveFlag() {
@@ -205,23 +188,6 @@ public class GamePanel extends JPanel {
     public void setMoveFlag(boolean moveFlag) {
         this.moveFlag = moveFlag;
         unPause();
-    }
-
-    public Image getBackgroundImg() {
-        return backgroundImg;
-    }
-
-    public void setBackgroundImg(Image backgroundImg) {
-        this.backgroundImg = backgroundImg;
-    }
-
-
-    public void setImagesCursor(Image[][] imagesCursor) {
-        this.imagesCursor = imagesCursor;
-    }
-
-    public void end() {
-        moveFlag = false;
     }
 
     public void setBallsCoordinatesAndStatus(Short[][] coordinatesAndStatus) {

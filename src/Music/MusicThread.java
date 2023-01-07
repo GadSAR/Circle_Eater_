@@ -1,15 +1,12 @@
 package Music;
-import Manage.*;
+
 
 public class MusicThread extends Thread {
     private MusicWavPlayer wav;
     private boolean flag, loop;
 
-    private GameStateManager gameStateManager;
 
-
-    public MusicThread(String Path, GameStateManager gameStateManager, boolean loop) {
-        this.gameStateManager = gameStateManager;
+    public MusicThread(String Path, boolean loop) {
         wav = new MusicWavPlayer(Path);
         this.loop = loop;
         start();
@@ -38,20 +35,8 @@ public class MusicThread extends Thread {
         wav.stop();
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
     public void setFlag(boolean flag) {
         this.flag = flag;
-    }
-
-    public boolean isLoop() {
-        return loop;
-    }
-
-    public void setLoop(boolean loop) {
-        this.loop = loop;
     }
 
 }
