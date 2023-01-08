@@ -30,7 +30,7 @@ public class Resource {
         CHILLplayer1BallImg = "src/Resources/pictures/pause.gif";
         CHILLplayer2BallImg = "src/Resources/pictures/enemy.png";
         GLITCHgoodBallImg = "src/Resources/pictures/power.png";
-        GLITCHbadBallImg = "src/Resources/pictures/red.png";
+        GLITCHbadBallImg = "src/Resources/pictures/red.gif";
         GLITCHplayer1BallImg = "src/Resources/pictures/ball.png";
         GLITCHplayer2BallImg = "src/Resources/pictures/enemy.png";
         UNKNOWNgoodBallImg = "src/Resources/pictures/greenUnknown.png";
@@ -82,8 +82,8 @@ public class Resource {
         CHILLgoodBallPathSound = "src/Resources/Sounds/good.wav";
         CHILLbadBallPathSound = "src/Resources/Sounds/bad.wav";
         CHILLgameBackgroundPathSound = "src/Resources/Sounds/Eminem_Stan.wav";
-        GLITCHgoodBallPathSound = "src/Resources/Sounds/goodGlitch.wav";;
-        GLITCHbadBallPathSound = "src/Resources/Sounds/badGlitch.wav";;
+        GLITCHgoodBallPathSound = "src/Resources/Sounds/goodGlitch.wav";
+        GLITCHbadBallPathSound = "src/Resources/Sounds/badGlitch.wav";
         GLITCHgameBackgroundPathSound = "src/Resources/Sounds/groove.wav";
         UNKNOWNgoodBallPathSound = "src/Resources/Sounds/goodUnknown.wav";
         UNKNOWNbadBallPathSound = "src/Resources/Sounds/badUnknown.wav";
