@@ -34,7 +34,7 @@ public class GameSettings extends JPanel {
 
         wRestore = 80;
         hRestore = 40;
-        xRestore = xMiddleScreen - wRestore / 2;;
+        xRestore = xMiddleScreen - wRestore / 2;
         yRestore = yMiddleScreen - hRestore / 2 - 180;
 
         int wText = 120;
@@ -100,7 +100,7 @@ public class GameSettings extends JPanel {
         g.drawImage(Minus, xMinus, yText3, wPlusMinus, hPlusMinus, null);
         g.drawImage(Minus, xMinus, yText4, wPlusMinus, hPlusMinus, null);
 
-        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + wBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack) {
+        if (gameStateManager.mouseIn(xBack,wBack,yBack,hBack)) {
             g.drawImage(onSave, xBack, yBack, wBack, hBack, null);
         } else g.drawImage(save, xBack, yBack, wBack, hBack, null);
 

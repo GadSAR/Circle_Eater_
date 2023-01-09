@@ -63,58 +63,59 @@ public class GameStateManager {
         f.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    if (currentGameState == GameState.GAME) {
-                        try {
-                            gamePanel.gameOver(-1);
-                        } catch (IOException | InterruptedException ex) {
-                            throw new RuntimeException(ex);
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ESCAPE:
+                        if (currentGameState == GameState.GAME) {
+                            try {
+                                gamePanel.gameOver(-1);
+                            } catch (IOException | InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        } else if (currentGameState == GameState.GAMEOVER)
+                            setCurrentGameState(GameState.MENU);
+                        else if (currentGameState == GameState.SETTINGS)
+                            setCurrentGameState(GameState.MENU);
+                        else if (currentGameState == GameState.HOWTOPLAY)
+                            setCurrentGameState(GameState.MENU);
+                        else if (currentGameState == GameState.MULTIPLAYER)
+                            setCurrentGameState(GameState.MENU);
+                        else if (currentGameState == GameState.MENU)
+                            System.exit(1);
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        if (currentGameState == GameState.GAME)
+                            if (playerType != 2)
+                                gamePanel.setMoveFlag(!gamePanel.getMoveFlag());
+                        break;
+                    case KeyEvent.VK_ENTER:
+                        if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
+                            setCurrentGameState(GameState.GAME);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        if (currentGameState == GameState.GAME) {
+                            mouseX = gamePanel.getPlayer().getX() - 60;
+                            mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
                         }
-                    } else if (currentGameState == GameState.GAMEOVER)
-                        setCurrentGameState(GameState.MENU);
-                    else if (currentGameState == GameState.SETTINGS)
-                        setCurrentGameState(GameState.MENU);
-                    else if (currentGameState == GameState.HOWTOPLAY)
-                        setCurrentGameState(GameState.MENU);
-                    else if (currentGameState == GameState.MULTIPLAYER)
-                        setCurrentGameState(GameState.MENU);
-                    else if (currentGameState == GameState.MENU)
-                        System.exit(1);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (currentGameState == GameState.GAME) {
+                            mouseX = gamePanel.getPlayer().getX() + 60;
+                            mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
+                        }
+                        break;
+                    case KeyEvent.VK_UP:
+                        if (currentGameState == GameState.GAME) {
+                            mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
+                            mouseY = gamePanel.getPlayer().getY() - 60;
+                        }
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        if (currentGameState == GameState.GAME) {
+                            mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
+                            mouseY = gamePanel.getPlayer().getY() + 60;
+                        }
+                        break;
                 }
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    if (currentGameState == GameState.GAME)
-                        if (playerType != 2)
-                            gamePanel.setMoveFlag(!gamePanel.getMoveFlag());
-                }
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (currentGameState == GameState.MENU || currentGameState == GameState.GAMEOVER)
-                        setCurrentGameState(GameState.GAME);
-                }
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    if (currentGameState == GameState.GAME) {
-                        mouseX = gamePanel.getPlayer().getX() - 60;
-                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
-                    }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    if (currentGameState == GameState.GAME) {
-                        mouseX = gamePanel.getPlayer().getX() + 60;
-                        mouseY = gamePanel.getPlayer().getY() + gamePanel.getPlayer().getWidth() / 2;
-                    }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (currentGameState == GameState.GAME) {
-                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
-                        mouseY = gamePanel.getPlayer().getY() - 60;
-                    }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (currentGameState == GameState.GAME) {
-                        mouseX = gamePanel.getPlayer().getX() + gamePanel.getPlayer().getWidth() / 2;
-                        mouseY = gamePanel.getPlayer().getY() + 60;
-                    }
-                }
-
             }
         });
 
@@ -125,84 +126,85 @@ public class GameStateManager {
                 mouseY = e.getY();
                 clickSound();
 
-                if (GameState.MENU == currentGameState) {
-
-                    if (mouseX > gameMenu.getxPlay() && mouseX < gameMenu.getxPlay() + gameMenu.getwPlay() && mouseY > gameMenu.getyPlay() && mouseY < gameMenu.getyPlay() + gameMenu.gethPlay()) {
-                        playerType = 0;
-                        setCurrentGameState(GameState.GAME);
-                    }
-                    if (mouseX > gameMenu.getxLobby() && mouseX < gameMenu.getxLobby() + gameMenu.getwLobby() && mouseY > gameMenu.getyLobby() && mouseY < gameMenu.getyLobby() + gameMenu.gethLobby())
-                        setCurrentGameState(GameState.MULTIPLAYER);
-                    if (mouseX > gameMenu.getxSettings() && mouseX < gameMenu.getxSettings() + gameMenu.getwSettings() && mouseY > gameMenu.getySettings() && mouseY < gameMenu.getySettings() + gameMenu.gethSettings())
-                        setCurrentGameState(GameState.SETTINGS);
-                    if (mouseX > gameMenu.getxExit() && mouseX < gameMenu.getxExit() + gameMenu.getwExit() && mouseY > gameMenu.getyExit() && mouseY < gameMenu.getyExit() + gameMenu.gethExit())
-                        System.exit(1);
-
-                } else if (GameState.SETTINGS == currentGameState) {
-
-                    if(mouseX > gameSettings.getxRestore() && mouseX < gameSettings.getxRestore() + gameSettings.getwRestore() && mouseY > gameSettings.getyRestore() && mouseY < gameSettings.getyRestore() + gameSettings.gethRestore())
-                        gameSettings.restoreDefaultSettings();
-                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText1() && mouseY < gameSettings.getyText1() + gameSettings.gethPlusMinus())
-                        gameSettings.increaseSpeed();
-                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText1() && mouseY < gameSettings.getyText1() + gameSettings.gethPlusMinus())
-                        gameSettings.decreaseSpeed();
-                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText2() && mouseY < gameSettings.getyText2() + gameSettings.gethPlusMinus())
-                        gameSettings.increaseMode();
-                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText2() && mouseY < gameSettings.getyText2() + gameSettings.gethPlusMinus())
-                        gameSettings.decreaseMode();
-                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText3() && mouseY < gameSettings.getyText3() + gameSettings.gethPlusMinus())
-                        gameSettings.increaseVecSize();
-                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText3() && mouseY < gameSettings.getyText3() + gameSettings.gethPlusMinus())
-                        gameSettings.decreaseVecSize();
-                    else if (mouseX > gameSettings.getxPlus() && mouseX < gameSettings.getxPlus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText4() && mouseY < gameSettings.getyText4() + gameSettings.gethPlusMinus())
-                        gameSettings.increaseWidthStart();
-                    else if (mouseX > gameSettings.getxMinus() && mouseX < gameSettings.getxMinus() + gameSettings.getwPlusMinus() && mouseY > gameSettings.getyText4() && mouseY < gameSettings.getyText4() + gameSettings.gethPlusMinus())
-                        gameSettings.decreaseWidthStart();
-                    else if (mouseX > gameSettings.getxBack() && mouseX < gameSettings.getxBack() + gameSettings.getwBack() && mouseY > gameSettings.getyBack() && mouseY < gameSettings.getyBack() + gameSettings.gethBack())
-                        setCurrentGameState(GameState.MENU);
-
-
-                } else if (GameState.MULTIPLAYER == currentGameState) {
-
-                    if (mouseX > gameMultiplayer.getxCreate() && mouseX < gameMultiplayer.getxCreate() + gameMultiplayer.getwCreate() && mouseY > gameMultiplayer.getyCreate() && mouseY < gameMultiplayer.getyCreate() + gameMultiplayer.gethCreate()) {
-                        playerType = 1;
-                        try {
-                            newServer();
-                        } catch (IOException | InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                    if (mouseX > gameMultiplayer.getxJoin() && mouseX < gameMultiplayer.getxJoin() + gameMultiplayer.getwJoin() && mouseY > gameMultiplayer.getyJoin() && mouseY < gameMultiplayer.getyJoin() + gameMultiplayer.gethJoin()) {
-                        playerType = 2;
-                        try {
-                            newClient(gameMultiplayer.getJoinIpAddress().getText());
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                    if (mouseX > gameMultiplayer.getxBack() && mouseX < gameMultiplayer.getxBack() + gameMultiplayer.getWBack() && mouseY > gameMultiplayer.getyBack() && mouseY < gameMultiplayer.getyBack() + gameMultiplayer.gethBack()) {
-                        setCurrentGameState(GameState.MENU);
-                    }
-                } else if (GameState.GAMEOVER == currentGameState) {
-
-                    if (mouseX > gameOver.getxReplay() && mouseX < gameOver.getxReplay() + gameOver.getwReplay() && mouseY > gameOver.getyReplay() && mouseY < gameOver.getyReplay() + gameOver.gethReplay()) {
-                        if (playerType == 1) {
+                switch (currentGameState) {
+                    case MENU:
+                        if (mouseIn(gameMenu.getxPlay(), gameMenu.getwPlay(), gameMenu.getyPlay(), gameMenu.gethPlay())) {
+                            playerType = 0;
+                            setCurrentGameState(GameState.GAME);
+                        } else if (mouseIn(gameMenu.getxLobby(), gameMenu.getwLobby(), gameMenu.getyLobby(), gameMenu.gethLobby()))
+                            setCurrentGameState(GameState.MULTIPLAYER);
+                        else if (mouseIn(gameMenu.getxSettings(), gameMenu.getwSettings(), gameMenu.getySettings(), gameMenu.gethSettings()))
+                            setCurrentGameState(GameState.SETTINGS);
+                        else if (mouseIn(gameMenu.getxHowToPlay(), gameMenu.getwHowToPlay(), gameMenu.getyHowToPlay(), gameMenu.gethHowToPlay()))
+                            setCurrentGameState(GameState.HOWTOPLAY);
+                        else if (mouseIn(gameMenu.getxExit(), gameMenu.getwExit(), gameMenu.getyExit(), gameMenu.gethExit()))
+                            System.exit(1);
+                        break;
+                    case SETTINGS:
+                        if (mouseIn(gameSettings.getxRestore(), gameSettings.getwRestore(), gameSettings.getyRestore(), gameSettings.gethRestore()))
+                            gameSettings.restoreDefaultSettings();
+                        else if (mouseIn(gameSettings.getxPlus(), gameSettings.getwPlusMinus(), gameSettings.getyText1(), gameSettings.gethPlusMinus()))
+                            gameSettings.increaseSpeed();
+                        else if (mouseIn(gameSettings.getxMinus(), gameSettings.getwPlusMinus(), gameSettings.getyText1(), gameSettings.gethPlusMinus()))
+                            gameSettings.decreaseSpeed();
+                        else if (mouseIn(gameSettings.getxPlus(), gameSettings.getwPlusMinus(), gameSettings.getyText2(), gameSettings.gethPlusMinus()))
+                            gameSettings.increaseMode();
+                        else if (mouseIn(gameSettings.getxMinus(), gameSettings.getwPlusMinus(), gameSettings.getyText2(), gameSettings.gethPlusMinus()))
+                            gameSettings.decreaseMode();
+                        else if (mouseIn(gameSettings.getxPlus(), gameSettings.getwPlusMinus(), gameSettings.getyText3(), gameSettings.gethPlusMinus()))
+                            gameSettings.increaseVecSize();
+                        else if (mouseIn(gameSettings.getxMinus(), gameSettings.getwPlusMinus(), gameSettings.getyText3(), gameSettings.gethPlusMinus()))
+                            gameSettings.decreaseVecSize();
+                        else if (mouseIn(gameSettings.getxPlus(), gameSettings.getwPlusMinus(), gameSettings.getyText4(), gameSettings.gethPlusMinus()))
+                            gameSettings.increaseWidthStart();
+                        else if (mouseIn(gameSettings.getxMinus(), gameSettings.getwPlusMinus(), gameSettings.getyText4(), gameSettings.gethPlusMinus()))
+                            gameSettings.decreaseWidthStart();
+                        else if (mouseIn(gameSettings.getxBack(), gameSettings.getwBack(), gameSettings.getyBack(), gameSettings.gethBack()))
+                            setCurrentGameState(GameState.MENU);
+                        break;
+                    case MULTIPLAYER:
+                        if (mouseIn(gameMultiplayer.getxCreate(), gameMultiplayer.getwCreate(), gameMultiplayer.getyCreate(), gameMultiplayer.gethCreate())) {
+                            playerType = 1;
                             try {
                                 newServer();
                             } catch (IOException | InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
-                        } else if (playerType == 2) {
+                        } else if (mouseIn(gameMultiplayer.getxJoin(), gameMultiplayer.getwJoin(), gameMultiplayer.getyJoin(), gameMultiplayer.gethJoin())) {
+                            playerType = 2;
                             try {
                                 newClient(gameMultiplayer.getJoinIpAddress().getText());
                             } catch (Exception ex) {
                                 throw new RuntimeException(ex);
                             }
-                        } else
-                            setCurrentGameState(GameState.GAME);
-                    }
-                    if (mouseX > gameOver.getxMenu() && mouseX < gameOver.getxMenu() + gameOver.getwMenu() && mouseY > gameOver.getyMenu() && mouseY < gameOver.getyMenu() + gameOver.gethMenu())
-                        setCurrentGameState(GameState.MENU);
+                        } else if (mouseIn(gameMultiplayer.getxBack(), gameMultiplayer.getwBack(), gameMultiplayer.getyBack(), gameMultiplayer.gethBack()))
+                            setCurrentGameState(GameState.MENU);
+                        break;
+                    case GAMEOVER:
+                        if (mouseIn(gameOver.getxReplay(), gameOver.getwReplay(), gameOver.getyReplay(), gameOver.gethReplay())) {
+                            if (playerType == 0)
+                                setCurrentGameState(GameState.GAME);
+                            else if (playerType == 1) {
+                                try {
+                                    newServer();
+                                } catch (IOException | InterruptedException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            } else if (playerType == 2) {
+                                try {
+                                    newClient(gameMultiplayer.getJoinIpAddress().getText());
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        }
+                        if (mouseIn(gameOver.getxMenu(), gameOver.getwMenu(), gameOver.getyMenu(), gameOver.gethMenu()))
+                            setCurrentGameState(GameState.MENU);
+                        break;
+                    case HOWTOPLAY:
+                        if (mouseIn(gameHowToPlay.getxBack(), gameHowToPlay.getwBack(), gameHowToPlay.getyBack(), gameHowToPlay.gethBack()))
+                            setCurrentGameState(GameState.MENU);
+                        break;
                 }
             }
         });
@@ -214,6 +216,10 @@ public class GameStateManager {
                 mouseY = e.getY();
             }
         });
+    }
+
+    public boolean mouseIn(int x, int w, int y, int h) {
+        return (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h);
     }
 
     public void drawCursor(Graphics g) {
@@ -361,13 +367,13 @@ public class GameStateManager {
         this.mode = mode;
         switch (mode) {
             case 0:
-                currentGameMode = GameMode.CHILL;
+                currentGameMode = GameMode.UNKNOWN;
                 break;
             case 1:
-                currentGameMode = GameMode.GLITCH;
+                currentGameMode = GameMode.CHILL;
                 break;
             case 2:
-                currentGameMode = GameMode.UNKNOWN;
+                currentGameMode = GameMode.GLITCH;
                 break;
         }
         changedMode = true;
@@ -389,6 +395,7 @@ public class GameStateManager {
     public void clickSound() {
         musicController.getClick().setFlag(true);
     }
+
     public GameState getCurrentGameState() {
         return currentGameState;
     }

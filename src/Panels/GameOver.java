@@ -56,10 +56,10 @@ public class GameOver extends JPanel {
             g.drawImage(gameOverWon, xGameOver, yGameOver, wGameOver, hGameOver, null);
         } else
             g.drawImage(gameOverLose, xGameOver, yGameOver, wGameOver, hGameOver, null);
-        if (gameStateManager.getMouseX() > xReplay && gameStateManager.getMouseX() < xReplay + wReplay && gameStateManager.getMouseY() > yReplay && gameStateManager.getMouseY() < yReplay + hReplay) {
+        if (gameStateManager.mouseIn(xReplay, wReplay, yReplay, hReplay)) {
             g.drawImage(onReplay, xReplay, yReplay, wReplay, hReplay, null);
         } else g.drawImage(Replay, xReplay, yReplay, wReplay, hReplay, null);
-        if (gameStateManager.getMouseX() > xMenu && gameStateManager.getMouseX() < xMenu + wMenu && gameStateManager.getMouseY() > yMenu && gameStateManager.getMouseY() < yMenu + hMenu) {
+        if (gameStateManager.mouseIn(xMenu, wMenu, yMenu, hMenu)) {
             g.drawImage(onMenu, xMenu, yMenu, wMenu, hMenu, null);
         } else g.drawImage(Menu, xMenu, yMenu, wMenu, hMenu, null);
 

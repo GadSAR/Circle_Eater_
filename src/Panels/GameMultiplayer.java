@@ -15,7 +15,7 @@ public class GameMultiplayer extends JPanel {
     private int wCreate, hCreate, xCreate, yCreate,
             wText, hText, xText, yText,
             wJoin, hJoin, xJoin, yJoin,
-            WBack, hBack, xBack, yBack;
+            wBack, hBack, xBack, yBack;
     private JTextField joinIpAddress;
 
 
@@ -61,9 +61,9 @@ public class GameMultiplayer extends JPanel {
         xText = xJoin - 220;
         yText = yJoin + 25;
 
-        WBack = 160;
+        wBack = 160;
         hBack = 80;
-        xBack = xMiddleScreen - WBack / 2;
+        xBack = xMiddleScreen - wBack / 2;
         yBack = yJoin + hJoin + 20;
 
         Font font = new Font("Arial", Font.BOLD, 15);
@@ -84,27 +84,25 @@ public class GameMultiplayer extends JPanel {
 
         g.drawImage(bgMultiplayer, 0, 0, getWidth(), getHeight(), null);
 
-        if (gameStateManager.getMouseX() > xCreate && gameStateManager.getMouseX() < xCreate + wCreate && gameStateManager.getMouseY() > yCreate && gameStateManager.getMouseY() < yCreate + hCreate) {
+        if (gameStateManager.mouseIn(xCreate, wCreate, yCreate, hCreate)) {
             g.drawImage(onCreate, xCreate, yCreate, wCreate, hCreate, null);
         } else g.drawImage(Create, xCreate, yCreate, wCreate, hCreate, null);
 
-        if (gameStateManager.getMouseX() > xJoin && gameStateManager.getMouseX() < xJoin + wJoin && gameStateManager.getMouseY() > yJoin && gameStateManager.getMouseY() < yJoin + hJoin) {
+        if (gameStateManager.mouseIn(xJoin, wJoin, yJoin, hJoin)) {
             g.drawImage(onJoin, xJoin, yJoin, wJoin, hJoin, null);
         } else g.drawImage(Join, xJoin, yJoin, wJoin, hJoin, null);
 
-        if (gameStateManager.getMouseX() > xText - 40 && gameStateManager.getMouseX() < xText + wText + 40 && gameStateManager.getMouseY() > yText - 40 && gameStateManager.getMouseY() < yText + hText + 40) {
-            // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
+        if (gameStateManager.getMouseX() > xText - 40 && gameStateManager.getMouseX() < xText + wText + 40 && gameStateManager.getMouseY() > yText - 40 && gameStateManager.getMouseY() < yText + hText + 40) {            // If the mouse is within the bounds of the text field and the text is "Type lobby Ip Address...", clear the text
             if (joinIpAddress.getText().equals("Type lobby Ip Address..."))
                 joinIpAddress.setText("");
         } else if (joinIpAddress.getText().isEmpty()) {
             // If the mouse is not within the bounds of the text field and the text is empty, set the text to "Type lobby Ip Address..."
             joinIpAddress.setText("Type lobby Ip Address...");
-
         }
 
-        if (gameStateManager.getMouseX() > xBack && gameStateManager.getMouseX() < xBack + WBack && gameStateManager.getMouseY() > yBack && gameStateManager.getMouseY() < yBack + hBack) {
-            g.drawImage(onBack, xBack, yBack, WBack, hBack, null);
-        } else g.drawImage(Back, xBack, yBack, WBack, hBack, null);
+        if (gameStateManager.mouseIn(xBack,wBack,yBack,hBack)) {
+            g.drawImage(onBack, xBack, yBack, wBack, hBack, null);
+        } else g.drawImage(Back, xBack, yBack, wBack, hBack, null);
 
         gameStateManager.drawCursor(g);
 
@@ -147,8 +145,8 @@ public class GameMultiplayer extends JPanel {
         return yJoin;
     }
 
-    public int getWBack() {
-        return WBack;
+    public int getwBack() {
+        return wBack;
     }
 
     public int gethBack() {

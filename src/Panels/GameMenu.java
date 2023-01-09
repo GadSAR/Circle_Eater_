@@ -68,19 +68,19 @@ public class GameMenu extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(bgMenu, 0, 0, getWidth(), getHeight(), null);
-        if (gameStateManager.getMouseX() > xPlay && gameStateManager.getMouseX() < xPlay + wPlay && gameStateManager.getMouseY() > yPlay && gameStateManager.getMouseY() < yPlay + hPlay) {
+        if (gameStateManager.mouseIn(xPlay, wPlay, yPlay, hPlay)) {
             g.drawImage(onPlay, xPlay, yPlay, wPlay, hPlay, null);
         } else g.drawImage(Play, xPlay, yPlay, wPlay, hPlay, null);
-        if (gameStateManager.getMouseX() > xLobby && gameStateManager.getMouseX() < xLobby + wLobby && gameStateManager.getMouseY() > yLobby && gameStateManager.getMouseY() < yLobby + hLobby) {
+        if (gameStateManager.mouseIn(xLobby, wLobby, yLobby, hLobby)) {
             g.drawImage(onLobby, xLobby, yLobby, wLobby, hLobby, null);
         } else g.drawImage(Lobby, xLobby, yLobby, wLobby, hLobby, null);
-        if (gameStateManager.getMouseX() > xSettings && gameStateManager.getMouseX() < xSettings + wSettings && gameStateManager.getMouseY() > ySettings && gameStateManager.getMouseY() < ySettings + hSettings) {
+        if (gameStateManager.mouseIn(xSettings, wSettings, ySettings, hSettings)) {
             g.drawImage(onSettings, xSettings, ySettings, wSettings, hSettings, null);
         } else g.drawImage(Settings, xSettings, ySettings, wSettings, hSettings, null);
-        if (gameStateManager.getMouseX() > xHowToPlay && gameStateManager.getMouseX() < xHowToPlay + wHowToPlay && gameStateManager.getMouseY() > yHowToPlay && gameStateManager.getMouseY() < yHowToPlay + hHowToPlay) {
+        if (gameStateManager.mouseIn(xHowToPlay, wHowToPlay, yHowToPlay, hHowToPlay)) {
             g.drawImage(onHowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
         } else g.drawImage(HowToPlay, xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay, null);
-        if (gameStateManager.getMouseX() > xExit && gameStateManager.getMouseX() < xExit + wExit && gameStateManager.getMouseY() > yExit && gameStateManager.getMouseY() < yExit + hExit) {
+        if (gameStateManager.mouseIn(xExit, wExit, yExit, hExit)) {
             g.drawImage(onExit, xExit, yExit, wExit, hExit, null);
         } else g.drawImage(Exit, xExit, yExit, wExit, hExit, null);
 
@@ -118,6 +118,22 @@ public class GameMenu extends JPanel {
 
     public int getySettings() {
         return ySettings;
+    }
+
+    public int getwHowToPlay() {
+        return wHowToPlay;
+    }
+
+    public int gethHowToPlay() {
+        return hHowToPlay;
+    }
+
+    public int getxHowToPlay() {
+        return xHowToPlay;
+    }
+
+    public int getyHowToPlay() {
+        return yHowToPlay;
     }
 
     public int getwExit() {

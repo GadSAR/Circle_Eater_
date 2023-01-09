@@ -40,7 +40,7 @@ public class Resource {
         gameMenuBackgroundImg = "src/Resources/pictures/bgMenu.gif";
         gameOverBackgroundImg = "src/Resources/pictures/bgMenu.gif";
         gameSettingsBackgroundImg = "src/Resources/pictures/bgMenu.gif";
-        gameHowToPlayBackgroundImg = "src/Resources/pictures/bgMenu.gif";
+        gameHowToPlayBackgroundImg = "src/Resources/pictures/bgHTP.gif";
         pauseImg = "src/Resources/pictures/pauseScreen.png";
 
         cursorImg = "src/Resources/pictures/cursor.gif";
